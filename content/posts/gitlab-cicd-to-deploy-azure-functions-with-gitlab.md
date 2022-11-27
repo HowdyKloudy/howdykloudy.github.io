@@ -12,8 +12,18 @@ showTableOfContents: true
 
 ## Introduction
 
-Hello, DevOps Focals! How have you been? It’s my pleasure to share the learnings in GitLab I have gained in the recent past. A month ago, I demonstrated deploying Azure Functions to a project team, and this blog post is to walk through the steps
+There are many ways to deploy Azure resources. 
+- Click through the Azure portal to provision the resources. 
+- Imperative
+  - Use Az CLI, PowerShell, REST API etc. 
+- Declarative
+  - IaC – Bicep,Terraform, Pulumi etc. 
 
+The most commonly used method to provision Azure resources is with Infrastructure as Code, and the tool is your choice. I recommend using Bicep. But, for this blog post, I used Terraform because I have to demonstrate the remote state backend configuration. 
+
+## Design (Resource Visualizer)
+
+![img](/images/blog/Blog-Pic-2.png)
 ## Prerequisites
 
 - Mandatory
@@ -120,5 +130,55 @@ resource "azurerm_windows_function_app" "function_app" {
     use_32_bit_worker = false
     always_on         = true
   }
+}
+```
+
+### Variables
+
+```Terraform
+variable "resource_group_name" {
+  type        = string
+  description = "(optional) describe your variable."
+}
+
+
+variable "location" {
+  type        = string
+  description = "(optional) describe your variable."
+}
+
+variable "storage_account_name" {
+  type        = string
+  description = "(optional) describe your variable."
+}
+
+variable "storage_account_tier" {
+  type        = string
+  description = "(optional) describe your variable"
+}
+
+variable "storage_account_replication_type" {
+  type        = string
+  description = "(optional) describe your variable"
+}
+
+variable "app_service_plan" {
+  type        = string
+  description = "(optional) describe your variable"
+}
+
+variable "app_service_plan_tier" {
+  type        = string
+  description = "(optional) describe your variable"
+}
+
+variable "app_service_plan_size" {
+  type        = string
+  description = "(optional) describe your variable."
+}
+
+variable "function_app_name" {
+  type        = string
+  description = "(optional) describe your variable."
 }
 ```
