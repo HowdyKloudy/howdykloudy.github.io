@@ -1,5 +1,5 @@
 ---
-title: "GITLAB CICD TO DEPLOY AZURE FUNCTIONS WITH GITLAB"
+title: "GITLAB CICD TO DEPLOY AZURE FUNCTIONS"
 date: 2022-11-27T20:32:21Z
 
 draft: false
@@ -21,9 +21,16 @@ There are many ways to deploy Azure resources.
 
 The most commonly used method to provision Azure resources is with Infrastructure as Code, and the tool is your choice. I recommend using Bicep. But, for this blog post, I used Terraform because I have to demonstrate the remote state backend configuration. 
 
-## Design (Resource Visualizer)
+## Design (Basic Solution)
 
 ![img](/images/blog/Blog-Pic-2.png)
+
+## Resource Visualizer
+
+> PRD - Production Environment
+
+![img](/images/blog/Blog-Pic-3.png)
+
 ## Prerequisites
 
 - Mandatory
@@ -135,6 +142,8 @@ resource "azurerm_windows_function_app" "function_app" {
 
 ### Variables
 
+> variables.tf 
+
 ```Terraform
 variable "resource_group_name" {
   type        = string
@@ -182,3 +191,21 @@ variable "function_app_name" {
   description = "(optional) describe your variable."
 }
 ```
+
+### References
+
+- [Azure Functions](https://azure.microsoft.com/en-gb/products/functions/#overview)
+- [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools)
+- [Terraform](https://www.terraform.io/)
+
+### Summary
+
+Congratulations, you have successfully deployed the serverless solution. Now, you know to create a CICD pipeline in GitLab to deploy and destroy Azure functions. In my next blog post, I have plans to cover the below
+
+- Implement Azure Traffic Manager for high availability
+- Blue Green Deployment
+
+---
+:lightning: Your feedback is highly appreciated. Feel free to send your comments to my :envelope: [inbox](mailto:chendrayan.exchange@hotmail.com)
+
+---
