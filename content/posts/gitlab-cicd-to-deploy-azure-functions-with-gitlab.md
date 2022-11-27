@@ -33,6 +33,7 @@ Hello, DevOps Focals! How have you been? It’s my pleasure to share the learnin
 
 - Deploy Azure Function App.
 - Deploy Azure Functions.
+- Deploy solutions in multiple environments. 
 - Implement KICS for Terraform.
 - Terraform remote state management (GitLab). 
 - Post the demo destroy the infrastructure. (lower environments).
@@ -64,6 +65,8 @@ Our source code folder structure is as shown below
 
  ### Terraform Backend Configuration
 
+> backend.tf
+
  ```Terraform 
 terraform {
   backend "http" {
@@ -73,3 +76,49 @@ terraform {
   }
 }
  ```
+
+### Terraform Template
+
+> main.tf
+
+```Terraform
+resource "azurerm_resource_group" "resource_group" {
+  name     = var.resource_group_name
+  location = var.location
+}
+
+
+resource "azurerm_storage_account" "storage_account" {
+  name                     = var.storage_account_name
+  resource_group_name      = azurerm_resource_group.resource_group.name
+  location                 = azurerm_resource_group.resource_group.location
+  account_tier             = var.storage_account_tier
+  account_replication_type = var.storage_account_replication_type
+}
+
+resource "azurerm_app_service_plan" "app_service_plan" {
+  name                = var.app_service_plan
+  location            = azurerm_resource_group.resource_group.location
+  resource_group_name = azurerm_resource_group.resource_group.name
+  sku {
+    tier = var.app_service_plan_tier
+    size = var.app_service_plan_size
+  }
+}
+
+resource "azurerm_windows_function_app" "function_app" {
+  name                       = var.function_app_name
+  resource_group_name        = azurerm_resource_group.resource_group.name
+  location                   = azurerm_resource_group.resource_group.location
+  storage_account_name       = azurerm_storage_account.storage_account.name
+  storage_account_access_key = azurerm_storage_account.storage_account.primary_access_key
+  service_plan_id            = azurerm_app_service_plan.app_service_plan.id
+  site_config {
+    application_stack {
+      powershell_core_version = "7.2"
+    }
+    use_32_bit_worker = false
+    always_on         = true
+  }
+}
+```
