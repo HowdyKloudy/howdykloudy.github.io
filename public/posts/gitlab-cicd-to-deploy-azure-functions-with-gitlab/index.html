@@ -17,28 +17,28 @@
     
 
     
-    <title>GitLab</title>
+    <title>GITLAB CICD TO DEPLOY AZURE FUNCTIONS WITH GITLAB</title>
     <meta name="description" content="        Chendrayan Venkatesan
 ">
-    <meta name="keywords" content='blog, gokarna, hugo'>
+    <meta name="keywords" content='blog, gokarna, hugo, GitLab, KICS, Azure, Azure Functions'>
 
-    <meta property="og:url" content="https://gokarna-hugo.netlify.app/tags/gitlab/">
+    <meta property="og:url" content="https://gokarna-hugo.netlify.app/posts/gitlab-cicd-to-deploy-azure-functions-with-gitlab/">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="GitLab">
+    <meta property="og:title" content="GITLAB CICD TO DEPLOY AZURE FUNCTIONS WITH GITLAB">
     <meta property="og:description" content="        Chendrayan Venkatesan
 ">
     <meta property="og:image" content="/images/avatar.png">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="GitLab">
+    <meta name="twitter:title" content="GITLAB CICD TO DEPLOY AZURE FUNCTIONS WITH GITLAB">
     <meta name="twitter:description" content="        Chendrayan Venkatesan
 ">
-    <meta property="twitter:domain" content="https://gokarna-hugo.netlify.app/tags/gitlab/">
-    <meta property="twitter:url" content="https://gokarna-hugo.netlify.app/tags/gitlab/">
+    <meta property="twitter:domain" content="https://gokarna-hugo.netlify.app/posts/gitlab-cicd-to-deploy-azure-functions-with-gitlab/">
+    <meta property="twitter:url" content="https://gokarna-hugo.netlify.app/posts/gitlab-cicd-to-deploy-azure-functions-with-gitlab/">
     <meta name="twitter:image" content="/images/avatar.png">
 
     
-    <link rel="canonical" href="https://gokarna-hugo.netlify.app/tags/gitlab/" />
+    <link rel="canonical" href="https://gokarna-hugo.netlify.app/posts/gitlab-cicd-to-deploy-azure-functions-with-gitlab/" />
 
     <link rel="stylesheet" type="text/css" href="https://gokarna-hugo.netlify.app/css/normalize.min.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" type="text/css" href="https://gokarna-hugo.netlify.app/css/main.css">
@@ -171,22 +171,121 @@
     </nav>
 </header>
 <main id="content">
-    <div class="container list-posts">
+    <div class="post container">
+    <div class="post-header-section">
+        <h1>GITLAB CICD TO DEPLOY AZURE FUNCTIONS WITH GITLAB</h1>
+        <small role="doc-subtitle"></small>
+        <p class="post-date">
+            November 27, 2022
+        </p>
 
-    <h1 class="list-title">GitLab</h2>
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="https://gokarna-hugo.netlify.app/tags/gitlab">GitLab</a></li>
+        
+            <li class="post-tag"><a href="https://gokarna-hugo.netlify.app/tags/kics">KICS</a></li>
+        
+            <li class="post-tag"><a href="https://gokarna-hugo.netlify.app/tags/azure">Azure</a></li>
+        
+            <li class="post-tag"><a href="https://gokarna-hugo.netlify.app/tags/azure-functions">Azure Functions</a></li>
+        
+        </ul>
+    </div>
 
-    
+    <div class="post-content">
+        <p>
+            <p><img src="/images/avatar.png" alt="img"></p>
+<h2 id="introduction">Introduction</h2>
+<p>Hello, DevOps Focals! How have you been? It’s my pleasure to share the learnings in GitLab I have gained in the recent past. A month ago, I demonstrated deploying Azure Functions to a project team, and this blog post is to walk through the steps</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Mandatory
+<ul>
+<li>Azure Account</li>
+<li>GitLab Account</li>
+<li>GitLab <strong>P</strong>ersonal <strong>A</strong>ccess <strong>T</strong>oken (PAT)</li>
+</ul>
+</li>
+<li>Optional (required for testing in local dev machine)
+<ul>
+<li>Terraform CLI (Option)</li>
+<li>Azure Functions Core CLI</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>🔦 <strong>Azure Function App</strong> is an instance to run the <strong>Azure Functions.</strong></p>
+<hr>
+<h2 id="requirement">Requirement</h2>
+<ul>
+<li>Deploy Azure Function App.</li>
+<li>Deploy Azure Functions.</li>
+<li>Implement KICS for Terraform.</li>
+<li>Terraform remote state management (GitLab).</li>
+<li>Post the demo destroy the infrastructure. (lower environments).</li>
+</ul>
+<h2 id="solution">Solution</h2>
+<p>Our source code folder structure is as shown below</p>
+<p>📦icollabrains<br>
+┣ 📂src<br>
+┃ ┣ 📂iHome<br>
+┃ ┃ ┣ 📜function.json<br>
+┃ ┃ ┗ 📜run.ps1<br>
+┃ ┣ 📜.gitignore<br>
+┃ ┣ 📜host.json<br>
+┃ ┣ 📜local.settings.json<br>
+┃ ┣ 📜profile.ps1<br>
+┃ ┗ 📜requirements.psd1<br>
+┣ 📂terraform<br>
+┃ ┣ 📜backend.tf<br>
+┃ ┣ 📜main.tf<br>
+┃ ┣ 📜outputs.tf<br>
+┃ ┣ 📜providers.tf<br>
+┃ ┗ 📜variables.tf<br>
+┣ 📜.gitlab-ci.yml<br>
+┗ 📜README.md</p>
+<p><img src="/images/blog/Blog-Pic-1.png" alt="images"></p>
+<h3 id="terraform-backend-configuration">Terraform Backend Configuration</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Terraform" data-lang="Terraform"><span style="display:flex;"><span><span style="color:#a6e22e">terraform</span> {
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">backend</span> <span style="color:#e6db74">&#34;http&#34;</span> {
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">address</span>  = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">TF_ADDRESS</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">username</span> = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">TF_USERNAME</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">password</span> = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">TF_PASSWORD</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span> }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+        </p>
+    </div>
 
-    <h2 class="posts-year">2022</h2><article class="post-title">
-    <a href="https://gokarna-hugo.netlify.app/posts/gitlab-cicd-to-deploy-azure-functions-with-gitlab/" class="post-link">GITLAB CICD TO DEPLOY AZURE FUNCTIONS WITH GITLAB</a>
-    <div class="flex-break"></div>
-    <span class="post-date">November 27, 2022</span>
-</article>
-
-    
-
+    <div class="prev-next">
+        
+    </div>
 </div>
 
+<aside class="post-toc">
+    <nav id="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#requirement">Requirement</a></li>
+        <li><a href="#solution">Solution</a>
+          <ul>
+            <li><a href="#terraform-backend-configuration">Terraform Backend Configuration</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </nav>
+</aside>
+
+
+
+    
 
         </main><footer class="footer">
     <span>&copy; 2022 Howdy, Cloudy!</span>

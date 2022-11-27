@@ -11,7 +11,7 @@
     <loc>https://gokarna-hugo.netlify.app/tags/gitlab/</loc>
     <lastmod>2022-11-27T20:32:21+00:00</lastmod>
   </url><url>
-    <loc>https://gokarna-hugo.netlify.app/posts/first_post/</loc>
+    <loc>https://gokarna-hugo.netlify.app/posts/gitlab-cicd-to-deploy-azure-functions-with-gitlab/</loc>
     <lastmod>2022-11-27T20:32:21+00:00</lastmod>
   </url><url>
     <loc>https://gokarna-hugo.netlify.app/</loc>
@@ -26,10 +26,16 @@
     <loc>https://gokarna-hugo.netlify.app/tags/</loc>
     <lastmod>2022-11-27T20:32:21+00:00</lastmod>
   </url><url>
+    <loc>https://gokarna-hugo.netlify.app/about/</loc>
+  </url><url>
+    <loc>https://gokarna-hugo.netlify.app/projects/bludhaven/</loc>
+  </url><url>
     <loc>https://gokarna-hugo.netlify.app/categories/</loc>
   </url><url>
-    <loc>https://gokarna-hugo.netlify.app/pages/first_post/</loc>
+    <loc>https://gokarna-hugo.netlify.app/projects/hydra/</loc>
   </url><url>
-    <loc>https://gokarna-hugo.netlify.app/pages/</loc>
+    <loc>https://gokarna-hugo.netlify.app/projects/</loc>
+  </url><url>
+    <loc>https://gokarna-hugo.netlify.app/projects/tatooine/</loc>
   </url>
 </urlset>
