@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Azure on Howdy, Cloudy</title>
+    <link>https://gokarna-hugo.netlify.app/tags/azure/</link>
+    <description>Recent content in Azure on Howdy, Cloudy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 27 Nov 2022 20:32:21 +0000</lastBuildDate><atom:link href="https://gokarna-hugo.netlify.app/tags/azure/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GITLAB CICD TO DEPLOY AZURE FUNCTIONS WITH GITLAB</title>
+      <link>https://gokarna-hugo.netlify.app/posts/first_post/</link>
+      <pubDate>Sun, 27 Nov 2022 20:32:21 +0000</pubDate>
+      
+      <guid>https://gokarna-hugo.netlify.app/posts/first_post/</guid>
+      <description>Heading 1 &amp;ldquo;Lorem ipsum dolor sit amet, consectetaur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+  </channel>
+</rss>
