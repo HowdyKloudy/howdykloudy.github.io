@@ -8,7 +8,7 @@ type: post
 showTableOfContents: true
 ---
 
-![img](/images/avatar.png)
+![img](/images/blog/cover-01.jpg)
 
 ## Introduction
 
@@ -20,7 +20,7 @@ There are many ways to deploy Azure resources.
   :rocket: PowerShell  
   :rocket: REST API etc. 
 - Declarative
-  - IaC – Bicep,Terraform, Pulumi etc. 
+  :rocket: IaC – Bicep,Terraform, Pulumi etc. 
 
 The most commonly used method to provision Azure resources is with Infrastructure as Code, and the tool is your choice. I recommend using Bicep. But, for this blog post, I used Terraform because I have to demonstrate the remote state backend configuration. 
 

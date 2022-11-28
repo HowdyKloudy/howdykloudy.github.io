@@ -105,6 +105,7 @@ pygmentsStyle = "monokai"
 
 [markup]
   [markup.tableOfContents]
+    description = "on this page"
     startLevel = 1
     endLevel = 4
     ordered = false
