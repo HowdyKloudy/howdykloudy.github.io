@@ -583,7 +583,7 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">dependencies</span>:
 </span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#34;kics-scan&#34;</span>
 </span></span></code></pre></div><ul>
-<li>Runs only on merge request events and upon the successful completion of KICS SCAN</li>
+<li>Runs only on merge request events and upon the successful completion of KICS SCAN.</li>
 <li>Parse the JSON file and retrieve the vulnerability results.</li>
 <li>Modify the stage exit condition as applicable. In this case, we use echo to show the number of high-severity counters.</li>
 </ul>
@@ -601,8 +601,7 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">dependencies</span>:
 </span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#34;kics-scan&#34;</span>
 </span></span></code></pre></div><ul>
-<li>Runs on merge request events, and change is in any file underneath Terraform folder</li>
-<li>Modify the stage exit condition as applicable. In this case, we use echo to show the number of high-severity counters.</li>
+<li>Runs on merge request events, and change is in any file underneath Terraform folder.</li>
 </ul>
 <hr>
 <h4 id="terraform-plan">Terraform Plan</h4>
@@ -635,8 +634,7 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">dependencies</span>:
 </span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">validate</span>
 </span></span></code></pre></div><ul>
-<li>Runs on merge request events, and change is in any file underneath Terraform folder</li>
-<li>Modify the stage exit condition as applicable. In this case, we use echo to show the number of high-severity counters.</li>
+<li>Runs on merge request events, and change is in any file underneath Terraform folder.</li>
 </ul>
 <hr>
 <h4 id="terraform-apply">Terraform Apply</h4>
@@ -657,7 +655,12 @@
 </span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">terraform apply -input=false plan.cache</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">dependencies</span>:
 </span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">plan</span>
-</span></span></code></pre></div><h4 id="deploy-azure-functions">Deploy Azure Functions</h4>
+</span></span></code></pre></div><ul>
+<li>Apply to provision resources.</li>
+<li>Runs on merge request events, and change is in any file underneath Terraform folder.</li>
+</ul>
+<hr>
+<h4 id="deploy-azure-functions">Deploy Azure Functions</h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">deploy</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">environment</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">$Environment</span>
@@ -677,7 +680,13 @@
 </span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">npm install -g azure-functions-core-tools@4 --unsafe-perm true</span>
 </span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID</span>
 </span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">func azure functionapp publish &#34;${Function_App_Name}-${Environment}&#34; --powershell --prefix src/</span>
-</span></span></code></pre></div><h4 id="az-functions-functional-test">Az Functions Functional Test</h4>
+</span></span></code></pre></div><ul>
+<li>Deploy Azure Functions when a change is in the SRC folder.</li>
+<li>Log in to Azure using AZ CLI.</li>
+<li>Publish Azure Functions using the Azure Functions core tools.</li>
+</ul>
+<hr>
+<h4 id="az-functions-functional-test">Az Functions Functional Test</h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">functionaltest</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">environment</span>:
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">$Environment</span>
@@ -698,7 +707,11 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      fi</span>      
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">dependencies</span>:
 </span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#34;deploy&#34;</span>
-</span></span></code></pre></div><h4 id="destroy">Destroy</h4>
+</span></span></code></pre></div><ul>
+<li>A simple CURL to check the accessibility of the API endpoint.</li>
+</ul>
+<hr>
+<h4 id="destroy">Destroy</h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">destroy</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">when</span>: <span style="color:#ae81ff">manual</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">environment</span>:
@@ -720,21 +733,20 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;app_service_plan_tier=${app_service_plan_tier}&#34; \
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;function_app_name=${Function_App_Name}-${Environment}&#34; \
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -auto-approve</span>      
-</span></span></code></pre></div><h3 id="references">References</h3>
+</span></span></code></pre></div><ul>
+<li>Destroy stage is to run on demand.</li>
+</ul>
+<h3 id="references">References</h3>
 <ul>
 <li><a href="https://azure.microsoft.com/en-gb/products/functions/#overview">Azure Functions</a></li>
 <li><a href="https://github.com/Azure/azure-functions-core-tools">Azure Functions Core Tools</a></li>
 <li><a href="https://www.terraform.io/">Terraform</a></li>
 </ul>
 <h3 id="summary">Summary</h3>
-<p>Congratulations, you have successfully deployed the serverless solution. Now, you know to create a CICD pipeline in GitLab to deploy and destroy Azure functions. In my next blog post, I have plans to cover the below</p>
-<ul>
-<li>Implement Azure Traffic Manager for high availability</li>
-<li>Blue Green Deployment</li>
-</ul>
-<hr>
-<p>🌩️ Your feedback is highly appreciated. Feel free to send your comments to my ✉ <a href="mailto:chendrayan.exchange@hotmail.com">inbox</a></p>
-<hr>
+<p>Congratulations, you have successfully deployed the serverless solution. Now, you know to create a CICD pipeline in GitLab to deploy and destroy Azure functions. In my upcoming blog post, I have plans to cover the below</p>
+<p>🚀 Implement Azure Traffic Manager for high availability.
+🚀 Blue Green Deployment.</p>
+<p>Your feedback is highly appreciated. Feel free to send your comments to my ✉ <a href="mailto:chendrayan.exchange@hotmail.com">inbox</a>.</p>
 
         </p>
     </div>

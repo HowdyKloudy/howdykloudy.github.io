@@ -119,10 +119,12 @@ terraform {
 
 | Variable    | Value                                                                              |
 | ----------- | ---------------------------------------------------------------------------------- |
-| TF_ADDRESS  | https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/terraform/state/${Environment} |
+| TF_ADDRESS  | https://gitlab.com/api/v4/projects/[PROJECT_ID]/terraform/state/[ENVIRONMENT] |
 | TF_USERNAME | GITLAB_USER_NAME                                                                   |
 | TF_PASSWORD | GITLAB_PAT_TOKEN                                                                   |
 
+:rocket: PROJECT_ID = ${CI_PROJECT_ID} (GitLab Predefined Variables)  
+:rocket: ENVIRONMENT = ${ENVIRONMENT} (Var in YAML)
 
 ### Terraform Template
 
@@ -536,13 +538,15 @@ destroy:
 - [Azure Functions](https://azure.microsoft.com/en-gb/products/functions/#overview)
 - [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools)
 - [Terraform](https://www.terraform.io/)
+- [GitLab Predefined Variables](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html)
 
 ### Summary
 
 Congratulations, you have successfully deployed the serverless solution. Now, you know to create a CICD pipeline in GitLab to deploy and destroy Azure functions. In my upcoming blog post, I have plans to cover the below
 
-:rocket: Implement Azure Traffic Manager for high availability.
-:rocket: Blue Green Deployment.
+:rocket: Implement a DevOps way to handle the enhancements.
+:rocket: Implement Azure Traffic Manager for high availability.  
+:rocket: Blue Green Deployment.  
 
 
 Your feedback is highly appreciated. Feel free to send your comments to my :envelope: [inbox](mailto:chendrayan.exchange@hotmail.com). 
