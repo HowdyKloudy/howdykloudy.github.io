@@ -539,12 +539,10 @@ destroy:
 
 ### Summary
 
-Congratulations, you have successfully deployed the serverless solution. Now, you know to create a CICD pipeline in GitLab to deploy and destroy Azure functions. In my next blog post, I have plans to cover the below
+Congratulations, you have successfully deployed the serverless solution. Now, you know to create a CICD pipeline in GitLab to deploy and destroy Azure functions. In my upcoming blog post, I have plans to cover the below
 
-- Implement Azure Traffic Manager for high availability
-- Blue Green Deployment
+:rocket: Implement Azure Traffic Manager for high availability.
+:rocket: Blue Green Deployment.
 
----
-:lightning: Your feedback is highly appreciated. Feel free to send your comments to my :envelope: [inbox](mailto:chendrayan.exchange@hotmail.com)
 
----
+Your feedback is highly appreciated. Feel free to send your comments to my :envelope: [inbox](mailto:chendrayan.exchange@hotmail.com). 
