@@ -28,6 +28,9 @@ The most commonly used method to provision Azure resources is with Infrastructur
 
 ![img](/images/blog/Blog-Pic-2.png)
 
+## Pipeline (Merge & Branch Pipeline)
+
+![img](/images/blog/Pipeline.png)
 ## Resource Visualizer
 
 > PRD - Production Environment
