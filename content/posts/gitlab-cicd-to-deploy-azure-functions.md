@@ -28,6 +28,8 @@ There are many ways to deploy Azure resources.
 
 The most commonly used method to provision Azure resources is with Infrastructure as Code, and the tool is your choice. I recommend using Bicep. But, for this blog post, I used Terraform because I have to demonstrate the remote state backend configuration. 
 
+:red_circle: [Source Code](https://gitlab.com/collabrains/icollabrains)
+
 ## Design (Initial Draft)
 
 ![img](/images/blog/Blog-Pic-2.png)
