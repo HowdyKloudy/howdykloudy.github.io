@@ -198,12 +198,11 @@
 <h2 id="introduction">Introduction</h2>
 <p>There are many ways to deploy Azure resources.</p>
 <ul>
-<li>Click through the Azure portal to provision the resources.</li>
-<li>Imperative
-<ul>
-<li>Use Az CLI, PowerShell, REST API etc.</li>
-</ul>
-</li>
+<li>Azure Portal - Click and follow the UI!</li>
+<li>Imperative<br>
+🚀 Use Az CLI<br>
+🚀 PowerShell<br>
+🚀 REST API etc.</li>
 <li>Declarative
 <ul>
 <li>IaC – Bicep,Terraform, Pulumi etc.</li>
@@ -323,7 +322,7 @@
 <tbody>
 <tr>
 <td>TF_ADDRESS</td>
-<td><a href="https://gitlab.com/api/v4/projects/$%7BCI_PROJECT_ID%7D/terraform/state/$%7BEnvironment%7D">https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/terraform/state/${Environment}</a></td>
+<td><a href="https://gitlab.com/api/v4/projects/%5BPROJECT_ID%5D/terraform/state/%5BENVIRONMENT%5D">https://gitlab.com/api/v4/projects/[PROJECT_ID]/terraform/state/[ENVIRONMENT]</a></td>
 </tr>
 <tr>
 <td>TF_USERNAME</td>
@@ -335,6 +334,8 @@
 </tr>
 </tbody>
 </table>
+<p>🚀 PROJECT_ID = ${CI_PROJECT_ID} (GitLab Predefined Variables)<br>
+🚀 ENVIRONMENT = ${ENVIRONMENT} (Var in YAML)</p>
 <h3 id="terraform-template">Terraform Template</h3>
 <p>List of resources to provision</p>
 <ul>
@@ -741,10 +742,13 @@
 <li><a href="https://azure.microsoft.com/en-gb/products/functions/#overview">Azure Functions</a></li>
 <li><a href="https://github.com/Azure/azure-functions-core-tools">Azure Functions Core Tools</a></li>
 <li><a href="https://www.terraform.io/">Terraform</a></li>
+<li><a href="https://docs.gitlab.com/ee/ci/variables/predefined_variables.html">GitLab Predefined Variables</a></li>
+<li><a href="https://docs.gitlab.com/ee/user/infrastructure/iac/terraform_state.html">GitLab Terraform State</a></li>
 </ul>
 <h3 id="summary">Summary</h3>
 <p>Congratulations, you have successfully deployed the serverless solution. Now, you know to create a CICD pipeline in GitLab to deploy and destroy Azure functions. In my upcoming blog post, I have plans to cover the below</p>
-<p>🚀 Implement Azure Traffic Manager for high availability.
+<p>🚀 Implement a DevOps way to handle the enhancements.<br>
+🚀 Implement Azure Traffic Manager for high availability.<br>
 🚀 Blue Green Deployment.</p>
 <p>Your feedback is highly appreciated. Feel free to send your comments to my ✉ <a href="mailto:chendrayan.exchange@hotmail.com">inbox</a>.</p>
 

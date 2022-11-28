@@ -12,10 +12,13 @@ showTableOfContents: true
 
 ## Introduction
 
-There are many ways to deploy Azure resources. 
-- Click through the Azure portal to provision the resources. 
-- Imperative
-  - Use Az CLI, PowerShell, REST API etc. 
+There are many ways to deploy Azure resources.   
+
+- Azure Portal - Click and follow the UI!  
+- Imperative  
+  :rocket: Use Az CLI  
+  :rocket: PowerShell  
+  :rocket: REST API etc. 
 - Declarative
   - IaC – Bicep,Terraform, Pulumi etc. 
 
@@ -539,12 +542,12 @@ destroy:
 - [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools)
 - [Terraform](https://www.terraform.io/)
 - [GitLab Predefined Variables](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html)
-
+- [GitLab Terraform State](https://docs.gitlab.com/ee/user/infrastructure/iac/terraform_state.html)
 ### Summary
 
 Congratulations, you have successfully deployed the serverless solution. Now, you know to create a CICD pipeline in GitLab to deploy and destroy Azure functions. In my upcoming blog post, I have plans to cover the below
 
-:rocket: Implement a DevOps way to handle the enhancements.
+:rocket: Implement a DevOps way to handle the enhancements.  
 :rocket: Implement Azure Traffic Manager for high availability.  
 :rocket: Blue Green Deployment.  
 
