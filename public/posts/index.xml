@@ -8,13 +8,13 @@
     <language>en</language>
     <lastBuildDate>Sun, 27 Nov 2022 20:32:21 +0000</lastBuildDate><atom:link href="https://gokarna-hugo.netlify.app/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>GITLAB CICD TO DEPLOY AZURE FUNCTIONS WITH GITLAB</title>
-      <link>https://gokarna-hugo.netlify.app/posts/gitlab-cicd-to-deploy-azure-functions-with-gitlab/</link>
+      <title>GITLAB CICD TO DEPLOY AZURE FUNCTIONS</title>
+      <link>https://gokarna-hugo.netlify.app/posts/gitlab-cicd-to-deploy-azure-functions/</link>
       <pubDate>Sun, 27 Nov 2022 20:32:21 +0000</pubDate>
       
-      <guid>https://gokarna-hugo.netlify.app/posts/gitlab-cicd-to-deploy-azure-functions-with-gitlab/</guid>
-      <description>Introduction Hello, DevOps Focals! How have you been? It’s my pleasure to share the learnings in GitLab I have gained in the recent past. A month ago, I demonstrated deploying Azure Functions to a project team, and this blog post is to walk through the steps
-Prerequisites Mandatory Azure Account GitLab Account GitLab Personal Access Token (PAT) Optional (required for testing in local dev machine) Terraform CLI (Option) Azure Functions Core CLI 🔦 Azure Function App is an instance to run the Azure Functions.</description>
+      <guid>https://gokarna-hugo.netlify.app/posts/gitlab-cicd-to-deploy-azure-functions/</guid>
+      <description>Introduction There are many ways to deploy Azure resources.
+Click through the Azure portal to provision the resources. Imperative Use Az CLI, PowerShell, REST API etc. Declarative IaC – Bicep,Terraform, Pulumi etc. The most commonly used method to provision Azure resources is with Infrastructure as Code, and the tool is your choice. I recommend using Bicep. But, for this blog post, I used Terraform because I have to demonstrate the remote state backend configuration.</description>
     </item>
     
   </channel>

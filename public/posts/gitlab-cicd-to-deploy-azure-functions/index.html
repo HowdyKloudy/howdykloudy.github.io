@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>GITLAB CICD TO DEPLOY AZURE FUNCTIONS</title>
+    <meta name="description" content="        Chendrayan Venkatesan
+">
+    <meta name="keywords" content='blog, gokarna, hugo, GitLab, KICS, Azure, Azure Functions'>
+
+    <meta property="og:url" content="https://gokarna-hugo.netlify.app/posts/gitlab-cicd-to-deploy-azure-functions/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="GITLAB CICD TO DEPLOY AZURE FUNCTIONS">
+    <meta property="og:description" content="        Chendrayan Venkatesan
+">
+    <meta property="og:image" content="/images/avatar.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GITLAB CICD TO DEPLOY AZURE FUNCTIONS">
+    <meta name="twitter:description" content="        Chendrayan Venkatesan
+">
+    <meta property="twitter:domain" content="https://gokarna-hugo.netlify.app/posts/gitlab-cicd-to-deploy-azure-functions/">
+    <meta property="twitter:url" content="https://gokarna-hugo.netlify.app/posts/gitlab-cicd-to-deploy-azure-functions/">
+    <meta name="twitter:image" content="/images/avatar.png">
+
+    
+    <link rel="canonical" href="https://gokarna-hugo.netlify.app/posts/gitlab-cicd-to-deploy-azure-functions/" />
+
+    <link rel="stylesheet" type="text/css" href="https://gokarna-hugo.netlify.app/css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="https://gokarna-hugo.netlify.app/css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="https://gokarna-hugo.netlify.app/css/dark.css">
+
+    <script src="https://gokarna-hugo.netlify.app/js/svg-injector.min.js"></script>
+    <script src="https://gokarna-hugo.netlify.app/js/feather-icons.min.js"></script>
+    <script src="https://gokarna-hugo.netlify.app/js/main.js"></script>
+
+    
+    
+        <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+      });
+    </script>
+  
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://gokarna-hugo.netlify.app">
+                <img src="https://gokarna-hugo.netlify.app/images/avatar.png" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://gokarna-hugo.netlify.app">Howdy, Cloudy</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="https://gokarna-hugo.netlify.app/"><span data-feather='home'></span> Home </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://gokarna-hugo.netlify.app/posts/"><span data-feather='book'></span> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://gokarna-hugo.netlify.app/about/"><span data-feather='user'></span> About Me </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://gokarna-hugo.netlify.app/tags/"><span data-feather='tag'></span> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com/chendrayanv"><span data-feather='github'></span>  </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://linkedin.com/in/chendrayanv"><span data-feather='linkedin'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <span id="dark-theme-toggle-screen-reader-target" class="sr-only"></span>
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <span id="hamburger-menu-toggle-screen-reader-target" class="sr-only">menu</span>
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="https://gokarna-hugo.netlify.app/"><span data-feather='home'></span> Home </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://gokarna-hugo.netlify.app/posts/"><span data-feather='book'></span> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://gokarna-hugo.netlify.app/about/"><span data-feather='user'></span> About Me </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://gokarna-hugo.netlify.app/tags/"><span data-feather='tag'></span> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com/chendrayanv"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://linkedin.com/in/chendrayanv"><span data-feather='linkedin'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <span id="dark-theme-toggle-screen-reader-target" class="sr-only">theme</span>
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+    <div class="post-header-section">
+        <h1>GITLAB CICD TO DEPLOY AZURE FUNCTIONS</h1>
+        <small role="doc-subtitle"></small>
+        <p class="post-date">
+            November 27, 2022
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="https://gokarna-hugo.netlify.app/tags/gitlab">GitLab</a></li>
+        
+            <li class="post-tag"><a href="https://gokarna-hugo.netlify.app/tags/kics">KICS</a></li>
+        
+            <li class="post-tag"><a href="https://gokarna-hugo.netlify.app/tags/azure">Azure</a></li>
+        
+            <li class="post-tag"><a href="https://gokarna-hugo.netlify.app/tags/azure-functions">Azure Functions</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <p><img src="/images/avatar.png" alt="img"></p>
+<h2 id="introduction">Introduction</h2>
+<p>There are many ways to deploy Azure resources.</p>
+<ul>
+<li>Click through the Azure portal to provision the resources.</li>
+<li>Imperative
+<ul>
+<li>Use Az CLI, PowerShell, REST API etc.</li>
+</ul>
+</li>
+<li>Declarative
+<ul>
+<li>IaC – Bicep,Terraform, Pulumi etc.</li>
+</ul>
+</li>
+</ul>
+<p>The most commonly used method to provision Azure resources is with Infrastructure as Code, and the tool is your choice. I recommend using Bicep. But, for this blog post, I used Terraform because I have to demonstrate the remote state backend configuration.</p>
+<h2 id="design-initial-draft">Design (Initial Draft)</h2>
+<p><img src="/images/blog/Blog-Pic-2.png" alt="img"></p>
+<h2 id="resource-visualizer">Resource Visualizer</h2>
+<blockquote>
+<p>PRD - Production Environment</p>
+</blockquote>
+<p><img src="/images/blog/Blog-Pic-3.png" alt="img"></p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Mandatory
+<ul>
+<li>Azure Account</li>
+<li>GitLab Account</li>
+<li>GitLab <strong>P</strong>ersonal <strong>A</strong>ccess <strong>T</strong>oken (PAT)
+<ul>
+<li><a href="https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html">More about PAT</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Optional (required for testing in local dev machine)
+<ul>
+<li>Terraform CLI</li>
+<li>Azure Functions Core CLI</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>🔦 <strong>Azure Function App</strong> is an instance to run the <strong>Azure Functions.</strong></p>
+<hr>
+<h2 id="requirement">Requirement</h2>
+<ul>
+<li>Deploy Azure Function App.</li>
+<li>Deploy Azure Functions.</li>
+<li>Deploy solutions in multiple environments.</li>
+<li>Implement KICS for Terraform.</li>
+<li>Terraform remote state management (GitLab).</li>
+<li>Post the demo destroy the infrastructure. (lower environments).</li>
+<li>Pipeline Configuration &amp; Rules
+<ul>
+<li>An implementor should pass a value for the environment and spin up the infrastructure.</li>
+<li>On a merge request event, the below jobs should run
+<ul>
+<li>kics-scan</li>
+<li>kics-result</li>
+<li>validate</li>
+</ul>
+</li>
+<li>On a merge, the below jobs should run
+<ul>
+<li>plan</li>
+<li>apply</li>
+<li>deploy</li>
+<li>functionaltest</li>
+<li>Destory (manual)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="solution">Solution</h2>
+<blockquote>
+<p>Our source code folder structure is as shown below</p>
+</blockquote>
+<p>📦icollabrains<br>
+┣ 📂src<br>
+┃ ┣ 📂iHome<br>
+┃ ┃ ┣ 📜function.json<br>
+┃ ┃ ┗ 📜run.ps1<br>
+┃ ┣ 📜.gitignore<br>
+┃ ┣ 📜host.json<br>
+┃ ┣ 📜local.settings.json<br>
+┃ ┣ 📜profile.ps1<br>
+┃ ┗ 📜requirements.psd1<br>
+┣ 📂terraform<br>
+┃ ┣ 📜backend.tf<br>
+┃ ┣ 📜main.tf<br>
+┃ ┣ 📜outputs.tf<br>
+┃ ┣ 📜providers.tf<br>
+┃ ┗ 📜variables.tf<br>
+┣ 📜.gitlab-ci.yml<br>
+┗ 📜README.md</p>
+<p><img src="/images/blog/Blog-Pic-1.png" alt="images"></p>
+<p>A solution is not only to solve the problem. It should be easy to adapt! With that consideration, I would like to walk through the proof of concept deployment in simple steps.</p>
+<h3 id="terraform-backend-configuration">Terraform Backend Configuration</h3>
+<p>Gitlab provides a Terraform HTTP backend to store the state files with the below essential features</p>
+<ul>
+<li>Version your Terraform state files.</li>
+<li>Encrypt the state file both in transit and at rest.</li>
+<li>Lock and unlock states.</li>
+<li>Remotely execute the terraform plan &amp; apply commands.</li>
+</ul>
+<blockquote>
+<p>backend.tf</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Terraform" data-lang="Terraform"><span style="display:flex;"><span><span style="color:#a6e22e">terraform</span> {
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">backend</span> <span style="color:#e6db74">&#34;http&#34;</span> {
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">address</span>  = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">TF_ADDRESS</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">username</span> = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">TF_USERNAME</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">password</span> = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">TF_PASSWORD</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span> }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TF_ADDRESS</td>
+<td><a href="https://gitlab.com/api/v4/projects/$%7BCI_PROJECT_ID%7D/terraform/state/$%7BEnvironment%7D">https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/terraform/state/${Environment}</a></td>
+</tr>
+<tr>
+<td>TF_USERNAME</td>
+<td>GITLAB_USER_NAME</td>
+</tr>
+<tr>
+<td>TF_PASSWORD</td>
+<td>GITLAB_PAT_TOKEN</td>
+</tr>
+</tbody>
+</table>
+<h3 id="terraform-template">Terraform Template</h3>
+<p>List of resources to provision</p>
+<ul>
+<li>Resource Group</li>
+<li>Storage Account</li>
+<li>App Service Plan</li>
+<li>Function App</li>
+</ul>
+<blockquote>
+<p>main.tf</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Terraform" data-lang="Terraform"><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;azurerm_resource_group&#34;</span> <span style="color:#e6db74">&#34;resource_group&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span>     = var.<span style="color:#a6e22e">resource_group_name</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">location</span> = var.<span style="color:#a6e22e">location</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;azurerm_storage_account&#34;</span> <span style="color:#e6db74">&#34;storage_account&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span>                     = var.<span style="color:#a6e22e">storage_account_name</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resource_group_name</span>      = <span style="color:#a6e22e">azurerm_resource_group</span>.<span style="color:#a6e22e">resource_group</span>.<span style="color:#a6e22e">name</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">location</span>                 = <span style="color:#a6e22e">azurerm_resource_group</span>.<span style="color:#a6e22e">resource_group</span>.<span style="color:#a6e22e">location</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">account_tier</span>             = var.<span style="color:#a6e22e">storage_account_tier</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">account_replication_type</span> = var.<span style="color:#a6e22e">storage_account_replication_type</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;azurerm_app_service_plan&#34;</span> <span style="color:#e6db74">&#34;app_service_plan&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span>                = var.<span style="color:#a6e22e">app_service_plan</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">location</span>            = <span style="color:#a6e22e">azurerm_resource_group</span>.<span style="color:#a6e22e">resource_group</span>.<span style="color:#a6e22e">location</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resource_group_name</span> = <span style="color:#a6e22e">azurerm_resource_group</span>.<span style="color:#a6e22e">resource_group</span>.<span style="color:#a6e22e">name</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">sku</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">tier</span> = var.<span style="color:#a6e22e">app_service_plan_tier</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">size</span> = var.<span style="color:#a6e22e">app_service_plan_size</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;azurerm_windows_function_app&#34;</span> <span style="color:#e6db74">&#34;function_app&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span>                       = var.<span style="color:#a6e22e">function_app_name</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resource_group_name</span>        = <span style="color:#a6e22e">azurerm_resource_group</span>.<span style="color:#a6e22e">resource_group</span>.<span style="color:#a6e22e">name</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">location</span>                   = <span style="color:#a6e22e">azurerm_resource_group</span>.<span style="color:#a6e22e">resource_group</span>.<span style="color:#a6e22e">location</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">storage_account_name</span>       = <span style="color:#a6e22e">azurerm_storage_account</span>.<span style="color:#a6e22e">storage_account</span>.<span style="color:#a6e22e">name</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">storage_account_access_key</span> = <span style="color:#a6e22e">azurerm_storage_account</span>.<span style="color:#a6e22e">storage_account</span>.<span style="color:#a6e22e">primary_access_key</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">service_plan_id</span>            = <span style="color:#a6e22e">azurerm_app_service_plan</span>.<span style="color:#a6e22e">app_service_plan</span>.<span style="color:#a6e22e">id</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">site_config</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">application_stack</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">powershell_core_version</span> = <span style="color:#e6db74">&#34;7.2&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">use_32_bit_worker</span> = <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">always_on</span>         = <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="variables">Variables</h3>
+<blockquote>
+<p>variables.tf</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Terraform" data-lang="Terraform"><span style="display:flex;"><span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;resource_group_name&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">type</span>        = <span style="color:#a6e22e">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">description</span> = <span style="color:#e6db74">&#34;(optional) describe your variable.&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;location&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">type</span>        = <span style="color:#a6e22e">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">description</span> = <span style="color:#e6db74">&#34;(optional) describe your variable.&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;storage_account_name&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">type</span>        = <span style="color:#a6e22e">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">description</span> = <span style="color:#e6db74">&#34;(optional) describe your variable.&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;storage_account_tier&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">type</span>        = <span style="color:#a6e22e">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">description</span> = <span style="color:#e6db74">&#34;(optional) describe your variable&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;storage_account_replication_type&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">type</span>        = <span style="color:#a6e22e">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">description</span> = <span style="color:#e6db74">&#34;(optional) describe your variable&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;app_service_plan&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">type</span>        = <span style="color:#a6e22e">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">description</span> = <span style="color:#e6db74">&#34;(optional) describe your variable&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;app_service_plan_tier&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">type</span>        = <span style="color:#a6e22e">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">description</span> = <span style="color:#e6db74">&#34;(optional) describe your variable&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;app_service_plan_size&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">type</span>        = <span style="color:#a6e22e">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">description</span> = <span style="color:#e6db74">&#34;(optional) describe your variable.&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;function_app_name&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">type</span>        = <span style="color:#a6e22e">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">description</span> = <span style="color:#e6db74">&#34;(optional) describe your variable.&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><blockquote>
+<p>Variable Values</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>resource_group_name</td>
+<td>rgp-${Function_App_Name}-${Environment}</td>
+</tr>
+<tr>
+<td>location</td>
+<td>ukwest (CICD Variables - GitLab)</td>
+</tr>
+<tr>
+<td>storage_account_name</td>
+<td>${Function_App_Name}stg${Environment}</td>
+</tr>
+<tr>
+<td>storage_account_tier</td>
+<td>Standard (CICD Variables - GitLab)</td>
+</tr>
+<tr>
+<td>storage_account_replication_type</td>
+<td>LRS (CICD Variables - GitLab)</td>
+</tr>
+<tr>
+<td>app_service_plan</td>
+<td>${Function_App_Name}-${Environment}</td>
+</tr>
+<tr>
+<td>app_service_plan_tier</td>
+<td>Standard (CICD Variables - GitLab)</td>
+</tr>
+<tr>
+<td>app_service_plan_size</td>
+<td>S1 (CICD Variables - GitLab)</td>
+</tr>
+<tr>
+<td>function_app_name</td>
+<td>${Function_App_Name}-${Environment}</td>
+</tr>
+</tbody>
+</table>
+<p>The below values are declared in the YAML file.</p>
+<ul>
+<li>Function_App_Name = icollabrains</li>
+<li>Environment = dev | prd | stage</li>
+</ul>
+<h3 id="cicd">CICD</h3>
+<h4 id="variables-1">Variables</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">variables</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Environment</span>: <span style="color:#ae81ff">dev</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">Function_App_Name</span>: <span style="color:#e6db74">&#34;icollabrains&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">TF_ADDRESS</span>: <span style="color:#e6db74">&#34;https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/terraform/state/${Environment}&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">KICS_VERSION</span>: <span style="color:#e6db74">&#34;1.2.4&#34;</span>
+</span></span></code></pre></div><ul>
+<li>Environment - Value can be of anything like dev, uat, test or prod.</li>
+<li>Function_App_Name - Name of your function app as applicable</li>
+<li>TF_ADDRESS - HTTP address for storing the state file</li>
+<li>KICS_VERSION - KICS binary file version number</li>
+</ul>
+<h4 id="before-script-template">Before Script Template</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">.before_script_template</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">image</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">hashicorp/terraform:latest</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">entrypoint</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;/usr/bin/env&#34;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">before_script</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">rm -rf .terraform</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">terraform init -backend-config=address=${TF_ADDRESS} -backend-config=lock_address=${TF_ADDRESS}/lock -backend-config=unlock_address=${TF_ADDRESS}/lock -backend-config=username=${TF_USERNAME} -backend-config=password=${TF_PASSWORD} -backend-config=lock_method=POST -backend-config=unlock_method=DELETE -backend-config=retry_wait_min=5</span>
+</span></span></code></pre></div><blockquote>
+<p>Terraform initialized with the below parameters</p>
+</blockquote>
+<ul>
+<li>backend-config=address=${TF_ADDRESS}</li>
+<li>backend-config=lock_address=${TF_ADDRESS}/lock</li>
+<li>backend-config=unlock_address=${TF_ADDRESS}/lock</li>
+<li>backend-config=username=${TF_USERNAME}</li>
+<li>backend-config=password=${TF_PASSWORD}</li>
+<li>backend-config=lock_method=POST</li>
+<li>backend-config=unlock_method=DELETE</li>
+<li>backend-config=retry_wait_min=5</li>
+</ul>
+<p>Lots of variables, right? Yeah, but not complex! These vars are to define the backend configuration with address, lock address, credentials, lock method, unlock method and retry wait time.</p>
+<hr>
+<h4 id="stages">Stages</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">stages</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">kics-scan</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">kics-result</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">validate</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">plan</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">apply</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">deploy</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">functionaltest</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">destroy</span>
+</span></span></code></pre></div><p>For convenience, I defined eight simple stages (KICS scan, process the Scan result, )</p>
+<hr>
+<h4 id="kics-scan">KICS Scan</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">kics-scan</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">stage</span>: <span style="color:#ae81ff">kics-scan</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">if</span>: <span style="color:#ae81ff">$CI_PIPELINE_SOURCE == &#34;merge_request_event&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">image</span>: <span style="color:#ae81ff">alpine</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">before_script</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">apk add --no-cache libc6-compat</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">wget -q -c &#34;https://github.com/Checkmarx/kics/releases/download/v${KICS_VERSION}/kics_${KICS_VERSION}_linux_x64.tar.gz&#34; -O - | tar -xz --directory /usr/bin &amp;&gt;/dev/null</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">script</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">kics scan -q /usr/bin/assets/queries -p ${PWD} -o ${PWD}/kics-results.json</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">artifacts</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">kics-results.json</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">kics-results.json</span>
+</span></span></code></pre></div><ul>
+<li>Runs only on merge request event.</li>
+<li>Download KICS binary to run the KICS SCAN.</li>
+<li>Store the output in a JSON format as artefacts. The output file name is <code>kics-results.json</code>.</li>
+</ul>
+<hr>
+<h4 id="kics-scan-result">KICS Scan Result</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">kics-result</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">stage</span>: <span style="color:#ae81ff">kics-result</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">if</span>: <span style="color:#ae81ff">$CI_PIPELINE_SOURCE == &#34;merge_request_event&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">before_script</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">export TOTAL_SEVERITY_COUNTER=`grep &#39;&#34;total_counter&#34;&#39;:&#39; &#39; kics-results.json | awk {&#39;print $2&#39;}`</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">export SEVERITY_COUNTER_HIGH=`grep &#39;&#34;HIGH&#34;&#39;:&#39; &#39; kics-results.json | awk {&#39;print $2&#39;} | sed &#39;s/.$//&#39;`</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">export SEVERITY_COUNTER_MEDIUM=`grep &#39;&#34;INFO&#34;&#39;:&#39; &#39; kics-results.json | awk {&#39;print $2&#39;} | sed &#39;s/.$//&#39;`</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">export SEVERITY_COUNTER_LOW=`grep &#39;&#34;LOW&#34;&#39;:&#39; &#39; kics-results.json | awk {&#39;print $2&#39;} | sed &#39;s/.$//&#39;`</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">export SEVERITY_COUNTER_INFO=`grep &#39;&#34;MEDIUM&#34;&#39;:&#39; &#39; kics-results.json | awk {&#39;print $2&#39;} | sed &#39;s/.$//&#39;`</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">script</span>:
+</span></span><span style="display:flex;"><span>    - |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      echo &#34;TOTAL SEVERITY COUNTER: $TOTAL_SEVERITY_COUNTER
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      SEVERITY COUNTER HIGH: $SEVERITY_COUNTER_HIGH
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      SEVERITY COUNTER MEDIUM: $SEVERITY_COUNTER_MEDIUM
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      SEVERITY COUNTER LOW: $SEVERITY_COUNTER_LOW
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      SEVERITY COUNTER INFO: $SEVERITY_COUNTER_INFO&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      if [ &#34;$SEVERITY_COUNTER_HIGH&#34; -ge &#34;1&#34; ];
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        then echo &#34;Please fix all $SEVERITY_COUNTER_HIGH HIGH SEVERITY ISSUES&#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      fi</span>      
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">dependencies</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#34;kics-scan&#34;</span>
+</span></span></code></pre></div><ul>
+<li>Runs only on merge request events and upon the successful completion of KICS SCAN</li>
+<li>Parse the JSON file and retrieve the vulnerability results.</li>
+<li>Modify the stage exit condition as applicable. In this case, we use echo to show the number of high-severity counters.</li>
+</ul>
+<h4 id="terraform-validate">Terraform Validate</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">validate</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">extends</span>: <span style="color:#ae81ff">.before_script_template</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">stage</span>: <span style="color:#ae81ff">validate</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">if</span>: <span style="color:#ae81ff">$CI_PIPELINE_SOURCE == &#34;merge_request_event&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">changes</span>: 
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#e6db74">&#34;terraform/**/*&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">script</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">terraform validate</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">dependencies</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#34;kics-scan&#34;</span>
+</span></span></code></pre></div><ul>
+<li>Runs on merge request events, and change is in any file underneath Terraform folder</li>
+<li>Modify the stage exit condition as applicable. In this case, we use echo to show the number of high-severity counters.</li>
+</ul>
+<hr>
+<h4 id="terraform-plan">Terraform Plan</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">plan</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">$Environment</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">if</span>: <span style="color:#ae81ff">$CI_COMMIT_BRANCH == &#34;main&#34; &amp;&amp; $CI_PIPELINE_SOURCE == &#34;push&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">changes</span>: 
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#e6db74">&#34;terraform/**/*&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">extends</span>: <span style="color:#ae81ff">.before_script_template</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">stage</span>: <span style="color:#ae81ff">plan</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">script</span>:
+</span></span><span style="display:flex;"><span>    - |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      terraform plan \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;resource_group_name=rgp-${Function_App_Name}-${Environment}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;location=${location}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;storage_account_name=${Function_App_Name}stg${Environment}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;storage_account_tier=${storage_account_tier}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;storage_account_replication_type=${storage_account_replication_type}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;app_service_plan=${Function_App_Name}-${Environment}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;app_service_plan_size=${app_service_plan_size}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;app_service_plan_tier=${app_service_plan_tier}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;function_app_name=${Function_App_Name}-${Environment}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -out &#34;plan.cache&#34;</span>      
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">artifacts</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;terraform/plan.cache&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">dependencies</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">validate</span>
+</span></span></code></pre></div><ul>
+<li>Runs on merge request events, and change is in any file underneath Terraform folder</li>
+<li>Modify the stage exit condition as applicable. In this case, we use echo to show the number of high-severity counters.</li>
+</ul>
+<hr>
+<h4 id="terraform-apply">Terraform Apply</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">apply</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">$Environment</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">if</span>: <span style="color:#ae81ff">$CI_COMMIT_BRANCH == &#34;main&#34; &amp;&amp; $CI_PIPELINE_SOURCE == &#34;push&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">changes</span>: 
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#e6db74">&#34;terraform/**/*&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">extends</span>: <span style="color:#ae81ff">.before_script_template</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">stage</span>: <span style="color:#ae81ff">apply</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">artifacts</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;terraform/plan.cache&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">script</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">terraform apply -input=false plan.cache</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">dependencies</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">plan</span>
+</span></span></code></pre></div><h4 id="deploy-azure-functions">Deploy Azure Functions</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">deploy</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">$Environment</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">if</span>: <span style="color:#ae81ff">$CI_COMMIT_BRANCH == &#34;main&#34; &amp;&amp; $CI_PIPELINE_SOURCE == &#34;push&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">changes</span>: 
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#e6db74">&#34;src/**/*&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">stage</span>: <span style="color:#ae81ff">deploy</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">image</span>: <span style="color:#ae81ff">python:3.9</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">script</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">pwd</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">apt-get update; apt-get install curl</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">curl -sL https://aka.ms/InstallAzureCLIDeb | bash</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">apt-get install curl &amp;&amp; curl -sL https://deb.nodesource.com/setup_12.x | bash</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">apt-get install nodejs</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">npm install -g azure-functions-core-tools@4 --unsafe-perm true</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">func azure functionapp publish &#34;${Function_App_Name}-${Environment}&#34; --powershell --prefix src/</span>
+</span></span></code></pre></div><h4 id="az-functions-functional-test">Az Functions Functional Test</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">functionaltest</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">$Environment</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">if</span>: <span style="color:#ae81ff">$CI_COMMIT_BRANCH == &#34;main&#34; &amp;&amp; $CI_PIPELINE_SOURCE == &#34;push&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">changes</span>: 
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#e6db74">&#34;src/**/*&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">stage</span>: <span style="color:#ae81ff">functionaltest</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">script</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">apt-get update</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">apt-get install curl -y</span>
+</span></span><span style="display:flex;"><span>    - |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      if [ &#34;$(curl https://${Function_App_Name}-${Environment}.azurewebsites.net/api/iHome?name=Chen | grep Hello)&#34; ]; then
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        echo &#34;success&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      else 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        exit 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      fi</span>      
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">dependencies</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#34;deploy&#34;</span>
+</span></span></code></pre></div><h4 id="destroy">Destroy</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#f92672">destroy</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">when</span>: <span style="color:#ae81ff">manual</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">$Environment</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">if</span>: <span style="color:#ae81ff">$CI_COMMIT_BRANCH == &#34;main&#34; &amp;&amp; $CI_PIPELINE_SOURCE == &#34;push&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">extends</span>: <span style="color:#ae81ff">.before_script_template</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">stage</span>: <span style="color:#ae81ff">destroy</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">script</span>:
+</span></span><span style="display:flex;"><span>    - |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      terraform destroy \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;resource_group_name=rgp-${Function_App_Name}-${Environment}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;location=${location}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;storage_account_name=${Function_App_Name}stg${Environment}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;storage_account_tier=${storage_account_tier}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;storage_account_replication_type=${storage_account_replication_type}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;app_service_plan=${Function_App_Name}-${Environment}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;app_service_plan_size=${app_service_plan_size}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;app_service_plan_tier=${app_service_plan_tier}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -var=&#34;function_app_name=${Function_App_Name}-${Environment}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      -auto-approve</span>      
+</span></span></code></pre></div><h3 id="references">References</h3>
+<ul>
+<li><a href="https://azure.microsoft.com/en-gb/products/functions/#overview">Azure Functions</a></li>
+<li><a href="https://github.com/Azure/azure-functions-core-tools">Azure Functions Core Tools</a></li>
+<li><a href="https://www.terraform.io/">Terraform</a></li>
+</ul>
+<h3 id="summary">Summary</h3>
+<p>Congratulations, you have successfully deployed the serverless solution. Now, you know to create a CICD pipeline in GitLab to deploy and destroy Azure functions. In my next blog post, I have plans to cover the below</p>
+<ul>
+<li>Implement Azure Traffic Manager for high availability</li>
+<li>Blue Green Deployment</li>
+</ul>
+<hr>
+<p>🌩️ Your feedback is highly appreciated. Feel free to send your comments to my ✉ <a href="mailto:chendrayan.exchange@hotmail.com">inbox</a></p>
+<hr>
+
+        </p>
+    </div>
+
+    <div class="prev-next">
+        
+    </div>
+</div>
+
+<aside class="post-toc">
+    <nav id="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#design-initial-draft">Design (Initial Draft)</a></li>
+        <li><a href="#resource-visualizer">Resource Visualizer</a></li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#requirement">Requirement</a></li>
+        <li><a href="#solution">Solution</a>
+          <ul>
+            <li><a href="#terraform-backend-configuration">Terraform Backend Configuration</a></li>
+            <li><a href="#terraform-template">Terraform Template</a></li>
+            <li><a href="#variables">Variables</a></li>
+            <li><a href="#cicd">CICD</a>
+              <ul>
+                <li><a href="#variables-1">Variables</a></li>
+                <li><a href="#before-script-template">Before Script Template</a></li>
+                <li><a href="#stages">Stages</a></li>
+                <li><a href="#kics-scan">KICS Scan</a></li>
+                <li><a href="#kics-scan-result">KICS Scan Result</a></li>
+                <li><a href="#terraform-validate">Terraform Validate</a></li>
+                <li><a href="#terraform-plan">Terraform Plan</a></li>
+                <li><a href="#terraform-apply">Terraform Apply</a></li>
+                <li><a href="#deploy-azure-functions">Deploy Azure Functions</a></li>
+                <li><a href="#az-functions-functional-test">Az Functions Functional Test</a></li>
+                <li><a href="#destroy">Destroy</a></li>
+              </ul>
+            </li>
+            <li><a href="#references">References</a></li>
+            <li><a href="#summary">Summary</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </nav>
+</aside>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2022 Howdy, Cloudy!</span>
+    <span>
+        Made with &#10084;&#65039; using <a target="_blank" href="https://github.com/526avijitgupta/gokarna">Gokarna</a>
+    </span>
+</footer>
+</body>
+</html>
