@@ -19,8 +19,12 @@ There are many ways to deploy Azure resources.
   :rocket: Use Az CLI  
   :rocket: PowerShell  
   :rocket: REST API etc. 
-- Declarative
-  :rocket: IaC – Bicep,Terraform, Pulumi etc. 
+- Declarative  
+  :rocket: IaC  
+  :rocket: Bicep  
+  :rocket: Terraform  
+  :rocket: Pulumi  
+  :rocket: farmer  
 
 The most commonly used method to provision Azure resources is with Infrastructure as Code, and the tool is your choice. I recommend using Bicep. But, for this blog post, I used Terraform because I have to demonstrate the remote state backend configuration. 
 

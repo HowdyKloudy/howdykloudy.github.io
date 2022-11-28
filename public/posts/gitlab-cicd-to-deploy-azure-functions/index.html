@@ -203,12 +203,18 @@
 🚀 Use Az CLI<br>
 🚀 PowerShell<br>
 🚀 REST API etc.</li>
-<li>Declarative
-🚀 IaC – Bicep,Terraform, Pulumi etc.</li>
+<li>Declarative<br>
+🚀 IaC<br>
+🚀 Bicep<br>
+🚀 Terraform<br>
+🚀 Pulumi<br>
+🚀 farmer</li>
 </ul>
 <p>The most commonly used method to provision Azure resources is with Infrastructure as Code, and the tool is your choice. I recommend using Bicep. But, for this blog post, I used Terraform because I have to demonstrate the remote state backend configuration.</p>
 <h2 id="design-initial-draft">Design (Initial Draft)</h2>
 <p><img src="/images/blog/Blog-Pic-2.png" alt="img"></p>
+<h2 id="merge--branch-pipeline-high-level-flow">Merge &amp; Branch Pipeline (High Level Flow)</h2>
+<p><img src="/images/blog/Pipeline.png" alt="img"></p>
 <h2 id="resource-visualizer">Resource Visualizer</h2>
 <blockquote>
 <p>PRD - Production Environment</p>
@@ -765,6 +771,7 @@
       <ul>
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#design-initial-draft">Design (Initial Draft)</a></li>
+        <li><a href="#merge--branch-pipeline-high-level-flow">Merge &amp; Branch Pipeline (High Level Flow)</a></li>
         <li><a href="#resource-visualizer">Resource Visualizer</a></li>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#requirement">Requirement</a></li>

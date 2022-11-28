@@ -17,7 +17,12 @@
 Azure Portal - Click and follow the UI! Imperative
 🚀 Use Az CLI
 🚀 PowerShell
-🚀 REST API etc. Declarative 🚀 IaC – Bicep,Terraform, Pulumi etc. The most commonly used method to provision Azure resources is with Infrastructure as Code, and the tool is your choice. I recommend using Bicep. But, for this blog post, I used Terraform because I have to demonstrate the remote state backend configuration.</description>
+🚀 REST API etc. Declarative
+🚀 IaC
+🚀 Bicep
+🚀 Terraform
+🚀 Pulumi
+🚀 farmer The most commonly used method to provision Azure resources is with Infrastructure as Code, and the tool is your choice. I recommend using Bicep. But, for this blog post, I used Terraform because I have to demonstrate the remote state backend configuration.</description>
     </item>
     
     <item>
