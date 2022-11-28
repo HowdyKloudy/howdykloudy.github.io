@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Azure Functions on Howdy, Cloudy</title>
-    <link>https://gokarna-hugo.netlify.app/tags/azure-functions/</link>
+    <link>/tags/azure-functions/</link>
     <description>Recent content in Azure Functions on Howdy, Cloudy</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 27 Nov 2022 20:32:21 +0000</lastBuildDate><atom:link href="https://gokarna-hugo.netlify.app/tags/azure-functions/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 27 Nov 2022 20:32:21 +0000</lastBuildDate><atom:link href="/tags/azure-functions/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GITLAB CICD TO DEPLOY AZURE FUNCTIONS</title>
-      <link>https://gokarna-hugo.netlify.app/posts/gitlab-cicd-to-deploy-azure-functions/</link>
+      <link>/posts/gitlab-cicd-to-deploy-azure-functions/</link>
       <pubDate>Sun, 27 Nov 2022 20:32:21 +0000</pubDate>
       
-      <guid>https://gokarna-hugo.netlify.app/posts/gitlab-cicd-to-deploy-azure-functions/</guid>
+      <guid>/posts/gitlab-cicd-to-deploy-azure-functions/</guid>
       <description>Introduction There are many ways to deploy Azure resources.
 Azure Portal - Click and follow the UI! Imperative
 🚀 Use Az CLI
 🚀 PowerShell
-🚀 REST API etc. Declarative IaC – Bicep,Terraform, Pulumi etc. The most commonly used method to provision Azure resources is with Infrastructure as Code, and the tool is your choice. I recommend using Bicep. But, for this blog post, I used Terraform because I have to demonstrate the remote state backend configuration.</description>
+🚀 REST API etc. Declarative 🚀 IaC – Bicep,Terraform, Pulumi etc. The most commonly used method to provision Azure resources is with Infrastructure as Code, and the tool is your choice. I recommend using Bicep. But, for this blog post, I used Terraform because I have to demonstrate the remote state backend configuration.</description>
     </item>
     
   </channel>

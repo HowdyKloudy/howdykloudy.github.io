@@ -2,40 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://gokarna-hugo.netlify.app/tags/azure/</loc>
+    <loc>/tags/azure/</loc>
     <lastmod>2022-11-27T20:32:21+00:00</lastmod>
   </url><url>
-    <loc>https://gokarna-hugo.netlify.app/tags/azure-functions/</loc>
+    <loc>/tags/azure-functions/</loc>
     <lastmod>2022-11-27T20:32:21+00:00</lastmod>
   </url><url>
-    <loc>https://gokarna-hugo.netlify.app/tags/gitlab/</loc>
+    <loc>/tags/gitlab/</loc>
     <lastmod>2022-11-27T20:32:21+00:00</lastmod>
   </url><url>
-    <loc>https://gokarna-hugo.netlify.app/posts/gitlab-cicd-to-deploy-azure-functions/</loc>
+    <loc>/posts/gitlab-cicd-to-deploy-azure-functions/</loc>
     <lastmod>2022-11-27T20:32:21+00:00</lastmod>
   </url><url>
-    <loc>https://gokarna-hugo.netlify.app/</loc>
+    <loc>/</loc>
     <lastmod>2022-11-27T20:32:21+00:00</lastmod>
   </url><url>
-    <loc>https://gokarna-hugo.netlify.app/tags/kics/</loc>
+    <loc>/tags/kics/</loc>
     <lastmod>2022-11-27T20:32:21+00:00</lastmod>
   </url><url>
-    <loc>https://gokarna-hugo.netlify.app/posts/</loc>
+    <loc>/posts/</loc>
     <lastmod>2022-11-27T20:32:21+00:00</lastmod>
   </url><url>
-    <loc>https://gokarna-hugo.netlify.app/tags/</loc>
+    <loc>/tags/</loc>
     <lastmod>2022-11-27T20:32:21+00:00</lastmod>
   </url><url>
-    <loc>https://gokarna-hugo.netlify.app/about/</loc>
+    <loc>/about/</loc>
   </url><url>
-    <loc>https://gokarna-hugo.netlify.app/projects/bludhaven/</loc>
+    <loc>/projects/bludhaven/</loc>
   </url><url>
-    <loc>https://gokarna-hugo.netlify.app/categories/</loc>
+    <loc>/categories/</loc>
   </url><url>
-    <loc>https://gokarna-hugo.netlify.app/projects/hydra/</loc>
+    <loc>/projects/hydra/</loc>
   </url><url>
-    <loc>https://gokarna-hugo.netlify.app/projects/</loc>
+    <loc>/projects/</loc>
   </url><url>
-    <loc>https://gokarna-hugo.netlify.app/projects/tatooine/</loc>
+    <loc>/projects/tatooine/</loc>
   </url>
 </urlset>

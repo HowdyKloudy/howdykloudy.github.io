@@ -2,44 +2,44 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Howdy, Cloudy</title>
-    <link>https://gokarna-hugo.netlify.app/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on Howdy, Cloudy</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 27 Nov 2022 20:32:21 +0000</lastBuildDate><atom:link href="https://gokarna-hugo.netlify.app/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 27 Nov 2022 20:32:21 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Azure</title>
-      <link>https://gokarna-hugo.netlify.app/tags/azure/</link>
+      <link>/tags/azure/</link>
       <pubDate>Sun, 27 Nov 2022 20:32:21 +0000</pubDate>
       
-      <guid>https://gokarna-hugo.netlify.app/tags/azure/</guid>
+      <guid>/tags/azure/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Azure Functions</title>
-      <link>https://gokarna-hugo.netlify.app/tags/azure-functions/</link>
+      <link>/tags/azure-functions/</link>
       <pubDate>Sun, 27 Nov 2022 20:32:21 +0000</pubDate>
       
-      <guid>https://gokarna-hugo.netlify.app/tags/azure-functions/</guid>
+      <guid>/tags/azure-functions/</guid>
       <description></description>
     </item>
     
     <item>
       <title>GitLab</title>
-      <link>https://gokarna-hugo.netlify.app/tags/gitlab/</link>
+      <link>/tags/gitlab/</link>
       <pubDate>Sun, 27 Nov 2022 20:32:21 +0000</pubDate>
       
-      <guid>https://gokarna-hugo.netlify.app/tags/gitlab/</guid>
+      <guid>/tags/gitlab/</guid>
       <description></description>
     </item>
     
     <item>
       <title>KICS</title>
-      <link>https://gokarna-hugo.netlify.app/tags/kics/</link>
+      <link>/tags/kics/</link>
       <pubDate>Sun, 27 Nov 2022 20:32:21 +0000</pubDate>
       
-      <guid>https://gokarna-hugo.netlify.app/tags/kics/</guid>
+      <guid>/tags/kics/</guid>
       <description></description>
     </item>
     
