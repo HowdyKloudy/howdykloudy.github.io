@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Blist Multilingual Theme</title>
+    <link>/blog/</link>
+    <description>Recent content in Blog on Blist Multilingual Theme</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 29 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Azure Function App Deployment using Blue-Green Deployment Model</title>
+      <link>/blog/azure-function-app-swap-slot/</link>
+      <pubDate>Thu, 29 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/azure-function-app-swap-slot/</guid>
+      <description>Introduction In my previous blog post, I shared the steps that walk you through the steps to deploy Azure Functions with GitLab, and now it’s a good day to demonstrate the swap slot that helps you to plan for the simple blue-green deployment model.
+High Level Solution Text Variables variables: Environment: qa Function_App_Name: &amp;#39;mikroapi&amp;#39; TF_ADDRESS: &amp;#34;https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/terraform/state/${Environment}&amp;#34; SLOT_NAME: &amp;#39;staging&amp;#39; SWAP_SLOT: &amp;#39;yes&amp;#39; stages stages: - &amp;#34;validate&amp;#34; - &amp;#34;plan&amp;#34; - &amp;#34;apply&amp;#34; - &amp;#34;deploy&amp;#34; - &amp;#34;swap-slot&amp;#34; Before Script .</description>
+    </item>
+    
+    <item>
+      <title>GitLab CICD To Deploy Azure Functions</title>
+      <link>/blog/gitlab-cicd-to-deploy-azure-functions/</link>
+      <pubDate>Mon, 28 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/gitlab-cicd-to-deploy-azure-functions/</guid>
+      <description>Introduction There are many ways to deploy Azure resources.
+Azure Portal - Click and follow the UI! Imperative
+🚀 Az CLI
+🚀 PowerShell
+🚀 REST API etc Declarative
+🚀 IaC
+🚀 Bicep
+🚀 Terraform
+🚀 Pulumi
+🚀 farmer The most commonly used method to provision Azure resources is with Infrastructure as Code, and the tool is your choice. I recommend using Bicep. But, for this blog post, I used Terraform because I have to demonstrate the remote state backend configuration.</description>
+    </item>
+    
+  </channel>
+</rss>
