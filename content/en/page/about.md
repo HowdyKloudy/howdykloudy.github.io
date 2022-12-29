@@ -1,26 +1,12 @@
 ---
-author: Katheryn Fox
+author: Chendrayan Venkatesan
 title: About Me
-date: 2021-07-15
+date: 2022-29-12
 description:
-keywords: ["about-us", "about-hugo", "contact"]
+keywords: ["about-me"]
 type: about
 ---
 
-Written in Go, Hugo is an open source static site generator available under the [Apache Licence 2.0.](https://github.com/gohugoio/hugo/blob/master/LICENSE) Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
+![ChenV](/2022/12/ChenV.jpg)
 
-Hugo makes use of a variety of open source projects including:
-
-- https://github.com/yuin/goldmark
-- https://github.com/alecthomas/chroma
-- https://github.com/muesli/smartcrop
-- https://github.com/spf13/cobra
-- https://github.com/spf13/viper
-
-Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.
-
-Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases.
-
-Websites built with Hugo are extremely fast, secure and can be deployed anywhere including, AWS, GitHub Pages, Heroku, Netlify and any other hosting provider.
-
-Learn more and contribute on [GitHub](https://github.com/gohugoio).
+Chendrayan Venkatesan, a.k.a Chen V, works as a Delivery Manager at Hexaware Technologies UK for Banking & Financial Services clients. His primary responsibility is the Cloud transformation and DevSecOps deliverables. Chen V is a Microsoft Most Valuable Professional award winner since 2014, author of Windows PowerShell for .NET Developers (second edition), a speaker at local user groups and conferences, a blogger, and a technical community volunteer. If you are in and around Bangalore, India, you can find him in Azure Bangalore User Group, Bangalore IT Pro User Group, SharePoint Saturday, and aOS community events.

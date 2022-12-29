@@ -11,9 +11,11 @@ thumbnail: /2022/12/BG.jpg
 
 In my previous [blog post](http://localhost:1313/azure-functions/gitlab-cicd-to-deploy-azure-functions/), I shared the steps that walk you through the basic concepts to deploy Azure Functions with GitLab CICD, and now it’s a good time to demonstrate the swap slot that helps you to plan for the simple blue-green deployment model. 
 
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/vYpCO-g1Z-U/0.jpg)](http://www.youtube.com/watch?v=vYpCO-g1Z-U "iAutomate")
+
 ### What is Blue-Green deployment model? 
 
-
+A blue/green deployment is a strategy in which you create two separate but identical environments. One environment (blue) runs the current application version, and another (green) runs the new version. A blue/green deployment strategy increases application availability and reduces deployment risk by simplifying the rollback process if a deployment fails. 
 
 #### High Level
 

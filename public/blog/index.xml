@@ -13,7 +13,7 @@
       
       <guid>/blog/azure-function-app-swap-slot/</guid>
       <description>Introduction In my previous blog post, I shared the steps that walk you through the basic concepts to deploy Azure Functions with GitLab CICD, and now it’s a good time to demonstrate the swap slot that helps you to plan for the simple blue-green deployment model.
-What is Blue-Green deployment model? High Level Solution We continue to use the same remote backend configuration, and also I removed the KICS scan stages.</description>
+&amp;lt;img src=&amp;#34;http://img.youtube.com/vi/vYpCO-g1Z-U/0.jpg&amp;#34; alt=&amp;#34;IMAGE ALT TEXT&amp;#34;&amp;gt;What is Blue-Green deployment model? A blue/green deployment is a strategy in which you create two separate but identical environments.</description>
     </item>
     
     <item>
