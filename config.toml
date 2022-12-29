@@ -99,55 +99,59 @@ DefaultContentLanguageInSubdir = true
     url = "https://twitter.com/chendrayanv"
   [[params.homepage.social.icons]]
     website = "linkedin"
-    url = "https://linkedin.com/in/"
-  [[params.homepage.social.icons]]
-    website = "xing"
-    url = "https://www.xing.com/profile/"
-  [[params.homepage.social.icons]]
-    website = "telegram"
-    url = "https://t.me/"
+    url = "https://linkedin.com/in/chendrayanv"
   [[params.homepage.social.icons]]
     website = "github"
-    url = "https://github.com/"
-  [[params.homepage.social.icons]]
-    website = "buymeacoffee"
-    url = "https://www.buymeacoffee.com/"
-  [[params.homepage.social.icons]]
-    website = "medium"
-    url = "https://medium.com/"
-  [[params.homepage.social.icons]]
-    website = "reddit"
-    url = "https://reddit.com/"
-  [[params.homepage.social.icons]]
-    website = "dribbble"
-    url = "https://dribbble.com/"
-  [[params.homepage.social.icons]]
-    website = "stackoverflow"
-    url = "https://stackoverflow.com/"
-  [[params.homepage.social.icons]]
-    website = "xda"
-    url = "https://forum.xda-developers.com/"
-  [[params.homepage.social.icons]]
-    website = "tiktok"
-    url = "https://tiktok.com"
-  [[params.homepage.social.icons]]
-    website = "googlescholar"
-    url = "https://scholar.google.com/"
-  [[params.homepage.social.icons]]
-    website = "mastodon"
-    url = "https://joinmastodon.org"
-  [[params.homepage.social.icons]]
-    website = "youtube"
-    url = "https://youtube.com"
-  [[params.homepage.social.icons]]
-    website = "instagram"
-    url = "https://instagram.com"
-  [[params.homepage.social.icons]]
-    website = "facebook"
-    url = "https://facebook.com"
-  [[params.homepage.social.icons]]
-    website = "behance"
-    url = "https://behance.net"
+    url = "https://github.com/chendrayanv"
+  # [[params.homepage.social.icons]]
+  # [[params.homepage.social.icons]]
+  #   website = "xing"
+  #   url = "https://www.xing.com/profile/"
+  # [[params.homepage.social.icons]]
+  #   website = "telegram"
+  #   url = "https://t.me/"
+  # [[params.homepage.social.icons]]
+  #   website = "github"
+  #   url = "https://github.com/chendrayanv"
+  # [[params.homepage.social.icons]]
+  #   website = "buymeacoffee"
+  #   url = "https://www.buymeacoffee.com/"
+  # [[params.homepage.social.icons]]
+  #   website = "medium"
+  #   url = "https://medium.com/"
+  # [[params.homepage.social.icons]]
+  #   website = "reddit"
+  #   url = "https://reddit.com/"
+  # [[params.homepage.social.icons]]
+  #   website = "dribbble"
+  #   url = "https://dribbble.com/"
+  # [[params.homepage.social.icons]]
+  #   website = "stackoverflow"
+  #   url = "https://stackoverflow.com/"
+  # [[params.homepage.social.icons]]
+  #   website = "xda"
+  #   url = "https://forum.xda-developers.com/"
+  # [[params.homepage.social.icons]]
+  #   website = "tiktok"
+  #   url = "https://tiktok.com"
+  # [[params.homepage.social.icons]]
+  #   website = "googlescholar"
+  #   url = "https://scholar.google.com/"
+  # [[params.homepage.social.icons]]
+  #   website = "mastodon"
+  #   url = "https://joinmastodon.org"
+  # [[params.homepage.social.icons]]
+  #   website = "youtube"
+  #   url = "https://youtube.com"
+  # [[params.homepage.social.icons]]
+  #   website = "instagram"
+  #   url = "https://instagram.com"
+  # [[params.homepage.social.icons]]
+  #   website = "facebook"
+  #   url = "https://facebook.com"
+  # [[params.homepage.social.icons]]
+  #   website = "behance"
+  #   url = "https://behance.net"
 
 [[menu.main]]
   name = "About"
