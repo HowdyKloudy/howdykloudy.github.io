@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>privacy on Blist Multilingual Theme</title>
+    <link>/tags/privacy/</link>
+    <description>Recent content in privacy on Blist Multilingual Theme</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 29 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="/tags/privacy/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deploying Azure Functions using Blue-Green Deployment Model</title>
+      <link>/blog/azure-function-app-swap-slot/</link>
+      <pubDate>Thu, 29 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/azure-function-app-swap-slot/</guid>
+      <description>Introduction In my previous blog post, I shared the steps that walk you through the basic concepts to deploy Azure Functions with GitLab CICD, and now it’s a good time to demonstrate the swap slot that helps you to plan for the simple blue-green deployment model.
+What is Blue-Green deployment model? High Level Solution We continue to use the same remote backend configuration, and also I removed the KICS scan stages.</description>
+    </item>
+    
+    <item>
+      <title>GitLab CICD To Deploy Azure Functions</title>
+      <link>/blog/gitlab-cicd-to-deploy-azure-functions/</link>
+      <pubDate>Mon, 28 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/gitlab-cicd-to-deploy-azure-functions/</guid>
+      <description>Introduction There are many ways to deploy Azure resources.
+Azure Portal - Click and follow the UI! Imperative
+🚀 Az CLI
+🚀 PowerShell
+🚀 REST API etc Declarative
+🚀 IaC
+🚀 Bicep
+🚀 Terraform
+🚀 Pulumi
+🚀 farmer The most commonly used method to provision Azure resources is with Infrastructure as Code, and the tool is your choice. I recommend using Bicep. But, for this blog post, I used Terraform because I have to demonstrate the remote state backend configuration.</description>
+    </item>
+    
+  </channel>
+</rss>

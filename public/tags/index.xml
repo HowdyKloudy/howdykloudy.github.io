@@ -1,45 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Howdy, Cloudy</title>
+    <title>Tags on Blist Multilingual Theme</title>
     <link>/tags/</link>
-    <description>Recent content in Tags on Howdy, Cloudy</description>
+    <description>Recent content in Tags on Blist Multilingual Theme</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sun, 27 Nov 2022 20:32:21 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Azure</title>
-      <link>/tags/azure/</link>
-      <pubDate>Sun, 27 Nov 2022 20:32:21 +0000</pubDate>
+      <title>privacy</title>
+      <link>/tags/privacy/</link>
+      <pubDate>Thu, 29 Dec 2022 00:00:00 +0000</pubDate>
       
-      <guid>/tags/azure/</guid>
+      <guid>/tags/privacy/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Azure Functions</title>
-      <link>/tags/azure-functions/</link>
-      <pubDate>Sun, 27 Nov 2022 20:32:21 +0000</pubDate>
+      <title>shortcodes</title>
+      <link>/tags/shortcodes/</link>
+      <pubDate>Thu, 29 Dec 2022 00:00:00 +0000</pubDate>
       
-      <guid>/tags/azure-functions/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>GitLab</title>
-      <link>/tags/gitlab/</link>
-      <pubDate>Sun, 27 Nov 2022 20:32:21 +0000</pubDate>
-      
-      <guid>/tags/gitlab/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>KICS</title>
-      <link>/tags/kics/</link>
-      <pubDate>Sun, 27 Nov 2022 20:32:21 +0000</pubDate>
-      
-      <guid>/tags/kics/</guid>
+      <guid>/tags/shortcodes/</guid>
       <description></description>
     </item>
     
