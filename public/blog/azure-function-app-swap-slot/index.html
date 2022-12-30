@@ -3,17 +3,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link rel="icon" href="/favicon.svg">
+  <link rel="icon" href="/favicon.ico">
 
   <title>
-  Deploying Azure Functions using Blue-Green Deployment Model - Blist Multilingual Theme
+  Deploying Azure Functions using Blue-Green Deployment Model - Howdy,Kloudy!
   </title>
   <meta name="description" content="Blue-Green Deployment Model" />
   <meta name="author" content="Chendrayan Venkatesan" />
   <meta name="generator" content="Hugo 0.105.0"><link
     rel="stylesheet"
-    href="/css/styles.min.5f51209eb07a4e21bceec980bffbdb561c7e11e9d7382dd6ef53689f310b2107.css"
-    integrity="sha256-X1EgnrB6TiG87smAv/vbVhx+EenXOC3W71NonzELIQc="
+    href="/css/styles.min.c16ca49252935bf0b8e7056067c653ee316d394e40817cc0d33d0bb03c556c06.css"
+    integrity="sha256-wWykklKTW/C45wVgZ8ZT7jFtOU5AgXzA0z0LsDxVbAY="
   />
   
   
@@ -33,7 +33,7 @@
   <meta itemprop="name" content="Deploying Azure Functions using Blue-Green Deployment Model">
 <meta itemprop="description" content="Blue-Green Deployment Model"><meta itemprop="datePublished" content="2022-12-29T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2022-12-29T00:00:00+00:00" />
-<meta itemprop="wordCount" content="410">
+<meta itemprop="wordCount" content="669">
 <meta itemprop="keywords" content="shortcodes,privacy," />
 
   
@@ -41,7 +41,7 @@
 <body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
   <a href="/" class="capitalize font-extrabold text-2xl">
     
-    <img src="/blist-logo.png" alt="Blist Multilingual Theme" class="h-8 max-w-full" />
+    <img src="/howdy1.png" alt="Howdy,Kloudy!" class="h-8 max-w-full" />
     
   </a>
   <button class="mobile-menu-button md:hidden">
@@ -59,8 +59,6 @@
     <li><a href="/page/about/">About</a></li>
     
     <li><a href="/tags">Tags</a></li>
-    
-    <li><a href="/en/blog/emoji-support/">Top Post</a></li>
     
 
     
@@ -146,7 +144,7 @@
         <circle cx="12" cy="12" r="9" />
         <polyline points="12 7 12 12 15 15" />
       </svg>
-      2&nbsp;minutes
+      4&nbsp;minutes
       &nbsp;&bull;
       <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -156,7 +154,7 @@
         <line x1="12" y1="6" x2="12" y2="19" />
         <line x1="21" y1="6" x2="21" y2="19" />
       </svg>
-      410&nbsp;words
+      669&nbsp;words
       
         
       
@@ -239,15 +237,24 @@
         
         </li><li>
         <a href="#swap-slot">Swap Slot</a>
-        </li></ul></ul>
-    </li></ul>
+        
+
+        
+        </li></ul>
+          </ul>
+      </li><li>
+        <a href="#summary">Summary</a>
+        </li></ul>
   </details>
 
     <h2 id="introduction">Introduction</h2>
-<p>In my previous <a href="http://localhost:1313/azure-functions/gitlab-cicd-to-deploy-azure-functions/" target="_blank" rel="noopener">blog post</a>
+<p>In my previous <a href="https://howdykloudy.github.io/blog/gitlab-cicd-to-deploy-azure-functions/" target="_blank" rel="noopener">blog post</a>
 , I shared the steps that walk you through the basic concepts to deploy Azure Functions with GitLab CICD, and now it’s a good time to demonstrate the swap slot that helps you to plan for the simple blue-green deployment model.</p>
-<p><a href="http://www.youtube.com/watch?v=vYpCO-g1Z-U" title="iAutomate" target="_blank" rel="noopener">&lt;img src=&#34;http://img.youtube.com/vi/vYpCO-g1Z-U/0.jpg&#34; alt=&#34;IMAGE ALT TEXT&#34;&gt;</a>
-</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/vYpCO-g1Z-U" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
 <h3 id="what-is-blue-green-deployment-model">What is Blue-Green deployment model?</h3>
 <p>A blue/green deployment is a strategy in which you create two separate but identical environments. One environment (blue) runs the current application version, and another (green) runs the new version. A blue/green deployment strategy increases application availability and reduces deployment risk by simplifying the rollback process if a deployment fails.</p>
 <h4 id="high-level">High Level</h4>
@@ -265,21 +272,37 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">TF_ADDRESS</span>: <span style="color:#f1fa8c">&#34;https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/terraform/state/${Environment}&#34;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">SLOT_NAME</span>: <span style="color:#f1fa8c">&#39;staging&#39;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">SWAP_SLOT</span>: <span style="color:#f1fa8c">&#39;yes&#39;</span>
-</span></span></code></pre></div><h4 id="stages">stages</h4>
+</span></span></code></pre></div><ul>
+<li>The <code>environment</code> string is as per the naming convention of your choice.</li>
+<li><code>Function_App_Name</code> is name of your function app.</li>
+<li><code>TF_ADDRESS</code> holds the HTTP address for the remote state management.</li>
+<li><code>SLOT_NAME</code> is the slot name. You can name as staging, QA or blue/green.</li>
+</ul>
+<h4 id="stages">stages</h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#ff79c6">stages</span>:
 </span></span><span style="display:flex;"><span>  - <span style="color:#f1fa8c">&#34;validate&#34;</span>
 </span></span><span style="display:flex;"><span>  - <span style="color:#f1fa8c">&#34;plan&#34;</span>
 </span></span><span style="display:flex;"><span>  - <span style="color:#f1fa8c">&#34;apply&#34;</span>
 </span></span><span style="display:flex;"><span>  - <span style="color:#f1fa8c">&#34;deploy&#34;</span>
 </span></span><span style="display:flex;"><span>  - <span style="color:#f1fa8c">&#34;swap-slot&#34;</span>
-</span></span></code></pre></div><h4 id="before-script">Before Script</h4>
+</span></span></code></pre></div><ul>
+<li>simple stages to do terraform <code>validate</code> , <code>plan</code> and <code>apply</code>.</li>
+<li><code>deploy</code> Azure Functions into the Function app.</li>
+<li>Set the value for the <code>swap-slot</code>. <code>$swap-slot == yes</code>, is to swap!</li>
+</ul>
+<h4 id="before-script">Before Script</h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#ff79c6">.before_script_template</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">before_script</span>:
 </span></span><span style="display:flex;"><span>    - $Credential = [pscredential]::new(${ARM_CLIENT_ID}, $(${ARM_CLIENT_SECRET} | ConvertTo-SecureString -AsPlainText -Force))
 </span></span><span style="display:flex;"><span>    - Connect-AzAccount -TenantId &#34;${ARM_TENANT_ID}&#34; -Credential $Credential -ServicePrincipal
 </span></span><span style="display:flex;"><span>    - cd terraform
 </span></span><span style="display:flex;"><span>    - terraform init -backend-config=address=&#34;${TF_ADDRESS}&#34; -backend-config=lock_address=&#34;${TF_ADDRESS}&#34;/lock -backend-config=unlock_address=&#34;${TF_ADDRESS}&#34;/lock -backend-config=username=&#34;${TF_USERNAME}&#34; -backend-config=password=&#34;${TF_PASSWORD}&#34; -backend-config=lock_method=POST -backend-config=unlock_method=DELETE -backend-config=retry_wait_min=5
-</span></span></code></pre></div><h4 id="validate">Validate</h4>
+</span></span></code></pre></div><ul>
+<li>Connect to Azure tenant.</li>
+<li>Change the directory to Terraform, where the configuration files are stored.</li>
+<li>The terraform init command initializes a working directory containing configuration files and installs plugins for required providers.</li>
+</ul>
+<h4 id="validate">Validate</h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#ff79c6">validate</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">stage</span>: validate
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">extends</span>: .before_script_template
@@ -290,7 +313,10 @@
 </span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;terraform/**/*&#34;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">script</span>:
 </span></span><span style="display:flex;"><span>    - terraform validate
-</span></span></code></pre></div><h4 id="plan">Plan</h4>
+</span></span></code></pre></div><ul>
+<li><code>validate</code> runs checks that verify whether a configuration is syntactically valid and internally consistent, regardless of any provided variables or existing state. It is thus primarily useful for verifying reusable modules, including the correctness of attribute names and value types.</li>
+</ul>
+<h4 id="plan">Plan</h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#ff79c6">plan</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">stage</span>: plan
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">extends</span>: .before_script_template
@@ -318,7 +344,10 @@
 </span></span><span style="display:flex;"><span>      - <span style="color:#f1fa8c">&#34;terraform\\plan.cache&#34;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">dependencies</span>:
 </span></span><span style="display:flex;"><span>    - <span style="color:#f1fa8c">&#34;validate&#34;</span>
-</span></span></code></pre></div><h4 id="apply">Apply</h4>
+</span></span></code></pre></div><ul>
+<li>The <code>plan</code> command reports on infrastructure changes but does not apply any of the proposed changes. Instead, it creates a reviewable execution plan, which you can use to confirm that the proposed changes are as expected.</li>
+</ul>
+<h4 id="apply">Apply</h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#ff79c6">apply</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">stage</span>: apply
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">extends</span>: .before_script_template
@@ -331,7 +360,10 @@
 </span></span><span style="display:flex;"><span>    - terraform apply -input=false plan.cache
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">dependencies</span>:
 </span></span><span style="display:flex;"><span>    - <span style="color:#f1fa8c">&#34;plan&#34;</span>
-</span></span></code></pre></div><h4 id="deploy">Deploy</h4>
+</span></span></code></pre></div><ul>
+<li>The <code>apply</code> command executes the actions proposed in a terraform plan</li>
+</ul>
+<h4 id="deploy">Deploy</h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#ff79c6">deploy</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">stage</span>: deploy
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">tags</span>:
@@ -343,7 +375,10 @@
 </span></span><span style="display:flex;"><span>    - az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID
 </span></span><span style="display:flex;"><span>    - Start-Sleep -Seconds 150
 </span></span><span style="display:flex;"><span>    - func azure functionapp publish &#34;${Function_App_Name}-${Environment}&#34; --powershell --prefix src/ --slot $SLOT_NAME --force
-</span></span></code></pre></div><h4 id="swap-slot">Swap Slot</h4>
+</span></span></code></pre></div><ul>
+<li><code>deploy</code> the Azure Functions into the Function App. (Not on the default production slot)</li>
+</ul>
+<h4 id="swap-slot">Swap Slot</h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#ff79c6">swap-slot</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">stage</span>: swap-slot
 </span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">only</span>:
@@ -355,12 +390,19 @@
 </span></span><span style="display:flex;"><span>    - echo &#34;ready to swap slot to production&#34;
 </span></span><span style="display:flex;"><span>    - az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID
 </span></span><span style="display:flex;"><span>    - az functionapp deployment slot swap -g &#34;rgp-${Function_App_Name}-${Environment}&#34; -n &#34;${Function_App_Name}-${Environment}&#34; --slot &#34;$SLOT_NAME&#34; --target-slot &#34;production&#34;
-</span></span></code></pre></div>
+</span></span></code></pre></div><ul>
+<li><code>swap-slot</code> is to swap the slot from blue to green</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<p>Congratulations, you have successfully deployed the serverless solution with an additional slot. Now that you know the way to plan for the blue-green deployment. In my upcoming blog post, I have plans to cover the below</p>
+<p>🚀 Implement a DevOps way to handle the enhancements.<br>
+🚀 Blue Green Deployment.</p>
+
   </article><div class="bg-blue-100 dark:bg-gray-900">
   <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
     <div>
       <div class="text-2xl font-bold mb-2">Social Networking</div>
-      <p class="opacity-60">I work on everything coding and tweet developer memes</p>
+      <p class="opacity-60">Let us stay connected to learn, share and grow!</p>
     </div>
 
     <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">

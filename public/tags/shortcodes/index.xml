@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>shortcodes on Blist Multilingual Theme</title>
+    <title>shortcodes on Howdy,Kloudy!</title>
     <link>/tags/shortcodes/</link>
-    <description>Recent content in shortcodes on Blist Multilingual Theme</description>
+    <description>Recent content in shortcodes on Howdy,Kloudy!</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Thu, 29 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="/tags/shortcodes/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,7 +13,7 @@
       
       <guid>/blog/azure-function-app-swap-slot/</guid>
       <description>Introduction In my previous blog post, I shared the steps that walk you through the basic concepts to deploy Azure Functions with GitLab CICD, and now it’s a good time to demonstrate the swap slot that helps you to plan for the simple blue-green deployment model.
-&amp;lt;img src=&amp;#34;http://img.youtube.com/vi/vYpCO-g1Z-U/0.jpg&amp;#34; alt=&amp;#34;IMAGE ALT TEXT&amp;#34;&amp;gt;What is Blue-Green deployment model? A blue/green deployment is a strategy in which you create two separate but identical environments.</description>
+What is Blue-Green deployment model? A blue/green deployment is a strategy in which you create two separate but identical environments. One environment (blue) runs the current application version, and another (green) runs the new version.</description>
     </item>
     
     <item>
