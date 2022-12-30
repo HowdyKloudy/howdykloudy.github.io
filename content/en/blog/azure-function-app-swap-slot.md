@@ -9,9 +9,9 @@ thumbnail: /2022/12/BG.jpg
 
 ## Introduction
 
-In my previous [blog post](http://localhost:1313/azure-functions/gitlab-cicd-to-deploy-azure-functions/), I shared the steps that walk you through the basic concepts to deploy Azure Functions with GitLab CICD, and now it’s a good time to demonstrate the swap slot that helps you to plan for the simple blue-green deployment model. 
+In my previous [blog post](https://howdykloudy.github.io/blog/gitlab-cicd-to-deploy-azure-functions/), I shared the steps that walk you through the basic concepts to deploy Azure Functions with GitLab CICD, and now it’s a good time to demonstrate the swap slot that helps you to plan for the simple blue-green deployment model. 
 
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/vYpCO-g1Z-U/0.jpg)](http://www.youtube.com/watch?v=vYpCO-g1Z-U "iAutomate")
+{{< youtube vYpCO-g1Z-U >}}
 
 ### What is Blue-Green deployment model? 
 
@@ -40,6 +40,10 @@ variables:
   SWAP_SLOT: 'yes'
 ```
 
+- The `environment` string is as per the naming convention of your choice.  
+- `Function_App_Name` is name of your function app.   
+- `TF_ADDRESS` holds the HTTP address for the remote state management.   
+- `SLOT_NAME` is the slot name. You can name as staging, QA or blue/green.  
 #### stages
 
 ```YAML
@@ -51,6 +55,9 @@ stages:
   - "swap-slot"
 
 ```
+- simple stages to do terraform `validate` , `plan` and `apply`. 
+- `deploy` Azure Functions into the Function app. 
+- Set the value for the `swap-slot`. `$swap-slot == yes`, is to swap! 
 
 #### Before Script
 
@@ -62,6 +69,10 @@ stages:
     - cd terraform
     - terraform init -backend-config=address="${TF_ADDRESS}" -backend-config=lock_address="${TF_ADDRESS}"/lock -backend-config=unlock_address="${TF_ADDRESS}"/lock -backend-config=username="${TF_USERNAME}" -backend-config=password="${TF_PASSWORD}" -backend-config=lock_method=POST -backend-config=unlock_method=DELETE -backend-config=retry_wait_min=5
 ```
+
+- Connect to Azure tenant.  
+- Change the directory to Terraform, where the configuration files are stored.  
+- The terraform init command initializes a working directory containing configuration files and installs plugins for required providers.  
 
 #### Validate
 
@@ -77,6 +88,7 @@ validate:
   script:
     - terraform validate
 ```
+- `validate` runs checks that verify whether a configuration is syntactically valid and internally consistent, regardless of any provided variables or existing state. It is thus primarily useful for verifying reusable modules, including the correctness of attribute names and value types.
 
 #### Plan
 
@@ -109,7 +121,7 @@ plan:
   dependencies:
     - "validate"
 ```
-
+- The `plan` command reports on infrastructure changes but does not apply any of the proposed changes. Instead, it creates a reviewable execution plan, which you can use to confirm that the proposed changes are as expected. 
 #### Apply
 
 ```YAML
@@ -126,7 +138,7 @@ apply:
   dependencies:
     - "plan"
 ```
-
+- The `apply` command executes the actions proposed in a terraform plan
 #### Deploy
 
 ```YAML
@@ -142,7 +154,7 @@ deploy:
     - Start-Sleep -Seconds 150
     - func azure functionapp publish "${Function_App_Name}-${Environment}" --powershell --prefix src/ --slot $SLOT_NAME --force
 ```
-
+- `deploy` the Azure Functions into the Function App. (Not on the default production slot)
 #### Swap Slot
 
 ```YAML
@@ -158,3 +170,11 @@ swap-slot:
     - az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID
     - az functionapp deployment slot swap -g "rgp-${Function_App_Name}-${Environment}" -n "${Function_App_Name}-${Environment}" --slot "$SLOT_NAME" --target-slot "production"
 ```
+- `swap-slot` is to swap the slot from blue to green
+
+## Summary
+
+Congratulations, you have successfully deployed the serverless solution with an additional slot. Now that you know the way to plan for the blue-green deployment. In my upcoming blog post, I have plans to cover the below  
+
+🚀 Implement a DevOps way to handle the enhancements.  
+🚀 Blue Green Deployment.  
