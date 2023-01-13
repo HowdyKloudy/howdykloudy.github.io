@@ -3,7 +3,7 @@ author: "Chendrayan Venkatesan"
 title: "Deploying Azure Functions using Blue-Green Deployment Model"
 date: 2022-12-29
 description: "Blue-Green Deployment Model"
-tags: ["shortcodes", "privacy"]
+tags: ["Azure", "Azure Functions", "PowerShell" , "Serverless" , "Blue-Green-Deployment"]
 thumbnail: /2022/12/BG.jpg
 ---
 
