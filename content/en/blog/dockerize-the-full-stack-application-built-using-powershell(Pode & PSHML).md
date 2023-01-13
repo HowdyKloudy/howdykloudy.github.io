@@ -9,11 +9,13 @@ thumbnail: /2023/01/container.jpg
 
 ## Introduction
 
-I appreciate your time and value your feedback. So, I have recorded the demonstration of spinning up the full-stack application built using PowerShell (Pode & PSHTML). 
+I have recorded the demonstration of spinning up the full-stack application built using PowerShell (Pode & PSHTML). Feel free to leave your comments 
+
+{{< youtube >}}
 
 ### Disclaimer
 
-- This blog post is the output of my learning on Docker, MySQL, docker-compose, and MiniKube. So, please skip asking ask why not native or alternatives. I am sharing it as a blog because of the ask that I have seen it in the REDDIT
+- This blog post is the output of my learning on Docker, MySQL, docker-compose, and MiniKube. So, please skip asking ask why not native or alternatives. I am sharing it as a blog because of the ask that I have seen it in the [REDDIT](https://www.reddit.com/r/PowerShell/comments/gq0bl0/discussion_can_powershell_be_used_for_fullstack/).
 - I am an automation engineer with a decent experience in the cloud, not a software developer. 
 - We don't talk about Pode, PSHTML & SimplySQL (PowerShell Modules) 
 - There is a big room for improvement. Consider this blog post as a first step to dockerize the PowerShell app to run with docker-compose and then on Minikube. 
@@ -119,11 +121,16 @@ Docker Compose is a tool to run multi-container Docker applications. Below is th
 
 ```YAML
 version: '3.8'
+networks:
+  howdy_kloudy:
+    name: howdy_kloudy
 services:
   mysql:
     image: mysql
     restart: always
     container_name: db-mysql
+    networks:
+      - howdy_kloudy
     ports:
       - 3306:3306
     environment:
@@ -135,16 +142,44 @@ services:
   podeui:
     build: ./app
     image: podeui
+    networks:
+      - howdy_kloudy
     ports:
       - "3000:3000"
-    links:
-      - mysql:mysql
+
 ```
 
 - `mysql` - use the latest `mysql` image. 
 - `podeui` - Build path ./app and image name is `podeui`
-- `links` - Make sure the connectivity between the `mysql` and `podeui`.
+- `networks` - Instead of just using the default app network, you can specify your own networks with the top-level networks key (howdy_kloudy). This lets you create more complex topologies and specify custom network drivers and options. You can also use it to connect services to externally-created networks which aren’t managed by Compose. (I need this for my future use case)
 
+```PowerShell
+PS C:\Projects\howdykloudy> docker-compose up --build --detach
+```
+
+![Images In Use](/2023/01/OP1.png)
+
+![Images In Use](/2023/01/OP2.png)
+
+Now access the application from the local host. 
+
+> UI
+
+![UI](/2023/01/OP3.png)
+
+> Response 
+
+![Response](/2023/01/OP4.png)
+
+Refer the records in the MySQL table 
+
+![First Record](/2023/01/OP5.png)
+
+Second record
+
+![Second Record](/2023/01/OP6.png)
+
+Okay, it's working as expected! We see records are available in the table. 
 
 ## Run on Minikube
 
