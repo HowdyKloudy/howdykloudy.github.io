@@ -260,6 +260,31 @@ Yes, the YAML above is self-explanatory. Just a few highlights
 - `ConfigMap` : A ConfigMap is not to hold large chunks of data. The data stored in a ConfigMap cannot exceed 1 MiB. If you need to store settings larger than this limit, you may want to consider mounting a volume or using a separate database or file service.
 - `PersistentVolumeClaim` : A PersistentVolumeClaim (PVC) is a request for storage by a user. It is similar to a Pod. Pods consume node resources, and PVCs consume PV resources. Pods can request specific levels of resources (CPU and Memory). Claims can request size and access modes (e.g., they can be mounted ReadWriteOnce, ReadOnlyMany or ReadWriteMany, see AccessModes). While PersistentVolumeClaims allow a user to consume abstract storage resources, it is expected that users need persistent volumes with varying properties, such as performance, for different problems. 
 
+```PowerShell
+PS C:\Projects\howdykloudy> minikube start
+```
+
+![minkube start](/2023/01/OP8.png)
+
+```PowerShell
+PS C:\Projects\howdykloudy> kubectl get pods -A
+```
+
+![list pods](/2023/01/OP9.png)
+
+```PowerShell
+PS C:\Projects\howdykloudy> minikube service podeui 
+```
+
+Access the application :) 
+
+```PowerShell
+kubectl exec {POD-NAME} -it --namespace default --container db-mysql -- /bin/bash
+```
+
+![list pods](/2023/01/OP10.png)
+
+
 ## Summary
 
 I plan to extend this application and share my Kubernetes learnings. So, stay tuned to get to know more on the below 
