@@ -5,7 +5,17 @@
     <link>/blog/</link>
     <description>Recent content in Blog on Howdy,Kloudy!</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 29 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dockerize the Full-Stack application built using PowerShell (Pode &amp; PSHTML)</title>
+      <link>/blog/dockerize-the-full-stack-application-built-using-powershellpode-pshml/</link>
+      <pubDate>Thu, 12 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/dockerize-the-full-stack-application-built-using-powershellpode-pshml/</guid>
+      <description>Introduction I have recorded the demonstration of spinning up the full-stack application built using PowerShell (Pode &amp;amp; PSHTML). Feel free to leave your comments
+Disclaimer This blog post is the output of my learning on Docker, MySQL, docker-compose, and MiniKube. So, please skip asking ask why not native or alternatives. I am sharing it as a blog because of the ask that I have seen it in the REDDIT. I am an automation engineer with a decent experience in the cloud, not a software developer.</description>
+    </item>
+    
     <item>
       <title>Deploying Azure Functions using Blue-Green Deployment Model</title>
       <link>/blog/azure-function-app-swap-slot/</link>

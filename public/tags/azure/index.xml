@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Azure on Howdy, Cloudy</title>
+    <title>Azure on Howdy,Kloudy!</title>
     <link>/tags/azure/</link>
-    <description>Recent content in Azure on Howdy, Cloudy</description>
+    <description>Recent content in Azure on Howdy,Kloudy!</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sun, 27 Nov 2022 20:32:21 +0000</lastBuildDate><atom:link href="/tags/azure/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="/tags/azure/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>GITLAB CICD TO DEPLOY AZURE FUNCTIONS</title>
-      <link>/posts/gitlab-cicd-to-deploy-azure-functions/</link>
-      <pubDate>Sun, 27 Nov 2022 20:32:21 +0000</pubDate>
+      <title>Deploying Azure Functions using Blue-Green Deployment Model</title>
+      <link>/blog/azure-function-app-swap-slot/</link>
+      <pubDate>Thu, 29 Dec 2022 00:00:00 +0000</pubDate>
       
-      <guid>/posts/gitlab-cicd-to-deploy-azure-functions/</guid>
-      <description>Introduction There are many ways to deploy Azure resources.
-Azure Portal - Click and follow the UI! Imperative
-🚀 Use Az CLI
-🚀 PowerShell
-🚀 REST API etc. Declarative
-🚀 IaC
-🚀 Bicep
-🚀 Terraform
-🚀 Pulumi
-🚀 farmer The most commonly used method to provision Azure resources is with Infrastructure as Code, and the tool is your choice. I recommend using Bicep. But, for this blog post, I used Terraform because I have to demonstrate the remote state backend configuration.</description>
+      <guid>/blog/azure-function-app-swap-slot/</guid>
+      <description>Introduction In my previous blog post, I shared the steps that walk you through the basic concepts to deploy Azure Functions with GitLab CICD, and now it’s a good time to demonstrate the swap slot that helps you to plan for the simple blue-green deployment model.
+What is Blue-Green deployment model? A blue/green deployment is a strategy in which you create two separate but identical environments. One environment (blue) runs the current application version, and another (green) runs the new version.</description>
     </item>
     
   </channel>

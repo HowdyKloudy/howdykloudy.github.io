@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PowerShell on Howdy,Kloudy!</title>
+    <link>/tags/powershell/</link>
+    <description>Recent content in PowerShell on Howdy,Kloudy!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 12 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="/tags/powershell/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dockerize the Full-Stack application built using PowerShell (Pode &amp; PSHTML)</title>
+      <link>/blog/dockerize-the-full-stack-application-built-using-powershellpode-pshml/</link>
+      <pubDate>Thu, 12 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/dockerize-the-full-stack-application-built-using-powershellpode-pshml/</guid>
+      <description>Introduction I have recorded the demonstration of spinning up the full-stack application built using PowerShell (Pode &amp;amp; PSHTML). Feel free to leave your comments
+Disclaimer This blog post is the output of my learning on Docker, MySQL, docker-compose, and MiniKube. So, please skip asking ask why not native or alternatives. I am sharing it as a blog because of the ask that I have seen it in the REDDIT. I am an automation engineer with a decent experience in the cloud, not a software developer.</description>
+    </item>
+    
+    <item>
+      <title>Deploying Azure Functions using Blue-Green Deployment Model</title>
+      <link>/blog/azure-function-app-swap-slot/</link>
+      <pubDate>Thu, 29 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/azure-function-app-swap-slot/</guid>
+      <description>Introduction In my previous blog post, I shared the steps that walk you through the basic concepts to deploy Azure Functions with GitLab CICD, and now it’s a good time to demonstrate the swap slot that helps you to plan for the simple blue-green deployment model.
+What is Blue-Green deployment model? A blue/green deployment is a strategy in which you create two separate but identical environments. One environment (blue) runs the current application version, and another (green) runs the new version.</description>
+    </item>
+    
+  </channel>
+</rss>
