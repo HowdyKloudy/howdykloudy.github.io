@@ -15,7 +15,7 @@ I have recorded the demonstration of spinning up the full-stack application buil
 
 ### Disclaimer
 
-- This blog post is the output of my learning on Docker, MySQL, docker-compose, and MiniKube. So, please skip asking ask why not native or alternatives. I am sharing it as a blog because of the ask that I have seen it in the [REDDIT](https://www.reddit.com/r/PowerShell/comments/gq0bl0/discussion_can_powershell_be_used_for_fullstack/).
+- This blog post is the output of my learning on Docker, MySQL, docker-compose, and MiniKube. So, please skip asking `why not native or alternatives?`. I am sharing it as a blog because of the ask that I have seen it in the [REDDIT](https://www.reddit.com/r/PowerShell/comments/gq0bl0/discussion_can_powershell_be_used_for_fullstack/).
 - I am an automation engineer with a decent experience in the cloud, not a software developer. 
 - We don't talk about Pode, PSHTML & SimplySQL (PowerShell Modules) 
 - There is a big room for improvement. Consider this blog post as a first step to dockerize the PowerShell app to run with docker-compose and then on Minikube. 

@@ -11,6 +11,9 @@ thumbnail: /2023/01/container-new.jpg
 
 This blog post is a part of the feature I added to my web app built using PowerShell. I couldn’t hold the excitement. So, the share is not a minimum viable product but an idea to show a case running a Dapr as a sidecar in a pod. In my last blog post, I shared my understanding of Dockerizing full-stack application(s) built using PowerShell and ran using Docker-Compose and then over a Minikube. It works fine, and no complex steps are involved in it. Now, I need to introduce Dapr to simplify the state store management. How? We remove the SimplySQL module and enable Dapr as a Sidecar to run inside the pod. We use the Dapr state store component to insert the records into the Azure Table Storage.
 
+I appreciate your time and recorded the demo. Feel free to share your comments and feedback to improvise the content are most welcome 
+
+{{< youtube fmy0wMgjtl4>}}
 
 ### Disclaimer
 
