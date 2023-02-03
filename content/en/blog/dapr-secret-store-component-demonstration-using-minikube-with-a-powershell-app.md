@@ -62,7 +62,7 @@ spec:
 
 I have secrets in YAML and also in the app. How to handle it securely? 
 
-![App Secrets](/static/2023/01/L3.png)
+![App Secrets](/2023/01/L3.png)
 
 ### What is covered in this blog post? 
 
