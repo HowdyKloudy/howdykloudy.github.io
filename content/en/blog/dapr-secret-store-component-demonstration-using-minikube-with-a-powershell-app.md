@@ -145,6 +145,7 @@ minikube start --vm-driver=hyperv
 
 # Create a secret using kubectl - This is used in kubernetes
 kubectl create secret generic dapr-cert --from-file=daprpcert.pfx
+kubectl create secret generic tableparameter --from-literal=accountName='{STORAGE-ACCOUNT-NAME}' --from-literal=accountKey='{YOUR-STORAGE-ACCOUNT-KEY}' --from-literal=tableName='{TABLE-NAME}'
 
 # Initiate the Dapr inside the Minikube cluster (kubernetes)
 dapr init --runtime-version 1.0.0-rc.3 --kubernetes 
@@ -186,9 +187,9 @@ spec:
   - name: vaultName
     value: kv-dapr-dev
   - name: spnTenantId
-    value: "d15f83d0-ed59-4e08-925a-e7445f64efe8"
+    value: "{TENANT-ID}"
   - name: spnClientId
-    value: "a4196419-e629-4d3b-95a0-39698d9750db"
+    value: "{CLIENT-ID}"
   - name: spnCertificate
     secretKeyRef:
       name: dapr-cert
