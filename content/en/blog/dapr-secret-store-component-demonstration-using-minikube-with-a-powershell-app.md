@@ -75,7 +75,7 @@ I value your time and recorded the Dapr secret store component demo using Miniku
 
 {{<youtube zTp6Aj-2LJI>}}
 
-# About the Secret Store Component
+### About the Secret Store Component
 
 The Dapr Secret Store component is a feature in Dapr that enables you to store, manage, and retrieve secrets, such as passwords, keys, and certificates, in a secure and scalable manner. The Dapr Secret Store component is designed to be used in a microservices architecture, allowing you to independently store and manage secrets for each microservice.
 
@@ -87,7 +87,7 @@ The Dapr Secret Store component is a feature in Dapr that enables you to store, 
 - **API-based:** The Dapr Secret Store component provides a simple API that enables you to store, retrieve, and manage secrets in your microservices application. Your microservices can use this API to access secrets as needed.
 - **Integration with other Dapr components:** The Dapr Secret Store component integrates with other Dapr components, such as the Dapr Configuration component, allowing you to manage secrets and configuration settings in a centralized and consistent manner.
 
-# Solution
+### Solution
 
 This time, we only focus on running the PowerShell web application on the Minikube cluster and not locally! The image below depicts the high-level logical flow 
 
@@ -95,9 +95,9 @@ This time, we only focus on running the PowerShell web application on the Miniku
 
 Deploy a pod with a web application and inject a Dapr sidecar. The Dapr sidecar's responsibility is to securely retrieve secrets from the Azure Key vault and communicate with Azure table storage. I know it's much theory. Let me walk through the steps 
 
-## Azure App Registration With Certificate
+#### Azure App Registration With Certificate
 
-You can use the existing service principal with a certificate or secret key. Follow the steps if you need a new SPN with a certificate. 
+You can use the existing service principal with a certificate or secret key. Follow the [steps](https://learn.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli) if you need a new SPN with a certificate. 
 
 > You can use Az CLI, PowerShell or REST API. 
 
@@ -119,25 +119,25 @@ az keyvault secret download --vault-name "{KEY-VAULT-NAME}" --name "{CERT-NAME}"
 
 ```
 
-## Set up a local Docker registry
+#### Set up a local Docker registry
 
 ```PowerShell
 docker run -d -p 5000:5000 --restart=always --name registry registry:2
 ```
 
-## Docker Build & Tag
+#### Docker Build & Tag
 
 ```PowerShell
 docker build -t localhost:5000/podeux:v1 . --no-cache
 ```
 
-## Push the image to the local registry
+#### Push the image to the local registry
 
 ```PowerShell
 docker push localhost:5000/podeux:v1
 ```
 
-## Work with Minikube
+#### Work with Minikube
 
 ```PowerShell
 # Start the Minikube
@@ -153,15 +153,15 @@ dapr init --runtime-version 1.0.0-rc.3 --kubernetes
 minikube image load localhost:5000/podeux:v1 --overwrite=true
 ```
 
-## Explore the infrastructure
+#### Explore the infrastructure
 
-### List the pods
+##### List the pods
 
 ```PowerShell
 kubectl get pods -A
 ```
 
-### Access the dashboard
+##### Access the dashboard
 
 ```PowerShell
 # access the minikube dashboard
@@ -171,7 +171,7 @@ minikube dashboard
 dapr dashboard -k
 ```
 
-## Deploy the state store component
+#### Deploy the state store component
 
 ```YAML
 apiVersion: dapr.io/v1alpha1
@@ -201,7 +201,7 @@ auth:
 kubectl apply -f .\components\azurekeyvault.yaml
 ```
 
-## Deploy the App & Service
+#### Deploy the App & Service
 
 ```YAML
 kind: Service
@@ -251,14 +251,14 @@ spec:
 kubectl apply -f .\manifest\deployment.yaml
 ```
 
-## Rollout 
+#### Rollout 
 
 ```PowerShell
 # To see the Deployment rollout status, run kubectl rollout status
 kubectl rollout status deploy/podeux
 ```
 
-## Expose the Service
+#### Expose the Service
 
 ```PowerShell
 # Access the app through port 3000 (both app & target port in 3000)
@@ -311,11 +311,11 @@ Write-PodeHost -Object $($Body)
 Invoke-RestMethod -Uri "http://localhost:3500/v1.0/state/eventregistrationresponse" -Method Post -Body $($Body) -ContentType 'application/json' -Verbose -ErrorAction Stop
 ```
 
-# References
+### References
 
 - [Azure Key Vault secret store](https://docs.dapr.io/reference/components-reference/supported-secret-stores/azure-keyvault/)
 - [Secrets management overview](https://docs.dapr.io/developing-applications/building-blocks/secrets/secrets-overview/ )
 
-# Summary
+### Summary
 
 The Dapr Secret Store component is a powerful tool for managing secrets in microservices applications, providing security, scalability, and ease of use. An exciting and essential feature, right? Go for it! Invest your time in building Darized / Dockerized apps and run them on Kubernetes.  
