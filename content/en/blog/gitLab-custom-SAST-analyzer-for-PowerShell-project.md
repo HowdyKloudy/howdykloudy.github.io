@@ -110,6 +110,81 @@ I need to implement custom PowerShell rules for the organization's needs. How to
 
 # PowerShell Script to generate GL-SAST-REPORT.JSON
 
+```PowerShell
+Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Repository PSGallery -Force
+$Collection = @()
+$vulnerabilities = (Get-ChildItem -Path . -Exclude test.ps1 | Invoke-ScriptAnalyzer )
+for ($i = 0; $i -lt $vulnerabilities.Count; $i++) {  
+    $vulnerability = [PSCustomObject]@{
+        id          = $(New-Guid).Guid
+        name        = $($vulnerabilities[$i].RuleName)
+        severity    = $(
+            switch ($vulnerabilities[$i].Severity.ToString()) {
+                'Error' {
+                    'Critical'
+                }
+                'Warning' {
+                    'Low'
+                }
+                'Information' {
+                    'Info'
+                }
+                default {
+                    'Unknown'
+                }
+            }
+        )
+        cve         = $([string]::Concat('id:', $((New-Guid).Guid), ':' , $(Get-Random -Maximum 10 -Minimum 1)))
+        location    = [pscustomobject]@{
+            file   = $([string]::Concat($($vulnerabilities[$i].ScriptName), '-' , $($vulnerabilities[$i].Line)))
+            commit = '0000000'
+        }
+        start_line  = $($vulnerabilities[$i].Line)
+        identifiers = @([pscustomobject]@{
+                type  = $(New-Guid).Guid
+                name  = $($vulnerabilities[$i].RuleName)
+                value = $([string]::Concat('id:', $((New-Guid).Guid), ':' , $(Get-Random -Maximum 10 -Minimum 1)))
+            })
+        scanner     = [pscustomobject]@{
+            id   = $(New-Guid).Guid
+            name = "Gitleaks"
+        }
+    }
+    $Collection += $vulnerability
+}
+
+$jsonObject = [PSCustomObject]@{
+    version         = "15.0.4"
+    scan            = [pscustomobject]@{
+        start_time = $(Get-Date -Format 'yyyy-MM-dd%THH:mm:ss')
+        end_time   = $(Get-Date -Format 'yyyy-MM-dd%THH:mm:ss')
+        status     = "success"
+        type       = "sast"
+        scanner    = [pscustomobject]@{
+            id      = $(New-Guid).Guid
+            name    = "PowerShell Script Analyzer - $((New-Guid).Guid)"
+            url     = "https://learn.microsoft.com/en-us/powershell/module/psscriptanalyzer/?view=ps-modules"
+            version = "development"
+            vendor  = [pscustomobject]@{
+                name = "Microsoft"
+            }
+        }
+        analyzer   = [PSCustomObject]@{
+            "id"      = $(New-Guid).Guid
+            "name"    = "PSScriptAnalyzer"
+            "url"     = "https://gitlab.com/gitlab-org/security-products/analyzers/secrets"
+            "vendor"  = [PSCustomObject]@{
+                "name" = "Microsoft"
+            }
+            "version" = "1.21.0"
+    
+        }
+    }
+    vulnerabilities = $Collection
+}
+$jsonObject | ConvertTo-Json -Depth 9 | Out-File "gl-sast-report.json"
+```
+
 ## Install PSScriptAnalyzer
 
 > This command installs the `PSScriptAnalyzer` module from the PowerShell Gallery for the current user.
