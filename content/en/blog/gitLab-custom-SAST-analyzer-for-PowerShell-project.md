@@ -26,7 +26,7 @@ In the following sections, I will delve into the process of creating a GitLab Cu
 
 I respect your time and recorded the demonstration of implementing a custom SAST analyzer for the PowerShell project. 
 
-{{<youtube >}}
+{{<youtube Z-60XQxtoF0>}}
 
 # What is SAST? 
 
@@ -48,6 +48,8 @@ I respect your time and recorded the demonstration of implementing a custom SAST
 I need to implement custom PowerShell rules for the organization's needs. How to do it? Refer this [link](https://learn.microsoft.com/en-us/powershell/utility-modules/psscriptanalyzer/create-custom-rule?view=ps-modules)  
 
 # Custom SAST Analyzer report schema 
+
+[sast-report-format](https://gitlab.com/gitlab-org/security-products/security-report-schemas/-/blob/master/dist/sast-report-format.json)
 
 ![JSON Schema](/2023/09/OP-1.png)
 
@@ -104,9 +106,6 @@ I need to implement custom PowerShell rules for the organization's needs. How to
     ]
 }
 ```
-
-![high-level](/2023/09/)
-
 
 # PowerShell Script to generate GL-SAST-REPORT.JSON
 
