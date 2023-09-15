@@ -281,3 +281,5 @@ ps_sast:
 - [PSScriptAnalyzer](https://github.com/PowerShell/PSScriptAnalyzer)
 - [Learn PSScriptAnalyzer](https://learn.microsoft.com/en-us/powershell/utility-modules/psscriptanalyzer/overview?view=ps-modules)
 - [PSScriptAnalyzer Custom Rules](https://learn.microsoft.com/en-us/powershell/utility-modules/psscriptanalyzer/create-custom-rule?view=ps-modules)
+
+> I wanted to take a moment to express my deepest gratitude to each one of you who has been a part of our blog's journey. Your support and readership have been invaluable, and I cannot thank you enough for being a part of our technical community.
