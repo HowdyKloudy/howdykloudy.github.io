@@ -5,7 +5,7 @@ description: "demonstration of using GraphQL API with PowerShell..."
 date: 2023-10-14T11:20:02+01:00
 draft: false
 tags: ["GitLab", "DevSecOps" , "GraphQL" , "PowerShell"]
-thumbnail: "/2023/09/blog-header.jpg"
+thumbnail: "/2023/10/blog-header.jpg"
 ---
 
 # Introduction
@@ -108,7 +108,7 @@ As we all know, the preceding code retrieves the project information, but how is
 ```PowerShell
 param (
     $orgnizationName = "gitlab.com"
-    $fullPath = "workwave/psgitlab"
+    $fullPath = "group/project"
 )
 
 $query = [pscustomobject]@{
@@ -152,7 +152,7 @@ $PrivateToken = 'SUPER-SECRET'
 $query = @{
     query = @"
         query {
-            project(fullPath: "workwave/autoscheduler") {
+            project(fullPath: "group/project") {
                 id
                 name
             mergeRequests(first: 5, after: null) {
@@ -176,7 +176,7 @@ while ($true) {
     $query = @{
         query = @"
         query {
-            project(fullPath: "workwave/autoscheduler") {
+            project(fullPath: "group/project") {
                 id
                 name
             mergeRequests(first: 5, after: "$($response.data.project.mergeRequests.pageInfo.endCursor)") {
@@ -206,10 +206,10 @@ $collection
 
 ```GraphQL
 {
-  leftProject: project(fullPath: "workwave/autoscheduler") {
+  leftProject: project(fullPath: "group/project") {
     starCount
   }
-  rightProject: project(fullPath: "workwave/PSGitLab") {
+  rightProject: project(fullPath: "group/project") {
     starCount
   }
 }
@@ -230,10 +230,10 @@ fragment compareFields on Project {
 }
 
 {
-  leftProject: project(fullPath: "workwave/autoscheduler") {
+  leftProject: project(fullPath: "group/project") {
     ...compareFields
   }
-  rightProject: project(fullPath: "workwave/PSGitLab") {
+  rightProject: project(fullPath: "group/project") {
     ...compareFields
   }
 }
@@ -254,7 +254,7 @@ Now that you know the query operation, work on the scenario, and if you need ass
 ```GraphQL
 mutation {
   createIssue(
-    input: {title: "test -1", projectPath: "workwave/autoscheduler", description: "test 1 description"}
+    input: {title: "test -1", projectPath: "group/project", description: "test 1 description"}
   ) {
     issue {
       id
@@ -270,7 +270,7 @@ mutation {
 ```GraphQL
 mutation {
   updateIssue(
-    input: {iid: "2", projectPath: "workwave/autoscheduler", stateEvent: CLOSE}
+    input: {iid: "2", projectPath: "group/project", stateEvent: CLOSE}
   ) {
     issue {
       id
