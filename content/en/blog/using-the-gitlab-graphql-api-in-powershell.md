@@ -18,13 +18,13 @@ I appreciate your time and recorded the demo
 
 {{<youtube zHynYT_cjk4>}}
 
-# What is GitLab GraphQL API? 
+## What is GitLab GraphQL API? 
 
 The GitLab GraphQL API is an alternative to the traditional REST API, designed to provide developers with precise control over the data they request and manipulate. It is based on the GraphQL query language, enabling you to specify what information you need from GitLab, simplifying data retrieval and enhancing the efficiency of your interactions.
 
 Sufficient theory can be tedious; let's commence with the exercise instead.
 
-# Getting started
+## Getting started
 
 To access the GitLab GraphQL API, you will need to:
 
@@ -77,7 +77,7 @@ The response is below
 }
 ```
 
-## Get a list of all projects
+### Get a list of all projects
 
 ```GraphQL
 query getProjectInformation($fullPath: ID!) {
@@ -105,7 +105,8 @@ As we all know, the preceding code retrieves the project information, but how is
 
 > GraphiQL
 
-![GraphiQL](/2023/10/image-graphql.png)
+![GraphiQL](/2023/10/image-graphiql.png)
+
 
 > PowerShell
 
