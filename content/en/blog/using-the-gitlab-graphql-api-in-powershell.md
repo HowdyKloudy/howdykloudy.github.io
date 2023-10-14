@@ -14,18 +14,22 @@ GraphQL is a revolutionary query language and runtime for API interactions in we
 
 At its core, GraphQL serves as a versatile tool for querying APIs and orchestrating data retrieval. It introduces a structured, coherent description of your API's data, allowing clients to wield precise control over the information they receive. But GraphQL's influence extends beyond efficient data queries; it empowers seamless API evolution and equips developers with a potent arsenal of tools.
 
+I appreciate your time and recorded the demo 
+
+{{<youtube zHynYT_cjk4>}}
+
 # What is GitLab GraphQL API? 
 
 The GitLab GraphQL API is an alternative to the traditional REST API, designed to provide developers with precise control over the data they request and manipulate. It is based on the GraphQL query language, enabling you to specify what information you need from GitLab, simplifying data retrieval and enhancing the efficiency of your interactions.
 
 Sufficient theory can be tedious; let's commence with the exercise instead.
 
-# Getting started with the GitLab GraphQL API
+# Getting started
 
 To access the GitLab GraphQL API, you will need to:
 
-- Have a GitLab account.
-- Generate a personal access token with the read_api scope.
+- Have a GitLab account. [Signup Link](https://gitlab.com/users/sign_up)
+- Generate a personal access token with the read_api scope. [PAT](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
 
 Once you have a personal access token, you can authenticate to the API. There are a few different ways to do this:
 
