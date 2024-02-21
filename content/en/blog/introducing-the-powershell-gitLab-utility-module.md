@@ -5,7 +5,7 @@ description: "Harnessing GitLab with PowerShell - a robust PowerShell module to 
 date: 2024-02-21T11:20:02+01:00
 draft: false
 tags: ["GitLab", "DevSecOps" , "GraphQL" , "PowerShell"]
-thumbnail: "/2024/02/PowerShell.GitLab.Utility.png
+thumbnail: "/2024/02/PowerShell-GitLab-Utility.png
 ---
 
 # Introduction
