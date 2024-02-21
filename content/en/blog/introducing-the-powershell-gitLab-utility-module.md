@@ -1,7 +1,7 @@
 ---
 author: "Chendrayan Venkatesan"
-title: "Harnessing GitLab with PowerShell - Introducing the PowerShell.GitLab.Utility Module"
-description: "a robust PowerShell module to work with GitLab"
+title: "Introducing the PowerShell GitLab Utility Module"
+description: "Harnessing GitLab with PowerShell - a robust PowerShell module to work with GitLab"
 date: 2024-02-21T11:20:02+01:00
 draft: false
 tags: ["GitLab", "DevSecOps" , "GraphQL" , "PowerShell"]
