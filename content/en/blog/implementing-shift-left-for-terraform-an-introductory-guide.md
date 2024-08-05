@@ -171,7 +171,7 @@ $flatResults | Format-Table -AutoSize -Expand Both
 
 ## Output 
 
-![img](/2024/08/Image1.png)
+![img](/2024/08/shift-left.png)
 
 ## Benefits of Shifting Left for Terraform
 
@@ -179,7 +179,6 @@ $flatResults | Format-Table -AutoSize -Expand Both
 - **Increased Security:** Enforce best practices and custom policies to secure your infrastructure.  
 - **Improved Code Quality:** Maintain a high standard of code quality by adhering to best practices and avoiding deprecated syntax.  
 - **Cost and Time Savings:** Reduce the risk of costly fixes and rework by catching issues early.  
-
 
 ## Conclusion
 
