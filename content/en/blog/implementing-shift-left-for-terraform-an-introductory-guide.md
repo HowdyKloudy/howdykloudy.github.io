@@ -171,7 +171,7 @@ $flatResults | Format-Table -AutoSize -Expand Both
 
 ## Output 
 
-![img](/2024/08/image1.png)
+![img](/2024/08/Image1.png)
 
 ## Benefits of Shifting Left for Terraform
 
