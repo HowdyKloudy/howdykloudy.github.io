@@ -1,6 +1,6 @@
 ---
 author: "Chendrayan Venkatesan"
-title: "Implementing Shift Left FinOps with Terraform: A Comprehensive Guide "
+title: "Implementing Shift Left FinOps with Terraform: A Comprehensive Guide"
 date: 2024-08-07
 description: "Shift Left FinOps for Terraform"
 tags: ["Azure", "Terraform" , "Shift Left", "PowerShell", "FinOps"]
@@ -12,6 +12,8 @@ thumbnail: /2024/08/blog-cover-finops.jpg
 As organizations strive to enhance their cloud infrastructure management, Shift Left and FinOps concepts have gained significant traction. Shift Left emphasizes integrating various aspects of the software development lifecycle earlier, identifying and resolving issues sooner. FinOps, on the other hand, focuses on the financial management of cloud services, ensuring cost efficiency and transparency.
 
 Combining these two practices, Shift Left FinOps aims to incorporate financial considerations into the development and deployment stages, allowing teams to predict and optimize costs proactively. This blog post will explore how you can achieve Shift Left FinOps using the Infracost tool and PowerShell.
+
+*Disclaimer: This is just the beginning - stay tuned for more scripts and insights around the shift left for Terraform.*
 
 ## Addressing Questions
 
