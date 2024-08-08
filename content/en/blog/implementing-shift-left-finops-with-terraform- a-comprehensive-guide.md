@@ -23,15 +23,15 @@ Combining these two practices, Shift Left FinOps aims to incorporate financial c
 
 > Why the Type has Error, Medium, and Critical – It's confusing.  
 
-***Answer: Yeah, it is! Let me fix it in the next blog post and deliver the best result. ***
+***Answer: Yeah, it is! Let me fix it in the next blog post and deliver the best result.***
 
 > Our organization needs custom validation, not generic.  
 
-***Answer: We can achieve this using TFSec. I have added it to my backlog and will cover it in a future post. :wink: ***
+***Answer: We can achieve this using TFSec. I have added it to my backlog and will cover it in a future post.*** :wink:
 
 > Is there any way to get to know the misconfigurations/vulnerabilities in real time rather than by executing a script?  
 
-***Answer: Well, it's a big ASK. Let me work towards it! It's my aim for this quarter. :star_struck: :star_struck: :star_struck: ***
+***Answer: Well, it's a big ASK. Let me work towards it! It's my aim for this quarter.*** :star_struck: :star_struck: :star_struck:
 
 ## Implementing Shift Left FinOps with Infracost and PowerShell
 
@@ -118,11 +118,9 @@ $cost = infracost breakdown --path='.' --format json --log-level error | Convert
 Pop-Location
 ```
 
-
 ## Output 
 
 ![img](/2024/08/InfraCost.png)
-
 
 ## Reference
 
