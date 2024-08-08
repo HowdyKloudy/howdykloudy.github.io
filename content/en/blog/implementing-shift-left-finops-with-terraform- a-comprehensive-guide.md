@@ -13,20 +13,24 @@ As organizations strive to enhance their cloud infrastructure management, Shift 
 
 Combining these two practices, Shift Left FinOps aims to incorporate financial considerations into the development and deployment stages, allowing teams to predict and optimize costs proactively. This blog post will explore how you can achieve Shift Left FinOps using the Infracost tool and PowerShell.
 
-*Disclaimer: This is just the beginning - stay tuned for more scripts and insights around the shift left for Terraform.*
+> **Disclaimer:** This is just the beginning - stay tuned for more scripts and insights around the shift left for Terraform.  
 
 ## Addressing Questions
 
-> How about Shift Left FinOps?
+> How about Shift Left FinOps?  
+
 ***Answer: This blog post will cover Shift Left FinOps using the Infracost tool with PowerShell. Infracost provides cost estimates for cloud resources defined in your Terraform projects, allowing you to make informed decisions about your infrastructure's financial impact before deployment.***
 
-> Why the Type has Error, Medium, and Critical – It's confusing.
+> Why the Type has Error, Medium, and Critical – It's confusing.  
+
 ***Answer: Yeah, it is! Let me fix it in the next blog post and deliver the best result. ***
 
-> Our organization needs custom validation, not generic.
+> Our organization needs custom validation, not generic.  
+
 ***Answer: We can achieve this using TFSec. I have added it to my backlog and will cover it in a future post. :wink: ***
 
-> Is there any way to get to know the misconfigurations/vulnerabilities in real time rather than by executing a script?
+> Is there any way to get to know the misconfigurations/vulnerabilities in real time rather than by executing a script?  
+
 ***Answer: Well, it's a big ASK. Let me work towards it! It's my aim for this quarter. :star_struck: :star_struck: :star_struck: ***
 
 ## Implementing Shift Left FinOps with Infracost and PowerShell
@@ -46,10 +50,8 @@ infracost --version
 > Step 3: Login
 
 ```PowerShell
-infracost auth login
+infracost auth login # The credentials (api key) gets stored in the location C:\Users\<USERNAME>\.config\infracost
 ```
-
-*** The credentials (api key) gets stored in the location C:\Users\<USERNAME>\.config\infracost ***
 
 > Step 4: Develop with PowerShell 
 
