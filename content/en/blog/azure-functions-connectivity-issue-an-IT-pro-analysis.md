@@ -14,7 +14,7 @@ A professional analysis of an Azure Functions connectivity issue caused by impro
 The initial step involved assessing the deployment process of the Function App. The stakeholder confirmed that the functions were not running and could not connect to the host, attributing the issue to an incorrect pattern. To clarify, the distinction between the components was reviewed:
 
 - Function App: The hosting environment for the functions.
-- Functions: Individual code units executed within the Function App.
+- Functions: Individual code units executed within the Function App.  
 
 Further analysis is required to examine the storage account configuration. The stakeholder indicated that the configuration was defined in a Terraform template, which had not been modified. It was determined that the storage account was deployed without public internet access. The stakeholder emphasised the security measures, noting that the network was intentionally isolated.
 
