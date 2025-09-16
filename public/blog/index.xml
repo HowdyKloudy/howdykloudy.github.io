@@ -5,7 +5,97 @@
     <link>/blog/</link>
     <description>Recent content in Blog on Howdy,Kloudy!</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 12 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 28 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Azure Functions Connectivity Issue: An IT Pro Analysis</title>
+      <link>/blog/azure-functions-connectivity-issue-an-it-pro-analysis/</link>
+      <pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/azure-functions-connectivity-issue-an-it-pro-analysis/</guid>
+      <description>Introdcution An application stakeholder reported an issue with an Azure Function, indicating an error message stating &amp;ldquo;The host is unreachable.&amp;rdquo; Upon inquiry, the stakeholder suggested that the Function App pattern design was flawed and that no functions were operational. Yes, this prompted a detailed investigation into the deployment and configuration and pushed me to write this blog. A professional analysis of an Azure Functions connectivity issue caused by improper network configuration and its resolution using VNET integration.</description>
+    </item>
+    
+    <item>
+      <title>Implementing Shift Left FinOps with Terraform: A Comprehensive Guide</title>
+      <link>/blog/implementing-shift-left-finops-with-terraform-a-comprehensive-guide/</link>
+      <pubDate>Wed, 07 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/implementing-shift-left-finops-with-terraform-a-comprehensive-guide/</guid>
+      <description>Introduction As organizations strive to enhance their cloud infrastructure management, Shift Left and FinOps concepts have gained significant traction. Shift Left emphasizes integrating various aspects of the software development lifecycle earlier, identifying and resolving issues sooner. FinOps, on the other hand, focuses on the financial management of cloud services, ensuring cost efficiency and transparency.
+Combining these two practices, Shift Left FinOps aims to incorporate financial considerations into the development and deployment stages, allowing teams to predict and optimize costs proactively.</description>
+    </item>
+    
+    <item>
+      <title>Implementing Shift Left for Terraform: An Introductory Guide</title>
+      <link>/blog/implementing-shift-left-for-terraform-an-introductory-guide/</link>
+      <pubDate>Mon, 05 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/implementing-shift-left-for-terraform-an-introductory-guide/</guid>
+      <description>Introduction In today&amp;rsquo;s fast-paced development environment, ensuring the security and quality of your infrastructure as code (IaC) is crucial. When I mentioned implementing Shift Left for Terraform to a few colleagues, many responded with, &amp;ldquo;Say what?&amp;rdquo; The concept of shifting security and quality checks to the earlier stages of the development lifecycle is still new to some. So, let&amp;rsquo;s dive into what Shift Left for Terraform means and explore a practical approach to implementing it.</description>
+    </item>
+    
+    <item>
+      <title>Unlocking Secrets: A Guide to Integrate Azure Key Vault with GitLab</title>
+      <link>/blog/unlocking-secrets-a-guide-to-azure-key-vault-integration-in-gitlab/</link>
+      <pubDate>Wed, 20 Mar 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/unlocking-secrets-a-guide-to-azure-key-vault-integration-in-gitlab/</guid>
+      <description>Introduction Lately, I have experienced issues using other popular key vault providers. So, I demonstrated using the Azure key vault in Azure DevOps. A question popped up: How do we use Az key vault in GitLab?
+Below links gives the direction&amp;hellip;
+GitLab &amp;amp;amp; Azure Key VaultAzure AD Federated Identity CredentialIsn’t it like breathing? Nope! It is not! This blog post is to show you the easiest way!
+I followed the instructions and came up with the most straightforward way</description>
+    </item>
+    
+    <item>
+      <title>Introducing the PowerShell GitLab Utility Module</title>
+      <link>/blog/introducing-the-powershell-gitlab-utility-module/</link>
+      <pubDate>Wed, 21 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/introducing-the-powershell-gitlab-utility-module/</guid>
+      <description>Introduction Harnessing GitLab with PowerShell: Introducing the PowerShell.GitLab.Utility Module
+In the evolving landscape of DevOps and CI/CD, automating and streamlining operations is invaluable. GitLab, a web-based DevOps lifecycle tool, provides a comprehensive platform for software development, from project planning and source code management to CI/CD, monitoring, and security. To enhance the interaction with GitLab through automation, the PowerShell.GitLab.Utility modules have emerged as a significant advancement.
+What is PowerShell.GitLab.Utility? PowerShell.GitLab.Utility is a PowerShell module designed to interface with GitLab.</description>
+    </item>
+    
+    <item>
+      <title>Using the GitLab GraphQL API in PowerShell</title>
+      <link>/blog/using-the-gitlab-graphql-api-in-powershell/</link>
+      <pubDate>Sat, 14 Oct 2023 11:20:02 +0100</pubDate>
+      
+      <guid>/blog/using-the-gitlab-graphql-api-in-powershell/</guid>
+      <description>Introduction GraphQL is a revolutionary query language and runtime for API interactions in web development. It doesn&amp;rsquo;t just transform how we request and manage data—it reshapes the entire API landscape. In this blog post, we&amp;rsquo;ll unveil the power of GitLab GraphQL API, exploring how it offers a comprehensive and user-friendly approach to data manipulation and API evolution.
+At its core, GraphQL serves as a versatile tool for querying APIs and orchestrating data retrieval.</description>
+    </item>
+    
+    <item>
+      <title>GitLab Custom SAST Analyzer for PowerShell Project</title>
+      <link>/blog/gitlab-custom-sast-analyzer-for-powershell-project/</link>
+      <pubDate>Thu, 14 Sep 2023 07:56:42 +0100</pubDate>
+      
+      <guid>/blog/gitlab-custom-sast-analyzer-for-powershell-project/</guid>
+      <description>Introduction In the ever-evolving landscape of infrastructure as code, software development and cybersecurity, ensuring the robust security of your codebase has become paramount. My journey into enhancing the security posture of my PowerShell projects led me to explore the world of GitLab Custom SAST Analyzers.
+As a GitLab Security Specialist, I was well-versed in the importance of securing code repositories and the pivotal role that Static Application Security Testing (SAST) plays in this endeavour.</description>
+    </item>
+    
+    <item>
+      <title>Dapr Secret Store Component Demonstration Using Minikube With a PowerShell App</title>
+      <link>/blog/dapr-secret-store-component-demonstration-using-minikube-with-a-powershell-app/</link>
+      <pubDate>Sun, 29 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/dapr-secret-store-component-demonstration-using-minikube-with-a-powershell-app/</guid>
+      <description>Introduction The content curation process for this blog post exhausted me, and the reason is a distraction. Read and enjoy the funny story! I made a lot of trial and error before sharing it with you all. My previous blog post discussed using Dapr on Minikube with a PowerShell app. You can refer to the link below to learn about the use case of state store component
+Dockerize the Full-Stack application built using PowerShell (Pode &amp;amp;amp; PSHTML)Dapr state store demonstration using Minikube with a PowerShell appFix the gap in handling secrets I hope you read my previous blogs.</description>
+    </item>
+    
+    <item>
+      <title>Dapr state store demonstration using Minikube with a PowerShell app</title>
+      <link>/blog/dapr-state-store-demonstration-using-minikube-with-a-powershell-app/</link>
+      <pubDate>Thu, 19 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/dapr-state-store-demonstration-using-minikube-with-a-powershell-app/</guid>
+      <description>Introduction This blog post is a part of the feature I added to my web app built using PowerShell. I couldn’t hold the excitement. So, the share is not a minimum viable product but an idea to show a case running a Dapr as a sidecar in a pod. In my last blog post, I shared my understanding of Dockerizing full-stack application(s) built using PowerShell and ran using Docker-Compose and then over a Minikube.</description>
+    </item>
+    
     <item>
       <title>Dockerize the Full-Stack application built using PowerShell (Pode &amp; PSHTML)</title>
       <link>/blog/dockerize-the-full-stack-application-built-using-powershellpode-pshml/</link>
@@ -13,7 +103,7 @@
       
       <guid>/blog/dockerize-the-full-stack-application-built-using-powershellpode-pshml/</guid>
       <description>Introduction I have recorded the demonstration of spinning up the full-stack application built using PowerShell (Pode &amp;amp; PSHTML). Feel free to leave your comments
-Disclaimer This blog post is the output of my learning on Docker, MySQL, docker-compose, and MiniKube. So, please skip asking ask why not native or alternatives. I am sharing it as a blog because of the ask that I have seen it in the REDDIT. I am an automation engineer with a decent experience in the cloud, not a software developer.</description>
+Disclaimer This blog post is the output of my learning on Docker, MySQL, docker-compose, and MiniKube. So, please skip asking why not native or alternatives?. I am sharing it as a blog because of the ask that I have seen it in the REDDIT. I am an automation engineer with a decent experience in the cloud, not a software developer.</description>
     </item>
     
     <item>

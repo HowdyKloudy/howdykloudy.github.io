@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dapr on Howdy,Kloudy!</title>
+    <link>/tags/dapr/</link>
+    <description>Recent content in dapr on Howdy,Kloudy!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 29 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="/tags/dapr/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dapr Secret Store Component Demonstration Using Minikube With a PowerShell App</title>
+      <link>/blog/dapr-secret-store-component-demonstration-using-minikube-with-a-powershell-app/</link>
+      <pubDate>Sun, 29 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/dapr-secret-store-component-demonstration-using-minikube-with-a-powershell-app/</guid>
+      <description>Introduction The content curation process for this blog post exhausted me, and the reason is a distraction. Read and enjoy the funny story! I made a lot of trial and error before sharing it with you all. My previous blog post discussed using Dapr on Minikube with a PowerShell app. You can refer to the link below to learn about the use case of state store component
+Dockerize the Full-Stack application built using PowerShell (Pode &amp;amp;amp; PSHTML)Dapr state store demonstration using Minikube with a PowerShell appFix the gap in handling secrets I hope you read my previous blogs.</description>
+    </item>
+    
+    <item>
+      <title>Dapr state store demonstration using Minikube with a PowerShell app</title>
+      <link>/blog/dapr-state-store-demonstration-using-minikube-with-a-powershell-app/</link>
+      <pubDate>Thu, 19 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/dapr-state-store-demonstration-using-minikube-with-a-powershell-app/</guid>
+      <description>Introduction This blog post is a part of the feature I added to my web app built using PowerShell. I couldn’t hold the excitement. So, the share is not a minimum viable product but an idea to show a case running a Dapr as a sidecar in a pod. In my last blog post, I shared my understanding of Dockerizing full-stack application(s) built using PowerShell and ran using Docker-Compose and then over a Minikube.</description>
+    </item>
+    
+  </channel>
+</rss>

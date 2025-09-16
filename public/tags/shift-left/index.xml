@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Shift Left on Howdy,Kloudy!</title>
+    <link>/tags/shift-left/</link>
+    <description>Recent content in Shift Left on Howdy,Kloudy!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 07 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="/tags/shift-left/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Implementing Shift Left FinOps with Terraform: A Comprehensive Guide</title>
+      <link>/blog/implementing-shift-left-finops-with-terraform-a-comprehensive-guide/</link>
+      <pubDate>Wed, 07 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/implementing-shift-left-finops-with-terraform-a-comprehensive-guide/</guid>
+      <description>Introduction As organizations strive to enhance their cloud infrastructure management, Shift Left and FinOps concepts have gained significant traction. Shift Left emphasizes integrating various aspects of the software development lifecycle earlier, identifying and resolving issues sooner. FinOps, on the other hand, focuses on the financial management of cloud services, ensuring cost efficiency and transparency.
+Combining these two practices, Shift Left FinOps aims to incorporate financial considerations into the development and deployment stages, allowing teams to predict and optimize costs proactively.</description>
+    </item>
+    
+    <item>
+      <title>Implementing Shift Left for Terraform: An Introductory Guide</title>
+      <link>/blog/implementing-shift-left-for-terraform-an-introductory-guide/</link>
+      <pubDate>Mon, 05 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/implementing-shift-left-for-terraform-an-introductory-guide/</guid>
+      <description>Introduction In today&amp;rsquo;s fast-paced development environment, ensuring the security and quality of your infrastructure as code (IaC) is crucial. When I mentioned implementing Shift Left for Terraform to a few colleagues, many responded with, &amp;ldquo;Say what?&amp;rdquo; The concept of shifting security and quality checks to the earlier stages of the development lifecycle is still new to some. So, let&amp;rsquo;s dive into what Shift Left for Terraform means and explore a practical approach to implementing it.</description>
+    </item>
+    
+  </channel>
+</rss>

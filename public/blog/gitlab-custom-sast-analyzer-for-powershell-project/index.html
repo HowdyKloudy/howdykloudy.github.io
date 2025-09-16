@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="/favicon.ico">
+
+  <title>
+  GitLab Custom SAST Analyzer for PowerShell Project - Howdy,Kloudy!
+  </title>
+  <meta name="description" content="demonstration of implementing a custom SAST analyzer for PowerShell projects..." />
+  <meta name="author" content="Chendrayan Venkatesan" />
+  <meta name="generator" content="Hugo 0.105.0"><link
+    rel="stylesheet"
+    href="__h_pp_l1_1_Permalink__e="
+    integrity="__h_pp_l1_1_Data.Integrity__e="
+  />
+  
+  
+
+  <meta property="og:title" content="GitLab Custom SAST Analyzer for PowerShell Project" />
+<meta property="og:description" content="demonstration of implementing a custom SAST analyzer for PowerShell projects..." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/gitlab-custom-sast-analyzer-for-powershell-project/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2023-09-14T07:56:42+01:00" />
+<meta property="article:modified_time" content="2023-09-14T07:56:42+01:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="GitLab Custom SAST Analyzer for PowerShell Project"/>
+<meta name="twitter:description" content="demonstration of implementing a custom SAST analyzer for PowerShell projects..."/>
+
+  <meta itemprop="name" content="GitLab Custom SAST Analyzer for PowerShell Project">
+<meta itemprop="description" content="demonstration of implementing a custom SAST analyzer for PowerShell projects..."><meta itemprop="datePublished" content="2023-09-14T07:56:42+01:00" />
+<meta itemprop="dateModified" content="2023-09-14T07:56:42+01:00" />
+<meta itemprop="wordCount" content="1102">
+<meta itemprop="keywords" content="GitLab,DevSecOps,SAST,CICD,PowerShell,PSScriptAnalyzer," />
+
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="/" class="capitalize font-extrabold text-2xl">
+    
+    <img src="/howdy1.png" alt="Howdy,Kloudy!" class="h-8 max-w-full" />
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+    <li><a href="/blog">Blog</a></li>
+    
+    <li><a href="/page/about/">About</a></li>
+    
+    <li><a href="/tags">Tags</a></li>
+    
+
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="open-search inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+      </span>
+    </li>
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="toggle-dark-mode inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="5" x2="12" y2="5.01" />
+          <line x1="17" y1="7" x2="17" y2="7.01" />
+          <line x1="19" y1="12" x2="19" y2="12.01" />
+          <line x1="17" y1="17" x2="17" y2="17.01" />
+          <line x1="12" y1="19" x2="12" y2="19.01" />
+          <line x1="7" y1="17" x2="7" y2="17.01" />
+          <line x1="5" y1="12" x2="5" y2="12.01" />
+          <line x1="7" y1="7" x2="7" y2="7.01" />
+        </svg>
+      </span>
+    </li>
+    
+  </ul>
+</header>
+<main class="flex-1">
+
+
+
+
+<div class="relative max-w-5xl mx-auto px-4">
+  <img src="/2023/09/09-blog-cover.jpg" class="rounded-lg shadow-sm w-full object-contain" />
+  
+  <div
+    class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+    
+  
+    September 14, 2023
+  
+
+
+  </div>
+  
+</div>
+
+
+<article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+  <h1 class="text-2xl font-bold mb-2">GitLab Custom SAST Analyzer for PowerShell Project</h1>
+  
+  <h5 class="text-sm flex items-center flex-wrap">
+    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <rect x="4" y="5" width="16" height="16" rx="2" />
+      <line x1="16" y1="3" x2="16" y2="7" />
+      <line x1="8" y1="3" x2="8" y2="7" />
+      <line x1="4" y1="11" x2="20" y2="11" />
+      <rect x="8" y="15" width="2" height="2" />
+    </svg>
+    Posted on 
+  
+    September 14, 2023
+  
+
+
+    
+    &nbsp;&bull;&nbsp;
+    
+    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <circle cx="12" cy="12" r="9" />
+      <polyline points="12 7 12 12 15 15" />
+    </svg>
+    6&nbsp;minutes
+    &nbsp;&bull;
+    <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+      <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+      <line x1="3" y1="6" x2="3" y2="19" />
+      <line x1="12" y1="6" x2="12" y2="19" />
+      <line x1="21" y1="6" x2="21" y2="19" />
+    </svg>
+
+    1102&nbsp;words
+
+    &nbsp;
+    <div class="views">
+      <span class="views">
+        <img src="https://visitor-badge.glitch.me/badge?page_id=%2fblog%2fgitlab-custom-sast-analyzer-for-powershell-project%2f" alt="Views" />
+      </span>
+    </div>
+    
+    
+    
+  </h5>
+  
+
+  <details id="TableOfContents" class="px-4 mt-4 bg-gray-100 dark:bg-gray-700 rounded toc">
+    <summary class="flex items-center font-bold py-2 px-4 cursor-pointer justify-between select-none text-black dark:text-white">
+      <span>Table of contents</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <polyline points="6 9 12 15 18 9"></polyline>
+     </svg>
+    </summary>
+
+    <ul class="mt-2 pb-4">
+        
+
+        
+        <li>
+        <a href="#introduction">Introduction</a>
+        
+
+        
+        </li><li>
+        <a href="#video">Video</a>
+        
+
+        
+        </li><li>
+        <a href="#what-is-sast">What is SAST?</a>
+        
+
+        
+        </li><li>
+        <a href="#what-is-psscriptanalyzer">What is PSScriptAnalyzer?</a>
+        
+
+        
+        </li><li>
+        <a href="#custom-sast-analyzer-report-schema">Custom SAST Analyzer report schema</a>
+        
+
+        
+        </li><li>
+        <a href="#powershell-script-to-generate-gl-sast-reportjson">PowerShell Script to generate GL-SAST-REPORT.JSON</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#install-psscriptanalyzer">Install PSScriptAnalyzer</a>
+        
+
+        
+        </li><li>
+        <a href="#initialize-variables">Initialize Variables</a>
+        
+
+        
+        </li><li>
+        <a href="#run-script-analyzer">Run Script Analyzer</a>
+        
+
+        
+        </li><li>
+        <a href="#create-vulnerability-object">Create Vulnerability Object</a>
+        
+
+        
+        </li><li>
+        <a href="#add-vulnerability-to-collection">Add Vulnerability to Collection</a>
+        
+
+        
+        </li><li>
+        <a href="#create-json-report">Create JSON Report</a>
+        
+
+        
+        </li></ul>
+      </li><li>
+        <a href="#gitlab-pipeline">GitLab Pipeline</a>
+        
+
+        
+        </li><li>
+        <a href="#output">Output</a>
+        
+
+        
+        </li><li>
+        <a href="#references">References</a>
+        </li></ul>
+  </details>
+
+  <h1 id="introduction">Introduction</h1>
+<p>In the ever-evolving landscape of infrastructure as code, software development and cybersecurity, ensuring the robust security of your codebase has become paramount. My journey into enhancing the security posture of my PowerShell projects led me to explore the world of GitLab Custom SAST Analyzers.</p>
+<p>As a GitLab Security Specialist, I was well-versed in the importance of securing code repositories and the pivotal role that Static Application Security Testing (SAST) plays in this endeavour. GitLab&rsquo;s commitment to providing a secure DevOps platform is evident, yet I found a particular gap regarding PowerShell projects. There was no default SAST analyzer readily available for this scripting language.</p>
+<p>Driven by the need to bridge this gap and bolster the security of my PowerShell projects, I embarked on a journey of innovation and customization. I had already cleared the GitLab Security Specialist certification, which empowered me with the knowledge and expertise to address this challenge effectively.</p>
+<p>In this journey, I discovered the power of custom SAST analysis using PSScript Analyzer. Armed with this open-source static code analysis tool designed specifically for PowerShell, I crafted a tailored solution to scan my PowerShell projects for potential security vulnerabilities. PSScriptAnalyzer module offered the flexibility and extensibility needed to create a custom SAST analyzer aligned with my project&rsquo;s unique requirements.</p>
+<p>In this exploration, I enhanced the security of my PowerShell code and realized the potential to contribute to the broader GitLab community by sharing my custom SAST analyzer. This journey represents the essence of DevSecOps - continuous improvement, collaboration, and empowerment.</p>
+<p>In the following sections, I will delve into the process of creating a GitLab Custom SAST Analyzer for PowerShell projects, highlighting the steps, challenges, and insights gained along the way. Together, we&rsquo;ll unlock the power of customized security analysis in the GitLab ecosystem, strengthening the defences of our code one script at a time.</p>
+<h1 id="video">Video</h1>
+<p>I respect your time and recorded the demonstration of implementing a custom SAST analyzer for the PowerShell project.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/Z-60XQxtoF0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h1 id="what-is-sast">What is SAST?</h1>
+<p><strong>SAST</strong> stands for <code>Static Application Security Testing.</code> It is a security testing methodology used in software development and cybersecurity to identify and mitigate security vulnerabilities in source code or compiled binaries before deploying the application. SAST is also known as &ldquo;white-box testing&rdquo; because it analyzes an application&rsquo;s code&rsquo;s internal structure and logic without executing the software. Highlights of <code>SAST</code> are as follows.</p>
+<ul>
+<li>Early Detection of Vulnerabilities</li>
+<li>Source Code Analysis</li>
+<li>Automation</li>
+<li>Customizable Rules</li>
+<li>False Positives</li>
+<li>Integration with Development Tools</li>
+<li>Complementing Other Testing Methods</li>
+<li>Regulatory Compliance</li>
+</ul>
+<h1 id="what-is-psscriptanalyzer">What is PSScriptAnalyzer?</h1>
+<p><code>PSScriptAnalyzer</code> is a valuable module in PowerShell scripting and development. It is a powerful static code analysis tool for PowerShell scripts and modules. PSScriptAnalyzer empowers developers and administrators to enhance their PowerShell code&rsquo;s quality, readability, and security.</p>
+<p>I need to implement custom PowerShell rules for the organization&rsquo;s needs. How to do it? Refer this <a href="https://learn.microsoft.com/en-us/powershell/utility-modules/psscriptanalyzer/create-custom-rule?view=ps-modules" target="_blank" rel="noopener">link</a>
+</p>
+<h1 id="custom-sast-analyzer-report-schema">Custom SAST Analyzer report schema</h1>
+<p><a href="https://gitlab.com/gitlab-org/security-products/security-report-schemas/-/blob/master/dist/sast-report-format.json" target="_blank" rel="noopener">sast-report-format</a>
+</p>
+<p><img src="/2023/09/OP-1.png" alt="JSON Schema"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JSON" data-lang="JSON"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;version&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;scan&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&#34;start_time&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&#34;end_time&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&#34;status&#34;</span>: <span style="color:#f1fa8c">&#34;success&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&#34;type&#34;</span>: <span style="color:#f1fa8c">&#34;sast&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&#34;scanner&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;id&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;url&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;version&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;vendor&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&#34;analyzer&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;id&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;url&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;vendor&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;version&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;vulnerabilities&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;id&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;severity&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;cve&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;location&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">&#34;file&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">&#34;commit&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;start_line&#34;</span>: ,
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;identifiers&#34;</span>: [
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#ff79c6">&#34;type&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#ff79c6">&#34;value&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;scanner&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">&#34;id&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h1 id="powershell-script-to-generate-gl-sast-reportjson">PowerShell Script to generate GL-SAST-REPORT.JSON</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">Install-Module</span> -Name PSScriptAnalyzer -Scope CurrentUser -Repository PSGallery -Force
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$Collection</span> = @()
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$vulnerabilities</span> = (<span style="color:#8be9fd;font-style:italic">Get-ChildItem</span> -Path . -Exclude test.ps1 | <span style="color:#8be9fd;font-style:italic">Invoke-ScriptAnalyzer</span> )
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">for</span> (<span style="color:#8be9fd;font-style:italic">$i</span> = 0; <span style="color:#8be9fd;font-style:italic">$i</span> <span style="color:#ff79c6">-lt</span> <span style="color:#8be9fd;font-style:italic">$vulnerabilities</span>.Count; <span style="color:#8be9fd;font-style:italic">$i</span>++) {  
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">$vulnerability</span> = [PSCustomObject]@{
+</span></span><span style="display:flex;"><span>        id          = $(<span style="color:#8be9fd;font-style:italic">New-Guid</span>).Guid
+</span></span><span style="display:flex;"><span>        name        = $(<span style="color:#8be9fd;font-style:italic">$vulnerabilities</span>[<span style="color:#8be9fd;font-style:italic">$i</span>].RuleName)
+</span></span><span style="display:flex;"><span>        severity    = $(
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">switch</span> (<span style="color:#8be9fd;font-style:italic">$vulnerabilities</span>[<span style="color:#8be9fd;font-style:italic">$i</span>].Severity.ToString()) {
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#39;Error&#39;</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f1fa8c">&#39;Critical&#39;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#39;Warning&#39;</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f1fa8c">&#39;Low&#39;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#39;Information&#39;</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f1fa8c">&#39;Info&#39;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">default</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f1fa8c">&#39;Unknown&#39;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>        cve         = $([string]::Concat(<span style="color:#f1fa8c">&#39;id:&#39;</span>, $((<span style="color:#8be9fd;font-style:italic">New-Guid</span>).Guid), <span style="color:#f1fa8c">&#39;:&#39;</span> , $(<span style="color:#8be9fd;font-style:italic">Get-Random</span> -Maximum 10 -Minimum 1)))
+</span></span><span style="display:flex;"><span>        location    = [pscustomobject]@{
+</span></span><span style="display:flex;"><span>            file   = $([string]::Concat($(<span style="color:#8be9fd;font-style:italic">$vulnerabilities</span>[<span style="color:#8be9fd;font-style:italic">$i</span>].ScriptName), <span style="color:#f1fa8c">&#39;-&#39;</span> , $(<span style="color:#8be9fd;font-style:italic">$vulnerabilities</span>[<span style="color:#8be9fd;font-style:italic">$i</span>].Line)))
+</span></span><span style="display:flex;"><span>            commit = <span style="color:#f1fa8c">&#39;0000000&#39;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        start_line  = $(<span style="color:#8be9fd;font-style:italic">$vulnerabilities</span>[<span style="color:#8be9fd;font-style:italic">$i</span>].Line)
+</span></span><span style="display:flex;"><span>        identifiers = @([pscustomobject]@{
+</span></span><span style="display:flex;"><span>                <span style="color:#8be9fd;font-style:italic">type </span> = $(<span style="color:#8be9fd;font-style:italic">New-Guid</span>).Guid
+</span></span><span style="display:flex;"><span>                name  = $(<span style="color:#8be9fd;font-style:italic">$vulnerabilities</span>[<span style="color:#8be9fd;font-style:italic">$i</span>].RuleName)
+</span></span><span style="display:flex;"><span>                value = $([string]::Concat(<span style="color:#f1fa8c">&#39;id:&#39;</span>, $((<span style="color:#8be9fd;font-style:italic">New-Guid</span>).Guid), <span style="color:#f1fa8c">&#39;:&#39;</span> , $(<span style="color:#8be9fd;font-style:italic">Get-Random</span> -Maximum 10 -Minimum 1)))
+</span></span><span style="display:flex;"><span>            })
+</span></span><span style="display:flex;"><span>        scanner     = [pscustomobject]@{
+</span></span><span style="display:flex;"><span>            id   = $(<span style="color:#8be9fd;font-style:italic">New-Guid</span>).Guid
+</span></span><span style="display:flex;"><span>            name = <span style="color:#f1fa8c">&#34;Gitleaks&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">$Collection</span> += <span style="color:#8be9fd;font-style:italic">$vulnerability</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$jsonObject</span> = [PSCustomObject]@{
+</span></span><span style="display:flex;"><span>    version         = <span style="color:#f1fa8c">&#34;15.0.4&#34;</span>
+</span></span><span style="display:flex;"><span>    scan            = [pscustomobject]@{
+</span></span><span style="display:flex;"><span>        start_time = $(<span style="color:#8be9fd;font-style:italic">Get-Date</span> -Format <span style="color:#f1fa8c">&#39;yyyy-MM-dd%THH:mm:ss&#39;</span>)
+</span></span><span style="display:flex;"><span>        end_time   = $(<span style="color:#8be9fd;font-style:italic">Get-Date</span> -Format <span style="color:#f1fa8c">&#39;yyyy-MM-dd%THH:mm:ss&#39;</span>)
+</span></span><span style="display:flex;"><span>        status     = <span style="color:#f1fa8c">&#34;success&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">type </span>      = <span style="color:#f1fa8c">&#34;sast&#34;</span>
+</span></span><span style="display:flex;"><span>        scanner    = [pscustomobject]@{
+</span></span><span style="display:flex;"><span>            id      = $(<span style="color:#8be9fd;font-style:italic">New-Guid</span>).Guid
+</span></span><span style="display:flex;"><span>            name    = <span style="color:#f1fa8c">&#34;PowerShell Script Analyzer - </span>$((<span style="color:#8be9fd;font-style:italic">New-Guid</span>).Guid)<span style="color:#f1fa8c">&#34;</span>
+</span></span><span style="display:flex;"><span>            url     = <span style="color:#f1fa8c">&#34;https://learn.microsoft.com/en-us/powershell/module/psscriptanalyzer/?view=ps-modules&#34;</span>
+</span></span><span style="display:flex;"><span>            version = <span style="color:#f1fa8c">&#34;development&#34;</span>
+</span></span><span style="display:flex;"><span>            vendor  = [pscustomobject]@{
+</span></span><span style="display:flex;"><span>                name = <span style="color:#f1fa8c">&#34;Microsoft&#34;</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        analyzer   = [PSCustomObject]@{
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;id&#34;</span>      = $(<span style="color:#8be9fd;font-style:italic">New-Guid</span>).Guid
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;name&#34;</span>    = <span style="color:#f1fa8c">&#34;PSScriptAnalyzer&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;url&#34;</span>     = <span style="color:#f1fa8c">&#34;https://gitlab.com/gitlab-org/security-products/analyzers/secrets&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;vendor&#34;</span>  = [PSCustomObject]@{
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;name&#34;</span> = <span style="color:#f1fa8c">&#34;Microsoft&#34;</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;version&#34;</span> = <span style="color:#f1fa8c">&#34;1.21.0&#34;</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    vulnerabilities = <span style="color:#8be9fd;font-style:italic">$Collection</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$jsonObject</span> | <span style="color:#8be9fd;font-style:italic">ConvertTo-Json</span> -Depth 9 | <span style="color:#8be9fd;font-style:italic">Out-File</span> <span style="color:#f1fa8c">&#34;gl-sast-report.json&#34;</span>
+</span></span></code></pre></div><h2 id="install-psscriptanalyzer">Install PSScriptAnalyzer</h2>
+<blockquote>
+<p>This command installs the <code>PSScriptAnalyzer</code> module from the PowerShell Gallery for the current user.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">Install-Module</span> -Name PSScriptAnalyzer -Scope CurrentUser -Repository PSGallery -Force
+</span></span></code></pre></div><h2 id="initialize-variables">Initialize Variables</h2>
+<blockquote>
+<p>This initializes an empty array called <code>$Collection</code> to store vulnerability information.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$Collection</span> = @()
+</span></span></code></pre></div><h2 id="run-script-analyzer">Run Script Analyzer</h2>
+<blockquote>
+<p>This command runs <code>PSScriptAnalyzer</code> on all PowerShell script files in the current directory (excluding <code>test.ps1</code>) and stores the results in the <code>$vulnerabilities</code> variable.
+Iterate Through Vulnerabilities</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$vulnerabilities</span> = (<span style="color:#8be9fd;font-style:italic">Get-ChildItem</span> -Path . -Exclude test.ps1 | <span style="color:#8be9fd;font-style:italic">Invoke-ScriptAnalyzer</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#ff79c6">for</span> (<span style="color:#8be9fd;font-style:italic">$i</span> = 0; <span style="color:#8be9fd;font-style:italic">$i</span> <span style="color:#ff79c6">-lt</span> <span style="color:#8be9fd;font-style:italic">$vulnerabilities</span>.Count; <span style="color:#8be9fd;font-style:italic">$i</span>++) {
+</span></span></code></pre></div><p>This starts a loop to iterate through the detected vulnerabilities.</p>
+<h2 id="create-vulnerability-object">Create Vulnerability Object</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$vulnerability</span> = [PSCustomObject]@{ ... }
+</span></span></code></pre></div><p>Inside the loop, a custom object is created to represent each vulnerability. The object includes fields such as ID, name, severity, location, identifiers, and scanner information. Severity is also mapped from &lsquo;Error&rsquo;, &lsquo;Warning&rsquo;, and &lsquo;Information&rsquo; to &lsquo;Critical&rsquo;, &lsquo;Low&rsquo;, and &lsquo;Info&rsquo;, respectively.</p>
+<h2 id="add-vulnerability-to-collection">Add Vulnerability to Collection</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$Collection</span> += <span style="color:#8be9fd;font-style:italic">$vulnerability</span>
+</span></span></code></pre></div><p>Each vulnerability object is added to the <code>$Collection</code> array.</p>
+<h2 id="create-json-report">Create JSON Report</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$jsonObject</span> = [PSCustomObject]@{ ... }
+</span></span></code></pre></div><p>After processing all vulnerabilities, a JSON report object is created. It includes version information, scan details, and the list of vulnerabilities from the <code>$Collection</code> array.
+Convert to JSON and Save</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$jsonObject</span> | <span style="color:#8be9fd;font-style:italic">ConvertTo-Json</span> -Depth 9 | <span style="color:#8be9fd;font-style:italic">Out-File</span> <span style="color:#f1fa8c">&#34;gl-sast-report.json&#34;</span>
+</span></span></code></pre></div><p>The report object is converted to JSON with a depth of 9 (usually sufficient), and the JSON content is saved to a file named &ldquo;gl-sast-report.json.&rdquo;
+When you run this PowerShell script, it will analyze your PowerShell scripts using <code>PSScriptAnalyzer</code> module , convert the results into a GitLab-compatible SAST report in JSON format, and save it to the specified file. You can then use this report to integrate security analysis into your GitLab CI/CD pipelines.</p>
+<h1 id="gitlab-pipeline">GitLab Pipeline</h1>
+<blockquote>
+<p>.gitlab-ci.yml</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#ff79c6">image</span>: mcr.microsoft.com/powershell
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">stages</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f1fa8c">&#34;ps_sast&#34;</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ps_sast</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">stage</span>: ps_sast
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">script</span>: 
+</span></span><span style="display:flex;"><span>    - pwsh -f &#34;.\test.ps1&#34;
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">artifacts</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">reports</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">sast</span>: gl-sast-report.json
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">paths</span>:
+</span></span><span style="display:flex;"><span>      - gl-sast-report.json
+</span></span></code></pre></div><h1 id="output">Output</h1>
+<p><img src="/2023/09/OP-2.png" alt="Output"></p>
+<h1 id="references">References</h1>
+<ul>
+<li><a href="https://docs.gitlab.com/ee/user/application_security/sast/" target="_blank" rel="noopener">GitLab SAST</a>
+</li>
+<li><a href="https://docs.gitlab.com/ee/user/application_security/sast/analyzers.html" target="_blank" rel="noopener">SAST Analyzers</a>
+</li>
+<li><a href="https://docs.gitlab.com/ee/user/application_security/sast/analyzers.html#custom-analyzers" target="_blank" rel="noopener">Custom Analyzers</a>
+</li>
+<li><a href="https://github.com/PowerShell/PSScriptAnalyzer" target="_blank" rel="noopener">PSScriptAnalyzer</a>
+</li>
+<li><a href="https://learn.microsoft.com/en-us/powershell/utility-modules/psscriptanalyzer/overview?view=ps-modules" target="_blank" rel="noopener">Learn PSScriptAnalyzer</a>
+</li>
+<li><a href="https://learn.microsoft.com/en-us/powershell/utility-modules/psscriptanalyzer/create-custom-rule?view=ps-modules" target="_blank" rel="noopener">PSScriptAnalyzer Custom Rules</a>
+</li>
+</ul>
+
+
+</article><div class="bg-blue-100 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2">Social Networking</div>
+      <p class="opacity-60">Let us stay connected to learn, share and grow!</p>
+    </div>
+
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
+      
+
+      
+      <li>
+        <a
+          href="https://twitter.com/chendrayanv"
+          target="_blank"
+          rel="noopener"
+          aria-label="Twitter"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"
+            />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <li>
+        <a
+          href="https://linkedin.com/in/chendrayanv"
+          target="_blank"
+          rel="noopener"
+          aria-label="LinkedIn"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <rect x="4" y="4" width="16" height="16" rx="2" />
+            <line x1="8" y1="11" x2="8" y2="16" />
+            <line x1="8" y1="8" x2="8" y2="8.01" />
+            <line x1="12" y1="16" x2="12" y2="11" />
+            <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <li>
+        <a
+          href=""
+          target="_blank"
+          rel="noopener"
+          aria-label="GitHub"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+            />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+    </ul>
+  </div>
+</div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    Copyright © 2021 - Howdy, Kloudy! · All rights reserved
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+<div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden">
+  <div class="container max-w-3xl mx-auto p-12">
+    <div class="relative">
+      <div class="my-4 text-center text-2xl font-bold">Search</div>
+
+      <span class="p-2 absolute right-0 top-0 cursor-pointer close-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </span>
+    </div>
+
+    <input type="search" class="py-2 px-3 w-full dark:text-black border dark:border-transparent"
+      placeholder="Enter search query" />
+
+    <div class="search-results text-lg font-medium my-4 hidden">Results</div>
+    <ul class="search-list my-2">
+
+    </ul>
+
+    <div class="no-results text-center my-8 hidden">
+      <div class="text-xl font-semibold mb-2">No results found</div>
+      <p class="font-light text-sm">Try adjusting your search query</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="/js/scripts.min.js"></script>
+
+
+
+
+
+
+<script>
+  
+  const darkmode = document.querySelector('.toggle-dark-mode');
+  function toggleDarkMode() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkmode', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkmode', 'dark')
+    }
+  }
+  if (darkmode) {
+    darkmode.addEventListener('click', toggleDarkMode);
+  }
+
+  const darkStorage = localStorage.getItem('darkmode');
+  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!darkStorage && isBrowserDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  if (darkStorage && darkStorage === 'dark') {
+    toggleDarkMode();
+  }
+</script>
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
+</body>
+</html>

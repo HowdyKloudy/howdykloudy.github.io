@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="/favicon.ico">
+
+  <title>
+  Dapr state store demonstration using Minikube with a PowerShell app - Howdy,Kloudy!
+  </title>
+  <meta name="description" content="this is one part of a microservice application I am building…" />
+  <meta name="author" content="Chendrayan Venkatesan" />
+  <meta name="generator" content="Hugo 0.105.0"><link
+    rel="stylesheet"
+    href="__h_pp_l1_1_Permalink__e="
+    integrity="__h_pp_l1_1_Data.Integrity__e="
+  />
+  
+  
+
+  <meta property="og:title" content="Dapr state store demonstration using Minikube with a PowerShell app" />
+<meta property="og:description" content="this is one part of a microservice application I am building…" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/dapr-state-store-demonstration-using-minikube-with-a-powershell-app/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2023-01-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-19T00:00:00+00:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Dapr state store demonstration using Minikube with a PowerShell app"/>
+<meta name="twitter:description" content="this is one part of a microservice application I am building…"/>
+
+  <meta itemprop="name" content="Dapr state store demonstration using Minikube with a PowerShell app">
+<meta itemprop="description" content="this is one part of a microservice application I am building…"><meta itemprop="datePublished" content="2023-01-19T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-01-19T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1058">
+<meta itemprop="keywords" content="minikube,powershell,dapr," />
+
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="/" class="capitalize font-extrabold text-2xl">
+    
+    <img src="/howdy1.png" alt="Howdy,Kloudy!" class="h-8 max-w-full" />
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+    <li><a href="/blog">Blog</a></li>
+    
+    <li><a href="/page/about/">About</a></li>
+    
+    <li><a href="/tags">Tags</a></li>
+    
+
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="open-search inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+      </span>
+    </li>
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="toggle-dark-mode inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="5" x2="12" y2="5.01" />
+          <line x1="17" y1="7" x2="17" y2="7.01" />
+          <line x1="19" y1="12" x2="19" y2="12.01" />
+          <line x1="17" y1="17" x2="17" y2="17.01" />
+          <line x1="12" y1="19" x2="12" y2="19.01" />
+          <line x1="7" y1="17" x2="7" y2="17.01" />
+          <line x1="5" y1="12" x2="5" y2="12.01" />
+          <line x1="7" y1="7" x2="7" y2="7.01" />
+        </svg>
+      </span>
+    </li>
+    
+  </ul>
+</header>
+<main class="flex-1">
+
+
+
+
+<div class="relative max-w-5xl mx-auto px-4">
+  <img src="/2023/01/container-new.jpg" class="rounded-lg shadow-sm w-full object-contain" />
+  
+  <div
+    class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+    
+  
+    January 19, 2023
+  
+
+
+  </div>
+  
+</div>
+
+
+<article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+  <h1 class="text-2xl font-bold mb-2">Dapr state store demonstration using Minikube with a PowerShell app</h1>
+  
+  <h5 class="text-sm flex items-center flex-wrap">
+    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <rect x="4" y="5" width="16" height="16" rx="2" />
+      <line x1="16" y1="3" x2="16" y2="7" />
+      <line x1="8" y1="3" x2="8" y2="7" />
+      <line x1="4" y1="11" x2="20" y2="11" />
+      <rect x="8" y="15" width="2" height="2" />
+    </svg>
+    Posted on 
+  
+    January 19, 2023
+  
+
+
+    
+    &nbsp;&bull;&nbsp;
+    
+    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <circle cx="12" cy="12" r="9" />
+      <polyline points="12 7 12 12 15 15" />
+    </svg>
+    5&nbsp;minutes
+    &nbsp;&bull;
+    <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+      <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+      <line x1="3" y1="6" x2="3" y2="19" />
+      <line x1="12" y1="6" x2="12" y2="19" />
+      <line x1="21" y1="6" x2="21" y2="19" />
+    </svg>
+
+    1058&nbsp;words
+
+    &nbsp;
+    <div class="views">
+      <span class="views">
+        <img src="https://visitor-badge.glitch.me/badge?page_id=%2fblog%2fdapr-state-store-demonstration-using-minikube-with-a-powershell-app%2f" alt="Views" />
+      </span>
+    </div>
+    
+    
+    
+  </h5>
+  
+
+  <details id="TableOfContents" class="px-4 mt-4 bg-gray-100 dark:bg-gray-700 rounded toc">
+    <summary class="flex items-center font-bold py-2 px-4 cursor-pointer justify-between select-none text-black dark:text-white">
+      <span>Table of contents</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <polyline points="6 9 12 15 18 9"></polyline>
+     </svg>
+    </summary>
+
+    <ul class="mt-2 pb-4">
+        
+
+        
+        <li>
+        <a href="#introduction">Introduction</a>
+        
+
+        
+        <ul>
+            <ul>
+            <li>
+        <a href="#disclaimer">Disclaimer</a>
+        
+
+        
+        </li><li>
+        <a href="#prerequisites">Prerequisites</a>
+        
+
+        
+        </li></ul>
+          <li>
+        <a href="#demo-use-case">Demo Use Case</a>
+        
+
+        
+        </li><li>
+        <a href="#solution">Solution</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#project-scaffolding">Project Scaffolding</a>
+        
+
+        
+        </li><li>
+        <a href="#how-does-the-state-store-component-work">How does the state store component work?</a>
+        
+
+        
+        </li><li>
+        <a href="#telegram-api-for-sending-messages">Telegram API for sending messages</a>
+        
+
+        
+        </li><li>
+        <a href="#get-on-action">Get on Action</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#create-a-local-registry">Create a local registry</a>
+        
+
+        
+        </li><li>
+        <a href="#build--tag-a-image">Build &amp; Tag a Image</a>
+        
+
+        
+        </li><li>
+        <a href="#push-the-image-to-the-local-registry">Push the image to the local registry</a>
+        
+
+        
+        </li><li>
+        <a href="#magic">Magic</a>
+        
+
+        
+        </li></ul>
+      </li></ul>
+      </li><li>
+        <a href="#summary">Summary</a>
+        </li></ul>
+    </li></ul>
+  </details>
+
+  <h1 id="introduction">Introduction</h1>
+<p>This blog post is a part of the feature I added to my web app built using PowerShell. I couldn’t hold the excitement. So, the share is not a minimum viable product but an idea to show a case running a Dapr as a sidecar in a pod. In my last blog post, I shared my understanding of Dockerizing full-stack application(s) built using PowerShell and ran using Docker-Compose and then over a Minikube. It works fine, and no complex steps are involved in it. Now, I need to introduce Dapr to simplify the state store management. How? We remove the SimplySQL module and enable Dapr as a Sidecar to run inside the pod. We use the Dapr state store component to insert the records into the Azure Table Storage.</p>
+<p>I appreciate your time and recorded the demo. Feel free to share your comments and feedback to improvise the content are most welcome</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/fmy0wMgjtl4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h3 id="disclaimer">Disclaimer</h3>
+<ul>
+<li>This blog post is the output of my learning on Docker, MySQL, docker-compose, and MiniKube.</li>
+<li>I am an automation engineer with a decent experience in the cloud, not a software developer.</li>
+<li>We don’t talk about Pode, PSHTML &amp; SimplySQL (PowerShell Modules).</li>
+<li>There is a big room for improvement. Consider this blog post as a first step to dockerize the PowerShell app to run with docker-compose and then on Minikube.</li>
+</ul>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>Dapr CLI</li>
+<li>Docker Desktop for Windows</li>
+<li>PowerShell
+<ul>
+<li>Pode</li>
+<li>PSHTML</li>
+</ul>
+</li>
+<li>MetroUI (Fontend toolkit)</li>
+<li>Minikube</li>
+<li>Kubectl (optional)</li>
+</ul>
+<h2 id="demo-use-case">Demo Use Case</h2>
+<ul>
+<li>Let attendees fill in a form to register for an event.</li>
+<li>Upon submitting the form
+<ul>
+<li>Store the information in the Azure Table.</li>
+<li>Send a notification via Telegram.</li>
+<li>Web Response to convey thanks note for the registration.</li>
+</ul>
+</li>
+</ul>
+<h2 id="solution">Solution</h2>
+<p>The abstract of our simple architecture is below</p>
+<p><img src="/2023/01/HLD-MS.png" alt="img"></p>
+<h3 id="project-scaffolding">Project Scaffolding</h3>
+<p>📦howdykloudy<br>
+┣ 📂app<br>
+┃ ┣ 📂views<br>
+┃ ┃ ┣ 📜event-registration-response.ps1<br>
+┃ ┃ ┣ 📜event-registration.ps1<br>
+┃ ┃ ┗ 📜home.ps1<br>
+┃ ┣ 📜app.ps1<br>
+┃ ┗ 📜Dockerfile<br>
+┣ 📂components<br>
+┃ ┗ 📜statestore.yaml<br>
+┣ 📂manifest<br>
+┃ ┗ 📜deployment.yaml<br>
+┗ 📜README.md</p>
+<ul>
+<li><code>app.ps1</code> is the entry point to start the web server</li>
+<li><code>home.ps1</code> is the landing page. (home page)</li>
+<li><code>event-registration.ps1</code> is the Get route to show the event registration form.</li>
+<li><code>event-registration-response.ps1</code> is the post route for the state store (insert form information into the Azure Table Storage); send a telegram message and a web response (UI) to share a thank note for the registration.</li>
+</ul>
+<p>Please note that I don’t have a script/code to write the information to the state store. Instead, I have a state store component file defined in <code>statestore.yaml</code> file under the <code>components</code> directory. Below is the definition of the state store component. Yes, I have secrets in it. In my upcoming blogs, I plan to cover the secrets management in Dapr</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#ff79c6">apiVersion</span>: dapr.io/v1alpha1
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">kind</span>: Component
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">name</span>: eventregistrationresponse
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">type</span>: state.azure.tablestorage
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">version</span>: v1
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: accountName
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">value</span>: {STORAGE-ACCOUNT-NAME}
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: accountKey
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">value</span>: {STORAGE-ACCOUNT-KEY}
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: tableName
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">value</span>: {TABLE-NAME}
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: cosmosDbMode
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">value</span>: <span style="color:#ff79c6">true</span>
+</span></span></code></pre></div><p>replace the values for <code>{STORAGE-ACCOUNT-NAME}</code> , <code>{STORAGE-ACCOUNT-KEY}</code> and <code>{TABLE-NAME}</code></p>
+<h3 id="how-does-the-state-store-component-work">How does the state store component work?</h3>
+<p>The state store component name is <code>eventregistrationresponse</code>. I have a route created with the same name (to avoid confusion), which invokes the REST API, as shown below</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">Invoke-RestMethod</span> -Uri <span style="color:#f1fa8c">&#34;http://localhost:3500/v1.0/state/eventregistrationresponse&#34;</span> -Method Post -Body $(<span style="color:#8be9fd;font-style:italic">$Body</span>) -ContentType <span style="color:#f1fa8c">&#39;application/json&#39;</span> 
+</span></span></code></pre></div><p>The <a href="https://docs.dapr.io/developing-applications/building-blocks/state-management/state-management-overview/" target="_blank" rel="noopener">documentation</a>
+ gives more information on state management.</p>
+<h3 id="telegram-api-for-sending-messages">Telegram API for sending messages</h3>
+<p>I need this feature, but I haven’t used the full feature part. Over here, I am showing a snippet to send a message when the registration form is submitted.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$Telegramtoken</span> = <span style="color:#f1fa8c">&#34;{API-TOKEN}&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$Telegramchatid</span> = <span style="color:#f1fa8c">&#34;{CHAT-ID}&#34;</span>
+</span></span><span style="display:flex;"><span>[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">Invoke-RestMethod</span> -Uri <span style="color:#f1fa8c">&#34;https://api.telegram.org/bot</span>$(<span style="color:#8be9fd;font-style:italic">$Telegramtoken</span>)<span style="color:#f1fa8c">/sendMessage?chat_id=</span>$(<span style="color:#8be9fd;font-style:italic">$Telegramchatid</span>)<span style="color:#f1fa8c">&amp;text=</span>$(<span style="color:#8be9fd;font-style:italic">$Body</span>)<span style="color:#f1fa8c">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">Write-PodeHost</span> -Object <span style="color:#f1fa8c">&#34;sending telegram notification...&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">catch</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">Write-PodeHost</span> -Object $(<span style="color:#8be9fd;font-style:italic">$_</span>.Exception.Response)
+</span></span><span style="display:flex;"><span>} 
+</span></span></code></pre></div><blockquote>
+<p>Follow the <a href="https://polarclouds.co.uk/send-telegram-from-powershell/" target="_blank" rel="noopener">link</a>
+ to get the API token and chat ID.</p>
+</blockquote>
+<h3 id="get-on-action">Get on Action</h3>
+<p>First, let me show you the steps to run the solution locally.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">PS </span>D:\projects\howdykloudy&gt; dapr uninstall
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">PS </span>D:\projects\howdykloudy&gt; dapr init --runtime-version 1.0.0-rc.3
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">PS </span>D:\projects\howdykloudy&gt; dapr run --log-level debug --app-id <span style="color:#f1fa8c">&#39;eventregistration&#39;</span> --app-port 3000 --dapr-http-port 3500 --dapr-grpc-port 60002 --components-path .\components -- pwsh .\app\app.ps1
+</span></span></code></pre></div><ul>
+<li><code>dapr uninstall</code> - Remove any previous configuration to be on the safer side.</li>
+<li><code>dapr init --runtime-version 1.0.0-rc.3</code> - Initialize the Dapr with the runtime version. I couldn’t make it work without it.</li>
+<li><code>dapr run --log-level debug --app-id 'eventregistration' --app-port 3000 --dapr-http-port 3500 --dapr-grpc-port 60002 --components-path .\components -- pwsh .\app\app.ps1</code> - Run the application in debug mode to see the message on the host; the app id is your choice, the app port is the same as the port defined in your application, the dapr HTTP port we use for the state management API and also the gRPC port.</li>
+</ul>
+<p>Without a doubt, I see the result!</p>
+<p><img src="/2023/01/State-Store.png" alt="img"></p>
+<p>Now let us take a few more steps to run the app on Minikube. For this, I have taken a few baby steps</p>
+<h4 id="create-a-local-registry">Create a local registry</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">PS </span>D:\projects\howdykloudy&gt; docker run -d -p 5000:5000 --restart=always --name registry registry:2
+</span></span></code></pre></div><h4 id="build--tag-a-image">Build &amp; Tag a Image</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">PS </span>D:\projects\howdykloudy\app&gt; docker build -t localhost:5000/podeux:v1 .
+</span></span></code></pre></div><h4 id="push-the-image-to-the-local-registry">Push the image to the local registry</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">PS </span>D:\projects\howdykloudy\app&gt; docker push localhost:5000/podeux:v1
+</span></span></code></pre></div><h4 id="magic">Magic</h4>
+<p>Gear up to run the Minikube, and the below snippet does the magic.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>minikube <span style="color:#8be9fd;font-style:italic">start
+</span></span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic"></span>dapr init --runtime-version 1.0.0-rc.3 --kubernetes 
+</span></span><span style="display:flex;"><span>minikube image load localhost:5000/podeux:v1
+</span></span></code></pre></div><ul>
+<li><code>minikube start</code> - is to start the Minikube cluster</li>
+<li><code>dapr init --runtime-version 1.0.0-rc.3 --kubernetes</code> - initialize the dapr to run on Minikube cluster</li>
+<li><code>minikube image load localhost:5000/podeux:v1</code> - load the image to Minikube (The image we pushed to the local registry - podeux:v1)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>kubectl apply <span style="color:#ff79c6">-f</span> .\components\statestore.yaml
+</span></span><span style="display:flex;"><span>kubectl apply <span style="color:#ff79c6">-f</span> .\manifest\deployment.yaml 
+</span></span><span style="display:flex;"><span>kubectl rollout status deploy/podeux
+</span></span><span style="display:flex;"><span>kubectl <span style="color:#8be9fd;font-style:italic">port-forward</span> service/podeux 3000:3000
+</span></span></code></pre></div><ul>
+<li><code>kubectl apply -f .\components\statestore.yaml</code> - Creates the state store</li>
+<li><code>kubectl apply -f .\manifest\deployment.yaml </code> - Creates deployment and service</li>
+<li><code>kubectl rollout status deploy/podeux</code> - Kubernetes deployments are asynchronous, meaning you&rsquo;ll need to wait for the deployment to complete before moving on to the next steps. You can do so with the following command:</li>
+<li><code>kubectl port-forward service/podeux 3000:3000</code> - There are several different ways to access a Kubernetes service, depending on which platform you are using. Port forwarding is one consistent way to access a service, whether the workload is hosted locally or on a cloud Kubernetes provider like AKS.</li>
+</ul>
+<p><img src="/2023/01/TM.png" alt="TM"></p>
+<h2 id="summary">Summary</h2>
+<p>Thanks, it took 2 hours for me to connect the dots and make it happen. I hope this may help someone there to amalgamate the PowerShell with Dapr and run a microservice application on a Minikube cluster. Yes, we are there! Soon we will spin up our app on the cloud. Stay tuned.</p>
+
+
+</article><div class="bg-blue-100 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2">Social Networking</div>
+      <p class="opacity-60">Let us stay connected to learn, share and grow!</p>
+    </div>
+
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
+      
+
+      
+      <li>
+        <a
+          href="https://twitter.com/chendrayanv"
+          target="_blank"
+          rel="noopener"
+          aria-label="Twitter"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"
+            />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <li>
+        <a
+          href="https://linkedin.com/in/chendrayanv"
+          target="_blank"
+          rel="noopener"
+          aria-label="LinkedIn"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <rect x="4" y="4" width="16" height="16" rx="2" />
+            <line x1="8" y1="11" x2="8" y2="16" />
+            <line x1="8" y1="8" x2="8" y2="8.01" />
+            <line x1="12" y1="16" x2="12" y2="11" />
+            <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <li>
+        <a
+          href=""
+          target="_blank"
+          rel="noopener"
+          aria-label="GitHub"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+            />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+    </ul>
+  </div>
+</div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    Copyright © 2021 - Howdy, Kloudy! · All rights reserved
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+<div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden">
+  <div class="container max-w-3xl mx-auto p-12">
+    <div class="relative">
+      <div class="my-4 text-center text-2xl font-bold">Search</div>
+
+      <span class="p-2 absolute right-0 top-0 cursor-pointer close-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </span>
+    </div>
+
+    <input type="search" class="py-2 px-3 w-full dark:text-black border dark:border-transparent"
+      placeholder="Enter search query" />
+
+    <div class="search-results text-lg font-medium my-4 hidden">Results</div>
+    <ul class="search-list my-2">
+
+    </ul>
+
+    <div class="no-results text-center my-8 hidden">
+      <div class="text-xl font-semibold mb-2">No results found</div>
+      <p class="font-light text-sm">Try adjusting your search query</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="/js/scripts.min.js"></script>
+
+
+
+
+
+
+<script>
+  
+  const darkmode = document.querySelector('.toggle-dark-mode');
+  function toggleDarkMode() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkmode', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkmode', 'dark')
+    }
+  }
+  if (darkmode) {
+    darkmode.addEventListener('click', toggleDarkMode);
+  }
+
+  const darkStorage = localStorage.getItem('darkmode');
+  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!darkStorage && isBrowserDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  if (darkStorage && darkStorage === 'dark') {
+    toggleDarkMode();
+  }
+</script>
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
+</body>
+</html>

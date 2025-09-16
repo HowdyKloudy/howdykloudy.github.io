@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="/favicon.ico">
+
+  <title>
+  Dapr Secret Store Component Demonstration Using Minikube With a PowerShell App - Howdy,Kloudy!
+  </title>
+  <meta name="description" content="security is everybody&#39;s business..." />
+  <meta name="author" content="Chendrayan Venkatesan" />
+  <meta name="generator" content="Hugo 0.105.0"><link
+    rel="stylesheet"
+    href="__h_pp_l1_1_Permalink__e="
+    integrity="__h_pp_l1_1_Data.Integrity__e="
+  />
+  
+  
+
+  <meta property="og:title" content="Dapr Secret Store Component Demonstration Using Minikube With a PowerShell App" />
+<meta property="og:description" content="security is everybody&#39;s business..." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/dapr-secret-store-component-demonstration-using-minikube-with-a-powershell-app/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2023-01-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-29T00:00:00+00:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Dapr Secret Store Component Demonstration Using Minikube With a PowerShell App"/>
+<meta name="twitter:description" content="security is everybody&#39;s business..."/>
+
+  <meta itemprop="name" content="Dapr Secret Store Component Demonstration Using Minikube With a PowerShell App">
+<meta itemprop="description" content="security is everybody&#39;s business..."><meta itemprop="datePublished" content="2023-01-29T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-01-29T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1237">
+<meta itemprop="keywords" content="dapr,secret-store,minikube,Azure," />
+
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="/" class="capitalize font-extrabold text-2xl">
+    
+    <img src="/howdy1.png" alt="Howdy,Kloudy!" class="h-8 max-w-full" />
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+    <li><a href="/blog">Blog</a></li>
+    
+    <li><a href="/page/about/">About</a></li>
+    
+    <li><a href="/tags">Tags</a></li>
+    
+
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="open-search inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+      </span>
+    </li>
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="toggle-dark-mode inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="5" x2="12" y2="5.01" />
+          <line x1="17" y1="7" x2="17" y2="7.01" />
+          <line x1="19" y1="12" x2="19" y2="12.01" />
+          <line x1="17" y1="17" x2="17" y2="17.01" />
+          <line x1="12" y1="19" x2="12" y2="19.01" />
+          <line x1="7" y1="17" x2="7" y2="17.01" />
+          <line x1="5" y1="12" x2="5" y2="12.01" />
+          <line x1="7" y1="7" x2="7" y2="7.01" />
+        </svg>
+      </span>
+    </li>
+    
+  </ul>
+</header>
+<main class="flex-1">
+
+
+
+
+<div class="relative max-w-5xl mx-auto px-4">
+  <img src="/2023/01/Secure-Key.jpg" class="rounded-lg shadow-sm w-full object-contain" />
+  
+  <div
+    class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+    
+  
+    January 29, 2023
+  
+
+
+  </div>
+  
+</div>
+
+
+<article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+  <h1 class="text-2xl font-bold mb-2">Dapr Secret Store Component Demonstration Using Minikube With a PowerShell App</h1>
+  
+  <h5 class="text-sm flex items-center flex-wrap">
+    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <rect x="4" y="5" width="16" height="16" rx="2" />
+      <line x1="16" y1="3" x2="16" y2="7" />
+      <line x1="8" y1="3" x2="8" y2="7" />
+      <line x1="4" y1="11" x2="20" y2="11" />
+      <rect x="8" y="15" width="2" height="2" />
+    </svg>
+    Posted on 
+  
+    January 29, 2023
+  
+
+
+    
+    &nbsp;&bull;&nbsp;
+    
+    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <circle cx="12" cy="12" r="9" />
+      <polyline points="12 7 12 12 15 15" />
+    </svg>
+    6&nbsp;minutes
+    &nbsp;&bull;
+    <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+      <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+      <line x1="3" y1="6" x2="3" y2="19" />
+      <line x1="12" y1="6" x2="12" y2="19" />
+      <line x1="21" y1="6" x2="21" y2="19" />
+    </svg>
+
+    1237&nbsp;words
+
+    &nbsp;
+    <div class="views">
+      <span class="views">
+        <img src="https://visitor-badge.glitch.me/badge?page_id=%2fblog%2fdapr-secret-store-component-demonstration-using-minikube-with-a-powershell-app%2f" alt="Views" />
+      </span>
+    </div>
+    
+    
+    
+  </h5>
+  
+
+  <details id="TableOfContents" class="px-4 mt-4 bg-gray-100 dark:bg-gray-700 rounded toc">
+    <summary class="flex items-center font-bold py-2 px-4 cursor-pointer justify-between select-none text-black dark:text-white">
+      <span>Table of contents</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <polyline points="6 9 12 15 18 9"></polyline>
+     </svg>
+    </summary>
+
+    <ul class="mt-2 pb-4">
+        
+
+        
+        <li>
+        <a href="#introduction">Introduction</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#fix-the-gap-in-handling-secrets">Fix the gap in handling secrets</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#what-is-covered-in-this-blog-post">What is covered in this blog post?</a>
+        
+
+        
+        </li><li>
+        <a href="#about-the-secret-store-component">About the Secret Store Component</a>
+        
+
+        
+        </li><li>
+        <a href="#solution">Solution</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#azure-app-registration-with-certificate">Azure App Registration With Certificate</a>
+        
+
+        
+        </li><li>
+        <a href="#set-up-a-local-docker-registry">Set up a local Docker registry</a>
+        
+
+        
+        </li><li>
+        <a href="#docker-build--tag">Docker Build &amp; Tag</a>
+        
+
+        
+        </li><li>
+        <a href="#push-the-image-to-the-local-registry">Push the image to the local registry</a>
+        
+
+        
+        </li><li>
+        <a href="#work-with-minikube">Work with Minikube</a>
+        
+
+        
+        </li><li>
+        <a href="#explore-the-infrastructure">Explore the infrastructure</a>
+        
+
+        
+        </li><li>
+        <a href="#deploy-the-state-store-component">Deploy the state store component</a>
+        
+
+        
+        </li><li>
+        <a href="#deploy-the-app--service">Deploy the App &amp; Service</a>
+        
+
+        
+        </li><li>
+        <a href="#rollout">Rollout</a>
+        
+
+        
+        </li><li>
+        <a href="#expose-the-service">Expose the Service</a>
+        
+
+        
+        </li></ul>
+      </li><li>
+        <a href="#references">References</a>
+        
+
+        
+        </li><li>
+        <a href="#summary">Summary</a>
+        </li></ul>
+    </li></ul>
+    </li></ul>
+  </details>
+
+  <h1 id="introduction">Introduction</h1>
+<p>The content curation process for this blog post exhausted me, and the reason is a distraction. Read and enjoy the funny story! I made a lot of trial and error before sharing it with you all. My previous blog post discussed using Dapr on Minikube with a PowerShell app. You can refer to the link below to learn about the use case of state store component</p>
+<ul>
+<li><a href="https://howdykloudy.github.io/blog/dockerize-the-full-stack-application-built-using-powershellpode-pshml/" target="_blank" rel="noopener">Dockerize the Full-Stack application built using PowerShell (Pode &amp;amp; PSHTML)</a>
+</li>
+<li><a href="https://howdykloudy.github.io/blog/dapr-state-store-demonstration-using-minikube-with-a-powershell-app/" target="_blank" rel="noopener">Dapr state store demonstration using Minikube with a PowerShell app</a>
+</li>
+</ul>
+<h2 id="fix-the-gap-in-handling-secrets">Fix the gap in handling secrets</h2>
+<p>I hope you read my previous blogs. If not, it&rsquo;s okay! Here is the problem for which we get a fix.</p>
+<blockquote>
+<p>Secrets in the YAML are bad - Key Vault</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#ff79c6">apiVersion</span>: dapr.io/v1alpha1
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">kind</span>: Component
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">name</span>: azurekeyvault
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">type</span>: secretstores.azure.keyvault
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">version</span>: v1
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ff79c6">name</span>: vaultName
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">value</span>: <span style="color:#f1fa8c">&#34;kv-howdykloudy-dev&#34;</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ff79c6">name</span>: azureTenantId
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">value</span>: <span style="color:#f1fa8c">&#34;d15f83d0-ed59-4e08-925a-e7445f64efe8&#34;</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ff79c6">name</span>: azureClientId
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">value</span>: <span style="color:#f1fa8c">&#34;9d5b1b0c-4a87-45b1-a012-de2d83e81ce8&#34;</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ff79c6">name</span>: azureClientSecret
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">value</span>: <span style="color:#f1fa8c">&#34;{YOUR-SUPER-SECRET}&#34;</span>
+</span></span></code></pre></div><blockquote>
+<p>Secret Store</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#ff79c6">apiVersion</span>: dapr.io/v1alpha1
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">kind</span>: Component
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">name</span>: eventregistrationresponse
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">type</span>: state.azure.tablestorage
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">version</span>: v1
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: accountName
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">value</span>: {STORAGE-ACCOUNT-NAME}
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: accountKey
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">value</span>: {STORAGE-ACCOUNT-KEY}
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: tableName
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">value</span>: {TABLE-NAME}
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">name</span>: cosmosDbMode
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">value</span>: <span style="color:#ff79c6">true</span>    
+</span></span></code></pre></div><p>I have secrets in YAML and also in the app. How to handle it securely?</p>
+<p><img src="/2023/01/L3.png" alt="App Secrets"></p>
+<h3 id="what-is-covered-in-this-blog-post">What is covered in this blog post?</h3>
+<ul>
+<li>Remove the clear text credentials/secrets from the YAML file. Pass the parameters to authenticate with Azure table storage through the <strong>kubectl command line.</strong></li>
+<li>Securely access the application</li>
+<li>Store the app secrets in the <strong>Azure key vault</strong>. I have secrets that need for the application
+<ul>
+<li>For example, the telegram API key and chat ID to post the notification</li>
+</ul>
+</li>
+</ul>
+<p>I value your time and recorded the Dapr secret store component demo using Minikube with a PowerShell app. Feel free to share your comments and feedback to improvise the content are most welcome</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/zTp6Aj-2LJI" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h3 id="about-the-secret-store-component">About the Secret Store Component</h3>
+<p>The Dapr Secret Store component is a feature in Dapr that enables you to store, manage, and retrieve secrets, such as passwords, keys, and certificates, in a secure and scalable manner. The Dapr Secret Store component is designed to be used in a microservices architecture, allowing you to independently store and manage secrets for each microservice.</p>
+<p><strong>Here are some key features of the Dapr Secret Store component:</strong></p>
+<ul>
+<li>Decentralized: The Dapr Secret Store component is decentralized, meaning that secrets are stored and managed locally on each node in a microservices architecture which reduces the risk of data breaches and makes it easier to manage secrets in large and complex microservices environments.</li>
+<li><strong>Secure:</strong> The Dapr Secret Store component uses encryption and other security measures to protect secrets, ensuring that unauthorized parties cannot access them.</li>
+<li><strong>Scalable:</strong> The Dapr Secret Store component is designed to scale horizontally, meaning it can easily handle multiple secrets and quickly deploy them in large-scale microservices environments.</li>
+<li><strong>API-based:</strong> The Dapr Secret Store component provides a simple API that enables you to store, retrieve, and manage secrets in your microservices application. Your microservices can use this API to access secrets as needed.</li>
+<li><strong>Integration with other Dapr components:</strong> The Dapr Secret Store component integrates with other Dapr components, such as the Dapr Configuration component, allowing you to manage secrets and configuration settings in a centralized and consistent manner.</li>
+</ul>
+<h3 id="solution">Solution</h3>
+<p>This time, we only focus on running the PowerShell web application on the Minikube cluster and not locally! The image below depicts the high-level logical flow</p>
+<p><img src="/2023/01/HLD-MS.png" alt="high-level"></p>
+<p>Deploy a pod with a web application and inject a Dapr sidecar. The Dapr sidecar&rsquo;s responsibility is to securely retrieve secrets from the Azure Key vault and communicate with Azure table storage. I know it&rsquo;s much theory. Let me walk through the steps</p>
+<h4 id="azure-app-registration-with-certificate">Azure App Registration With Certificate</h4>
+<p>You can use the existing service principal with a certificate or secret key. Follow the <a href="https://learn.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli" target="_blank" rel="noopener">steps</a>
+ if you need a new SPN with a certificate.</p>
+<blockquote>
+<p>You can use Az CLI, PowerShell or REST API.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#6272a4"># Create a resource group</span>
+</span></span><span style="display:flex;"><span>az <span style="color:#8be9fd;font-style:italic">group </span>create -n <span style="color:#f1fa8c">&#34;{RESOURCE-GROUP}&#34;</span> --location <span style="color:#f1fa8c">&#34;{LOCATION}&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Create a key vault</span>
+</span></span><span style="display:flex;"><span>az keyvault create --location <span style="color:#f1fa8c">&#34;{LOCATION}&#34;</span> --name <span style="color:#f1fa8c">&#34;{KEY-VAULT-NAME}&#34;</span> --resource-group <span style="color:#f1fa8c">&#34;{RESOURCE-GROUP}&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Create a service principal and configure its access to Azure resources.</span>
+</span></span><span style="display:flex;"><span>az ad <span style="color:#8be9fd;font-style:italic">sp create-for</span>-rbac --name <span style="color:#f1fa8c">&#34;{SPN-NAME}&#34;</span> --create-cert --cert <span style="color:#f1fa8c">&#34;{CERT-NAME}&#34;</span> --keyvault <span style="color:#f1fa8c">&#34;{KEY-VAULT-NAME}&#34;</span> --skip-assignment --years 1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Set Key Vault Policy</span>
+</span></span><span style="display:flex;"><span>az keyvault <span style="color:#8be9fd;font-style:italic">set-policy</span> --name <span style="color:#f1fa8c">&#34;{KEY-VAULT-NAME}&#34;</span> --object-id <span style="color:#f1fa8c">&#34;{SPN-OBJECT-ID}&#34;</span> --secret-permissions get
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Download and store the PFX in a secure location</span>
+</span></span><span style="display:flex;"><span>az keyvault secret download --vault-name <span style="color:#f1fa8c">&#34;{KEY-VAULT-NAME}&#34;</span> --name <span style="color:#f1fa8c">&#34;{CERT-NAME}&#34;</span> --encoding base64 -<span style="color:#ff79c6">-file</span> <span style="color:#f1fa8c">&#34;{CERT-NAME}.pfx&#34;</span>
+</span></span></code></pre></div><h4 id="set-up-a-local-docker-registry">Set up a local Docker registry</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>docker run -d -p 5000:5000 --restart=always --name registry registry:2
+</span></span></code></pre></div><h4 id="docker-build--tag">Docker Build &amp; Tag</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>docker build -t localhost:5000/podeux:v1 . --no-cache
+</span></span></code></pre></div><h4 id="push-the-image-to-the-local-registry">Push the image to the local registry</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>docker push localhost:5000/podeux:v1
+</span></span></code></pre></div><h4 id="work-with-minikube">Work with Minikube</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#6272a4"># Start the Minikube</span>
+</span></span><span style="display:flex;"><span>minikube <span style="color:#8be9fd;font-style:italic">start </span>--vm-driver=hyperv
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Create a secret using kubectl - This is used in kubernetes</span>
+</span></span><span style="display:flex;"><span>kubectl create secret generic <span style="color:#8be9fd;font-style:italic">dapr-cert</span> --from<span style="color:#ff79c6">-file</span>=daprpcert.pfx
+</span></span><span style="display:flex;"><span>kubectl create secret generic tableparameter --from-literal=accountName=<span style="color:#f1fa8c">&#39;{STORAGE-ACCOUNT-NAME}&#39;</span> --from-literal=accountKey=<span style="color:#f1fa8c">&#39;{YOUR-STORAGE-ACCOUNT-KEY}&#39;</span> --from-literal=tableName=<span style="color:#f1fa8c">&#39;{TABLE-NAME}&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Initiate the Dapr inside the Minikube cluster (kubernetes)</span>
+</span></span><span style="display:flex;"><span>dapr init --runtime-version 1.0.0-rc.3 --kubernetes 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Load the image (local registry)</span>
+</span></span><span style="display:flex;"><span>minikube image load localhost:5000/podeux:v1 --overwrite=true
+</span></span></code></pre></div><h4 id="explore-the-infrastructure">Explore the infrastructure</h4>
+<h5 id="list-the-pods">List the pods</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>kubectl get pods -A
+</span></span></code></pre></div><h5 id="access-the-dashboard">Access the dashboard</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#6272a4"># access the minikube dashboard</span>
+</span></span><span style="display:flex;"><span>minikube dashboard
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># access the dapr dashboard</span>
+</span></span><span style="display:flex;"><span>dapr dashboard -k
+</span></span></code></pre></div><h4 id="deploy-the-state-store-component">Deploy the state store component</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#ff79c6">apiVersion</span>: dapr.io/v1alpha1
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">kind</span>: Component
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">name</span>: azurekeyvault
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">namespace</span>: default
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">type</span>: secretstores.azure.keyvault
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">version</span>: v1
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ff79c6">name</span>: vaultName
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">value</span>: kv-dapr-dev
+</span></span><span style="display:flex;"><span>  - <span style="color:#ff79c6">name</span>: spnTenantId
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">value</span>: <span style="color:#f1fa8c">&#34;{TENANT-ID}&#34;</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ff79c6">name</span>: spnClientId
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">value</span>: <span style="color:#f1fa8c">&#34;{CLIENT-ID}&#34;</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ff79c6">name</span>: spnCertificate
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">secretKeyRef</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">name</span>: dapr-cert
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">key</span>:  daprpcert.pfx
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">auth</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">secretStore</span>: kubernetes  
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>kubectl apply <span style="color:#ff79c6">-f</span> .\components\azurekeyvault.yaml
+</span></span></code></pre></div><h4 id="deploy-the-app--service">Deploy the App &amp; Service</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-YAML" data-lang="YAML"><span style="display:flex;"><span><span style="color:#ff79c6">kind</span>: Service
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">apiVersion</span>: v1
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">name</span>: podeux
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">app</span>: podeux
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">app</span>: podeux
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">ports</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ff79c6">port</span>: <span style="color:#bd93f9">3000</span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">kind</span>: Deployment
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">apiVersion</span>: apps/v1
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">name</span>: podeux
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">app</span>: podeux
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">replicas</span>: <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">app</span>: podeux
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">template</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">metadata</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">labels</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">app</span>: podeux
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">annotations</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">dapr.io/enabled</span>: <span style="color:#f1fa8c">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">dapr.io/app-id</span>: <span style="color:#f1fa8c">&#34;podeux&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">dapr.io/app-port</span>: <span style="color:#f1fa8c">&#34;3000&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">dapr.io/log-as-json</span>: <span style="color:#f1fa8c">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">dapr.io/enable-debug</span>: <span style="color:#f1fa8c">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">containers</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#ff79c6">name</span>: podeux
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">image</span>: localhost:5000/podeux:v1
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">imagePullPolicy</span>: Never
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">ports</span>:
+</span></span><span style="display:flex;"><span>            - <span style="color:#ff79c6">containerPort</span>: <span style="color:#bd93f9">3000</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">resources</span>: {}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>kubectl apply <span style="color:#ff79c6">-f</span> .\manifest\deployment.yaml
+</span></span></code></pre></div><h4 id="rollout">Rollout</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#6272a4"># To see the Deployment rollout status, run kubectl rollout status</span>
+</span></span><span style="display:flex;"><span>kubectl rollout status deploy/podeux
+</span></span></code></pre></div><h4 id="expose-the-service">Expose the Service</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#6272a4"># Access the app through port 3000 (both app &amp; target port in 3000)</span>
+</span></span><span style="display:flex;"><span>kubectl <span style="color:#8be9fd;font-style:italic">port-forward</span> service/podeux 3000:3000
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Alternative - Access the app through port 3500 (localhost)</span>
+</span></span><span style="display:flex;"><span>kubectl <span style="color:#8be9fd;font-style:italic">port-forward</span> service/podeux 3500:3000
+</span></span></code></pre></div><p>Now, access the application from your local host - http://localhost:3000</p>
+<p>Click on telegram button, the below code does the magic (access the secrets from KV through the Dapr API)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#6272a4">#region - Telegram</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">Add-PodeRoute</span> -Method Get -Path <span style="color:#f1fa8c">&#39;/telegram&#39;</span> -ScriptBlock {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">$Telegramtoken</span> = (<span style="color:#8be9fd;font-style:italic">Invoke-RestMethod</span> -Uri <span style="color:#f1fa8c">&#39;http://localhost:3500/v1.0/secrets/azurekeyvault/Telegramtoken&#39;</span> -ContentType <span style="color:#f1fa8c">&#39;application/json&#39;</span>).Telegramtoken
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">$Telegramchatid</span> = (<span style="color:#8be9fd;font-style:italic">Invoke-RestMethod</span> -Uri <span style="color:#f1fa8c">&#39;http://localhost:3500/v1.0/secrets/azurekeyvault/Telegramchatid&#39;</span> -ContentType <span style="color:#f1fa8c">&#39;application/json&#39;</span>).Telegramchatid
+</span></span><span style="display:flex;"><span>    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">$Body</span> = [PSCustomObject]@{
+</span></span><span style="display:flex;"><span>            Message = <span style="color:#f1fa8c">&#39;Secure Message Test&#39;</span>
+</span></span><span style="display:flex;"><span>        } | <span style="color:#8be9fd;font-style:italic">ConvertTo-Json</span> -Compress
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">Invoke-RestMethod</span> -Uri <span style="color:#f1fa8c">&#34;https://api.telegram.org/bot</span>$(<span style="color:#8be9fd;font-style:italic">$Telegramtoken</span>)<span style="color:#f1fa8c">/sendMessage?chat_id=</span>$(<span style="color:#8be9fd;font-style:italic">$Telegramchatid</span>)<span style="color:#f1fa8c">&amp;text=</span>$(<span style="color:#8be9fd;font-style:italic">$Body</span>)<span style="color:#f1fa8c">&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">catch</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">Write-PodeHost</span> -Object $(<span style="color:#8be9fd;font-style:italic">$_</span>.Exception.Response)
+</span></span><span style="display:flex;"><span>    } 
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#endregion</span>
+</span></span></code></pre></div><p>To insert records, the below code calls Dapr API to communicate with Table Storage</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$employeeId</span> = $([string]::Concat($(<span style="color:#8be9fd;font-style:italic">Get-Random</span> -Minimum 50), <span style="color:#f1fa8c">&#39;-&#39;</span>, <span style="color:#f1fa8c">&#39;empid&#39;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$key</span> = $(<span style="color:#8be9fd;font-style:italic">$employeeId</span>)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$data</span> = [PSCustomObject]@{
+</span></span><span style="display:flex;"><span>    first_name = $(<span style="color:#8be9fd;font-style:italic">$WebEvent</span>.Data.first_name)
+</span></span><span style="display:flex;"><span>    last_name  = $(<span style="color:#8be9fd;font-style:italic">$WebEvent</span>.Data.last_name)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$State</span> = @(
+</span></span><span style="display:flex;"><span>    [ordered]@{
+</span></span><span style="display:flex;"><span>        key   = <span style="color:#8be9fd;font-style:italic">$key</span>
+</span></span><span style="display:flex;"><span>        value = $(<span style="color:#8be9fd;font-style:italic">$data</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$Body</span> = <span style="color:#8be9fd;font-style:italic">ConvertTo-Json</span> -InputObject <span style="color:#8be9fd;font-style:italic">$State</span> -Compress
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">Write-PodeHost</span> -Object $(<span style="color:#8be9fd;font-style:italic">$Body</span>)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">Invoke-RestMethod</span> -Uri <span style="color:#f1fa8c">&#34;http://localhost:3500/v1.0/state/eventregistrationresponse&#34;</span> -Method Post -Body $(<span style="color:#8be9fd;font-style:italic">$Body</span>) -ContentType <span style="color:#f1fa8c">&#39;application/json&#39;</span> -Verbose -ErrorAction Stop
+</span></span></code></pre></div><h3 id="references">References</h3>
+<ul>
+<li><a href="https://docs.dapr.io/reference/components-reference/supported-secret-stores/azure-keyvault/" target="_blank" rel="noopener">Azure Key Vault secret store</a>
+</li>
+<li><a href="https://docs.dapr.io/developing-applications/building-blocks/secrets/secrets-overview/" target="_blank" rel="noopener">Secrets management overview</a>
+</li>
+</ul>
+<h3 id="summary">Summary</h3>
+<p>The Dapr Secret Store component is a powerful tool for managing secrets in microservices applications, providing security, scalability, and ease of use. An exciting and essential feature, right? Go for it! Invest your time in building Darized / Dockerized apps and run them on Kubernetes.</p>
+
+
+</article><div class="bg-blue-100 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2">Social Networking</div>
+      <p class="opacity-60">Let us stay connected to learn, share and grow!</p>
+    </div>
+
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
+      
+
+      
+      <li>
+        <a
+          href="https://twitter.com/chendrayanv"
+          target="_blank"
+          rel="noopener"
+          aria-label="Twitter"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"
+            />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <li>
+        <a
+          href="https://linkedin.com/in/chendrayanv"
+          target="_blank"
+          rel="noopener"
+          aria-label="LinkedIn"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <rect x="4" y="4" width="16" height="16" rx="2" />
+            <line x1="8" y1="11" x2="8" y2="16" />
+            <line x1="8" y1="8" x2="8" y2="8.01" />
+            <line x1="12" y1="16" x2="12" y2="11" />
+            <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <li>
+        <a
+          href=""
+          target="_blank"
+          rel="noopener"
+          aria-label="GitHub"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+            />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+    </ul>
+  </div>
+</div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    Copyright © 2021 - Howdy, Kloudy! · All rights reserved
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+<div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden">
+  <div class="container max-w-3xl mx-auto p-12">
+    <div class="relative">
+      <div class="my-4 text-center text-2xl font-bold">Search</div>
+
+      <span class="p-2 absolute right-0 top-0 cursor-pointer close-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </span>
+    </div>
+
+    <input type="search" class="py-2 px-3 w-full dark:text-black border dark:border-transparent"
+      placeholder="Enter search query" />
+
+    <div class="search-results text-lg font-medium my-4 hidden">Results</div>
+    <ul class="search-list my-2">
+
+    </ul>
+
+    <div class="no-results text-center my-8 hidden">
+      <div class="text-xl font-semibold mb-2">No results found</div>
+      <p class="font-light text-sm">Try adjusting your search query</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="/js/scripts.min.js"></script>
+
+
+
+
+
+
+<script>
+  
+  const darkmode = document.querySelector('.toggle-dark-mode');
+  function toggleDarkMode() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkmode', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkmode', 'dark')
+    }
+  }
+  if (darkmode) {
+    darkmode.addEventListener('click', toggleDarkMode);
+  }
+
+  const darkStorage = localStorage.getItem('darkmode');
+  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!darkStorage && isBrowserDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  if (darkStorage && darkStorage === 'dark') {
+    toggleDarkMode();
+  }
+</script>
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
+</body>
+</html>

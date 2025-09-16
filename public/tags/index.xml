@@ -5,40 +5,193 @@
     <link>/tags/</link>
     <description>Recent content in Tags on Howdy,Kloudy!</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 12 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 28 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>docker-compose</title>
-      <link>/tags/docker-compose/</link>
-      <pubDate>Thu, 12 Jan 2023 00:00:00 +0000</pubDate>
+      <title>Az Networking</title>
+      <link>/tags/az-networking/</link>
+      <pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate>
       
-      <guid>/tags/docker-compose/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>minikube</title>
-      <link>/tags/minikube/</link>
-      <pubDate>Thu, 12 Jan 2023 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/minikube/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>PowerShell</title>
-      <link>/tags/powershell/</link>
-      <pubDate>Thu, 12 Jan 2023 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/powershell/</guid>
+      <guid>/tags/az-networking/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Azure</title>
       <link>/tags/azure/</link>
-      <pubDate>Thu, 29 Dec 2022 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate>
       
       <guid>/tags/azure/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Function App</title>
+      <link>/tags/function-app/</link>
+      <pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/function-app/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>VNET</title>
+      <link>/tags/vnet/</link>
+      <pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/vnet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>FinOps</title>
+      <link>/tags/finops/</link>
+      <pubDate>Wed, 07 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/finops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PowerShell</title>
+      <link>/tags/powershell/</link>
+      <pubDate>Wed, 07 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/powershell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shift Left</title>
+      <link>/tags/shift-left/</link>
+      <pubDate>Wed, 07 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/shift-left/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Terraform</title>
+      <link>/tags/terraform/</link>
+      <pubDate>Wed, 07 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/terraform/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Azure Federated App Credential</title>
+      <link>/tags/azure-federated-app-credential/</link>
+      <pubDate>Wed, 20 Mar 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/azure-federated-app-credential/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GitLab</title>
+      <link>/tags/gitlab/</link>
+      <pubDate>Wed, 20 Mar 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/gitlab/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GitLab Azure Key Vault</title>
+      <link>/tags/gitlab-azure-key-vault/</link>
+      <pubDate>Wed, 20 Mar 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/gitlab-azure-key-vault/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OIDC</title>
+      <link>/tags/oidc/</link>
+      <pubDate>Wed, 20 Mar 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/oidc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DevSecOps</title>
+      <link>/tags/devsecops/</link>
+      <pubDate>Wed, 21 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/devsecops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GraphQL</title>
+      <link>/tags/graphql/</link>
+      <pubDate>Wed, 21 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/graphql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CICD</title>
+      <link>/tags/cicd/</link>
+      <pubDate>Thu, 14 Sep 2023 07:56:42 +0100</pubDate>
+      
+      <guid>/tags/cicd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PSScriptAnalyzer</title>
+      <link>/tags/psscriptanalyzer/</link>
+      <pubDate>Thu, 14 Sep 2023 07:56:42 +0100</pubDate>
+      
+      <guid>/tags/psscriptanalyzer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SAST</title>
+      <link>/tags/sast/</link>
+      <pubDate>Thu, 14 Sep 2023 07:56:42 +0100</pubDate>
+      
+      <guid>/tags/sast/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dapr</title>
+      <link>/tags/dapr/</link>
+      <pubDate>Sun, 29 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/dapr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>minikube</title>
+      <link>/tags/minikube/</link>
+      <pubDate>Sun, 29 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/minikube/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>secret-store</title>
+      <link>/tags/secret-store/</link>
+      <pubDate>Sun, 29 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/secret-store/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker-compose</title>
+      <link>/tags/docker-compose/</link>
+      <pubDate>Thu, 12 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/docker-compose/</guid>
       <description></description>
     </item>
     

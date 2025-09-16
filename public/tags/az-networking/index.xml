@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Az Networking on Howdy,Kloudy!</title>
+    <link>/tags/az-networking/</link>
+    <description>Recent content in Az Networking on Howdy,Kloudy!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 28 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="/tags/az-networking/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Azure Functions Connectivity Issue: An IT Pro Analysis</title>
+      <link>/blog/azure-functions-connectivity-issue-an-it-pro-analysis/</link>
+      <pubDate>Mon, 28 Jul 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/azure-functions-connectivity-issue-an-it-pro-analysis/</guid>
+      <description>Introdcution An application stakeholder reported an issue with an Azure Function, indicating an error message stating &amp;ldquo;The host is unreachable.&amp;rdquo; Upon inquiry, the stakeholder suggested that the Function App pattern design was flawed and that no functions were operational. Yes, this prompted a detailed investigation into the deployment and configuration and pushed me to write this blog. A professional analysis of an Azure Functions connectivity issue caused by improper network configuration and its resolution using VNET integration.</description>
+    </item>
+    
+  </channel>
+</rss>

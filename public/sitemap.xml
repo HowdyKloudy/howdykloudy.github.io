@@ -2,29 +2,107 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>/tags/az-networking/</loc>
+    <lastmod>2025-07-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/azure/</loc>
+    <lastmod>2025-07-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/blog/azure-functions-connectivity-issue-an-it-pro-analysis/</loc>
+    <lastmod>2025-07-28T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>/blog/</loc>
-    <lastmod>2023-01-12T00:00:00+00:00</lastmod>
+    <lastmod>2025-07-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/function-app/</loc>
+    <lastmod>2025-07-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2025-07-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2025-07-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/vnet/</loc>
+    <lastmod>2025-07-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/finops/</loc>
+    <lastmod>2024-08-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/blog/implementing-shift-left-finops-with-terraform-a-comprehensive-guide/</loc>
+    <lastmod>2024-08-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/powershell/</loc>
+    <lastmod>2024-08-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/shift-left/</loc>
+    <lastmod>2024-08-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/terraform/</loc>
+    <lastmod>2024-08-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/blog/implementing-shift-left-for-terraform-an-introductory-guide/</loc>
+    <lastmod>2024-08-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/azure-federated-app-credential/</loc>
+    <lastmod>2024-03-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/gitlab/</loc>
+    <lastmod>2024-03-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/gitlab-azure-key-vault/</loc>
+    <lastmod>2024-03-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/oidc/</loc>
+    <lastmod>2024-03-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/blog/unlocking-secrets-a-guide-to-azure-key-vault-integration-in-gitlab/</loc>
+    <lastmod>2024-03-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/devsecops/</loc>
+    <lastmod>2024-02-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/graphql/</loc>
+    <lastmod>2024-02-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/blog/introducing-the-powershell-gitlab-utility-module/</loc>
+    <lastmod>2024-02-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/blog/using-the-gitlab-graphql-api-in-powershell/</loc>
+    <lastmod>2023-10-14T11:20:02+01:00</lastmod>
+  </url><url>
+    <loc>/tags/cicd/</loc>
+    <lastmod>2023-09-14T07:56:42+01:00</lastmod>
+  </url><url>
+    <loc>/blog/gitlab-custom-sast-analyzer-for-powershell-project/</loc>
+    <lastmod>2023-09-14T07:56:42+01:00</lastmod>
+  </url><url>
+    <loc>/tags/psscriptanalyzer/</loc>
+    <lastmod>2023-09-14T07:56:42+01:00</lastmod>
+  </url><url>
+    <loc>/tags/sast/</loc>
+    <lastmod>2023-09-14T07:56:42+01:00</lastmod>
+  </url><url>
+    <loc>/tags/dapr/</loc>
+    <lastmod>2023-01-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/blog/dapr-secret-store-component-demonstration-using-minikube-with-a-powershell-app/</loc>
+    <lastmod>2023-01-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/minikube/</loc>
+    <lastmod>2023-01-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/secret-store/</loc>
+    <lastmod>2023-01-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/blog/dapr-state-store-demonstration-using-minikube-with-a-powershell-app/</loc>
+    <lastmod>2023-01-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/docker-compose/</loc>
     <lastmod>2023-01-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/blog/dockerize-the-full-stack-application-built-using-powershellpode-pshml/</loc>
     <lastmod>2023-01-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/</loc>
-    <lastmod>2023-01-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/minikube/</loc>
-    <lastmod>2023-01-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/powershell/</loc>
-    <lastmod>2023-01-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2023-01-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/azure/</loc>
-    <lastmod>2022-12-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/azure-functions/</loc>
     <lastmod>2022-12-29T00:00:00+00:00</lastmod>

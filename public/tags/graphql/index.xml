@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GraphQL on Howdy,Kloudy!</title>
+    <link>/tags/graphql/</link>
+    <description>Recent content in GraphQL on Howdy,Kloudy!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 21 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="/tags/graphql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introducing the PowerShell GitLab Utility Module</title>
+      <link>/blog/introducing-the-powershell-gitlab-utility-module/</link>
+      <pubDate>Wed, 21 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/introducing-the-powershell-gitlab-utility-module/</guid>
+      <description>Introduction Harnessing GitLab with PowerShell: Introducing the PowerShell.GitLab.Utility Module
+In the evolving landscape of DevOps and CI/CD, automating and streamlining operations is invaluable. GitLab, a web-based DevOps lifecycle tool, provides a comprehensive platform for software development, from project planning and source code management to CI/CD, monitoring, and security. To enhance the interaction with GitLab through automation, the PowerShell.GitLab.Utility modules have emerged as a significant advancement.
+What is PowerShell.GitLab.Utility? PowerShell.GitLab.Utility is a PowerShell module designed to interface with GitLab.</description>
+    </item>
+    
+    <item>
+      <title>Using the GitLab GraphQL API in PowerShell</title>
+      <link>/blog/using-the-gitlab-graphql-api-in-powershell/</link>
+      <pubDate>Sat, 14 Oct 2023 11:20:02 +0100</pubDate>
+      
+      <guid>/blog/using-the-gitlab-graphql-api-in-powershell/</guid>
+      <description>Introduction GraphQL is a revolutionary query language and runtime for API interactions in web development. It doesn&amp;rsquo;t just transform how we request and manage data—it reshapes the entire API landscape. In this blog post, we&amp;rsquo;ll unveil the power of GitLab GraphQL API, exploring how it offers a comprehensive and user-friendly approach to data manipulation and API evolution.
+At its core, GraphQL serves as a versatile tool for querying APIs and orchestrating data retrieval.</description>
+    </item>
+    
+  </channel>
+</rss>

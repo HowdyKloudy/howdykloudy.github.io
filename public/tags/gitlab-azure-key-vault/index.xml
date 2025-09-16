@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GitLab Azure Key Vault on Howdy,Kloudy!</title>
+    <link>/tags/gitlab-azure-key-vault/</link>
+    <description>Recent content in GitLab Azure Key Vault on Howdy,Kloudy!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 20 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="/tags/gitlab-azure-key-vault/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unlocking Secrets: A Guide to Integrate Azure Key Vault with GitLab</title>
+      <link>/blog/unlocking-secrets-a-guide-to-azure-key-vault-integration-in-gitlab/</link>
+      <pubDate>Wed, 20 Mar 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/unlocking-secrets-a-guide-to-azure-key-vault-integration-in-gitlab/</guid>
+      <description>Introduction Lately, I have experienced issues using other popular key vault providers. So, I demonstrated using the Azure key vault in Azure DevOps. A question popped up: How do we use Az key vault in GitLab?
+Below links gives the direction&amp;hellip;
+GitLab &amp;amp;amp; Azure Key VaultAzure AD Federated Identity CredentialIsn’t it like breathing? Nope! It is not! This blog post is to show you the easiest way!
+I followed the instructions and came up with the most straightforward way</description>
+    </item>
+    
+  </channel>
+</rss>

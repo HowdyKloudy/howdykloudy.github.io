@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="/favicon.ico">
+
+  <title>
+  Using the GitLab GraphQL API in PowerShell - Howdy,Kloudy!
+  </title>
+  <meta name="description" content="demonstration of using GraphQL API with PowerShell..." />
+  <meta name="author" content="Chendrayan Venkatesan" />
+  <meta name="generator" content="Hugo 0.105.0"><link
+    rel="stylesheet"
+    href="__h_pp_l1_1_Permalink__e="
+    integrity="__h_pp_l1_1_Data.Integrity__e="
+  />
+  
+  
+
+  <meta property="og:title" content="Using the GitLab GraphQL API in PowerShell" />
+<meta property="og:description" content="demonstration of using GraphQL API with PowerShell..." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/using-the-gitlab-graphql-api-in-powershell/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2023-10-14T11:20:02+01:00" />
+<meta property="article:modified_time" content="2023-10-14T11:20:02+01:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Using the GitLab GraphQL API in PowerShell"/>
+<meta name="twitter:description" content="demonstration of using GraphQL API with PowerShell..."/>
+
+  <meta itemprop="name" content="Using the GitLab GraphQL API in PowerShell">
+<meta itemprop="description" content="demonstration of using GraphQL API with PowerShell..."><meta itemprop="datePublished" content="2023-10-14T11:20:02+01:00" />
+<meta itemprop="dateModified" content="2023-10-14T11:20:02+01:00" />
+<meta itemprop="wordCount" content="1041">
+<meta itemprop="keywords" content="GitLab,DevSecOps,GraphQL,PowerShell," />
+
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="/" class="capitalize font-extrabold text-2xl">
+    
+    <img src="/howdy1.png" alt="Howdy,Kloudy!" class="h-8 max-w-full" />
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+    <li><a href="/blog">Blog</a></li>
+    
+    <li><a href="/page/about/">About</a></li>
+    
+    <li><a href="/tags">Tags</a></li>
+    
+
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="open-search inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+      </span>
+    </li>
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="toggle-dark-mode inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="5" x2="12" y2="5.01" />
+          <line x1="17" y1="7" x2="17" y2="7.01" />
+          <line x1="19" y1="12" x2="19" y2="12.01" />
+          <line x1="17" y1="17" x2="17" y2="17.01" />
+          <line x1="12" y1="19" x2="12" y2="19.01" />
+          <line x1="7" y1="17" x2="7" y2="17.01" />
+          <line x1="5" y1="12" x2="5" y2="12.01" />
+          <line x1="7" y1="7" x2="7" y2="7.01" />
+        </svg>
+      </span>
+    </li>
+    
+  </ul>
+</header>
+<main class="flex-1">
+
+
+
+
+<div class="relative max-w-5xl mx-auto px-4">
+  <img src="/2023/10/blog-header.jpg" class="rounded-lg shadow-sm w-full object-contain" />
+  
+  <div
+    class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+    
+  
+    October 14, 2023
+  
+
+
+  </div>
+  
+</div>
+
+
+<article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+  <h1 class="text-2xl font-bold mb-2">Using the GitLab GraphQL API in PowerShell</h1>
+  
+  <h5 class="text-sm flex items-center flex-wrap">
+    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <rect x="4" y="5" width="16" height="16" rx="2" />
+      <line x1="16" y1="3" x2="16" y2="7" />
+      <line x1="8" y1="3" x2="8" y2="7" />
+      <line x1="4" y1="11" x2="20" y2="11" />
+      <rect x="8" y="15" width="2" height="2" />
+    </svg>
+    Posted on 
+  
+    October 14, 2023
+  
+
+
+    
+    &nbsp;&bull;&nbsp;
+    
+    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <circle cx="12" cy="12" r="9" />
+      <polyline points="12 7 12 12 15 15" />
+    </svg>
+    5&nbsp;minutes
+    &nbsp;&bull;
+    <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+      <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+      <line x1="3" y1="6" x2="3" y2="19" />
+      <line x1="12" y1="6" x2="12" y2="19" />
+      <line x1="21" y1="6" x2="21" y2="19" />
+    </svg>
+
+    1041&nbsp;words
+
+    &nbsp;
+    <div class="views">
+      <span class="views">
+        <img src="https://visitor-badge.glitch.me/badge?page_id=%2fblog%2fusing-the-gitlab-graphql-api-in-powershell%2f" alt="Views" />
+      </span>
+    </div>
+    
+    
+    
+  </h5>
+  
+
+  <details id="TableOfContents" class="px-4 mt-4 bg-gray-100 dark:bg-gray-700 rounded toc">
+    <summary class="flex items-center font-bold py-2 px-4 cursor-pointer justify-between select-none text-black dark:text-white">
+      <span>Table of contents</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <polyline points="6 9 12 15 18 9"></polyline>
+     </svg>
+    </summary>
+
+    <ul class="mt-2 pb-4">
+        
+
+        
+        <li>
+        <a href="#introduction">Introduction</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#what-is-gitlab-graphql-api">What is GitLab GraphQL API?</a>
+        
+
+        
+        </li><li>
+        <a href="#getting-started">Getting started</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#get-a-list-of-all-projects">Get a list of all projects</a>
+        
+
+        
+        </li></ul>
+      </li></ul>
+      </li><li>
+        <a href="#some-common-queries">Some Common Queries</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#list-project-merge-requests">List project merge requests</a>
+        
+
+        
+        </li></ul>
+      </li><li>
+        <a href="#comparing-two-projects">Comparing two projects</a>
+        
+
+        
+        </li><li>
+        <a href="#mutations">Mutations</a>
+        
+
+        
+        </li><li>
+        <a href="#recommendations">Recommendations</a>
+        
+
+        
+        </li><li>
+        <a href="#graphql-over-restapi-gitlab">GraphQL over RESTAPI (GitLab)</a>
+        
+
+        
+        </li><li>
+        <a href="#references">References</a>
+        
+
+        
+        </li><li>
+        <a href="#summary">Summary</a>
+        </li></ul>
+  </details>
+
+  <h1 id="introduction">Introduction</h1>
+<p>GraphQL is a revolutionary query language and runtime for API interactions in web development. It doesn&rsquo;t just transform how we request and manage data—it reshapes the entire API landscape. In this blog post, we&rsquo;ll unveil the power of GitLab GraphQL API, exploring how it offers a comprehensive and user-friendly approach to data manipulation and API evolution.</p>
+<p>At its core, GraphQL serves as a versatile tool for querying APIs and orchestrating data retrieval. It introduces a structured, coherent description of your API&rsquo;s data, allowing clients to wield precise control over the information they receive. But GraphQL&rsquo;s influence extends beyond efficient data queries; it empowers seamless API evolution and equips developers with a potent arsenal of tools.</p>
+<p>I appreciate your time and recorded the demo</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/zHynYT_cjk4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h2 id="what-is-gitlab-graphql-api">What is GitLab GraphQL API?</h2>
+<p>The GitLab GraphQL API is an alternative to the traditional REST API, designed to provide developers with precise control over the data they request and manipulate. It is based on the GraphQL query language, enabling you to specify what information you need from GitLab, simplifying data retrieval and enhancing the efficiency of your interactions.</p>
+<p>Sufficient theory can be tedious; let&rsquo;s commence with the exercise instead.</p>
+<h2 id="getting-started">Getting started</h2>
+<p>To access the GitLab GraphQL API, you will need to:</p>
+<ul>
+<li>Have a GitLab account. <a href="https://gitlab.com/users/sign_up" target="_blank" rel="noopener">Signup Link</a>
+</li>
+<li>Generate a personal access token with the read_api scope. <a href="https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html" target="_blank" rel="noopener">PAT</a>
+</li>
+</ul>
+<p>Once you have a personal access token, you can authenticate to the API. There are a few different ways to do this:</p>
+<ul>
+<li>Bearer header in your requests.</li>
+<li>Set the GITLAB_TOKEN environment variable.</li>
+<li>Third-party tools such as GraphiQL or Postman.</li>
+</ul>
+<p>To write basic queries, you will need to learn the GraphQL syntax. There are many tutorials and resources available online.</p>
+<p>Here is an example of a basic GraphQL query to retrieve current user information</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-GraphQL" data-lang="GraphQL"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">query</span> <span style="color:#50fa7b">currentUserBasicInformation</span> {
+</span></span><span style="display:flex;"><span>  currentUser {
+</span></span><span style="display:flex;"><span>    id
+</span></span><span style="display:flex;"><span>    name
+</span></span><span style="display:flex;"><span>    twitter
+</span></span><span style="display:flex;"><span>    groupCount
+</span></span><span style="display:flex;"><span>    starredProjects {
+</span></span><span style="display:flex;"><span>      count
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    jobTitle
+</span></span><span style="display:flex;"><span>    organization
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The response is below</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JSON" data-lang="JSON"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;data&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;currentUser&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">&#34;id&#34;</span>: <span style="color:#f1fa8c">&#34;gid://gitlab/User/12345678&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;Chendrayan Venkatesan&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">&#34;twitter&#34;</span>: <span style="color:#f1fa8c">&#34;@ChendrayanV&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">&#34;groupCount&#34;</span>: <span style="color:#bd93f9">9</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">&#34;starredProjects&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&#34;count&#34;</span>: <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">&#34;jobTitle&#34;</span>: <span style="color:#f1fa8c">&#34;Technology Lead&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">&#34;organization&#34;</span>: <span style="color:#f1fa8c">&#34;Freelancer&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="get-a-list-of-all-projects">Get a list of all projects</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-GraphQL" data-lang="GraphQL"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">query</span> <span style="color:#50fa7b">getProjectInformation</span>(<span style="color:#8be9fd;font-style:italic">$fullPath</span>: <span style="color:#50fa7b">ID</span>!) {
+</span></span><span style="display:flex;"><span>  project(fullPath: <span style="color:#8be9fd;font-style:italic">$fullPath</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">id</span>
+</span></span><span style="display:flex;"><span>    name
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The keyword <code>query</code> in GraphQL is to define a query operation. A query operation is a request to fetch data from a GraphQL server.</li>
+<li>The string literal <code>getProjectInformation</code> is the friendly name of the operation. <code>$fullPath</code> is the query variable.</li>
+<li>The word `project`` is the TYPE</li>
+<li>The id and name are the FIELDS.</li>
+</ul>
+<blockquote>
+<p>Query Variables</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-GraphQL" data-lang="GraphQL"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;fullPath&#34;</span>: <span style="color:#f1fa8c">&#34;group/fullPath&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>As we all know, the preceding code retrieves the project information, but how is it executed? Through GraphiQL or PowerShell? Both are correct</p>
+<blockquote>
+<p>GraphiQL</p>
+</blockquote>
+<p><img src="/2023/10/image-graphiql.png" alt="GraphiQL"></p>
+<blockquote>
+<p>PowerShell</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#ff79c6">param</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">$orgnizationName</span> = <span style="color:#f1fa8c">&#34;gitlab.com&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">$fullPath</span> = <span style="color:#f1fa8c">&#34;group/project&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$query</span> = [pscustomobject]@{
+</span></span><span style="display:flex;"><span>    operationName = <span style="color:#f1fa8c">&#34;getProjectInformation&#34;</span>
+</span></span><span style="display:flex;"><span>    query         = $(<span style="color:#8be9fd;font-style:italic">Get-Content</span> -path .\query.graphql -Raw)
+</span></span><span style="display:flex;"><span>    variables     = @{
+</span></span><span style="display:flex;"><span>        fullPath = $(<span style="color:#8be9fd;font-style:italic">$fullPath</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>} | <span style="color:#8be9fd;font-style:italic">ConvertTo-Json</span> -Compress 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$PrivateToken</span> = <span style="color:#f1fa8c">&#39;SUPER-SECRET&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$Result</span> = <span style="color:#8be9fd;font-style:italic">Invoke-RestMethod</span> -Uri <span style="color:#f1fa8c">&#34;https://</span>$(<span style="color:#8be9fd;font-style:italic">$orgnizationName</span>)<span style="color:#f1fa8c">/api/graphql&#34;</span> -Headers @{Authorization = <span style="color:#f1fa8c">&#34;Bearer </span>$(<span style="color:#8be9fd;font-style:italic">$PrivateToken</span>)<span style="color:#f1fa8c">&#34;</span> } -Method Post -Body <span style="color:#8be9fd;font-style:italic">$query</span> -ContentType <span style="color:#f1fa8c">&#39;application/json&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$Result</span>.data
+</span></span></code></pre></div><h1 id="some-common-queries">Some Common Queries</h1>
+<p>From now on, the PowerShell code remains as is! Yes, only the <code>query</code> that gets change (based on requirements)</p>
+<h2 id="list-project-merge-requests">List project merge requests</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-GraphQL" data-lang="GraphQL"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">query</span> <span style="color:#50fa7b">getProjectInformation</span>(<span style="color:#8be9fd;font-style:italic">$fullPath</span>: <span style="color:#50fa7b">ID</span>!) {
+</span></span><span style="display:flex;"><span>  project(fullPath: <span style="color:#8be9fd;font-style:italic">$fullPath</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">id</span>
+</span></span><span style="display:flex;"><span>    name
+</span></span><span style="display:flex;"><span>    mergeRequests(state: <span style="color:#50fa7b">all</span>) {
+</span></span><span style="display:flex;"><span>      nodes {
+</span></span><span style="display:flex;"><span>        id
+</span></span><span style="display:flex;"><span>        state
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Hey, you know I see only the first <code>100</code> records. How do I retrieve all the field objects? Do <code>Pagination</code>! Here is the PowerShell script to pull the MR information with pagination</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$PrivateToken</span> = <span style="color:#f1fa8c">&#39;SUPER-SECRET&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$query</span> = @{
+</span></span><span style="display:flex;"><span>    query = <span style="color:#f1fa8c">@&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        query {
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            project(fullPath: &#34;group/project&#34;) {
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                id
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                name
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            mergeRequests(first: 5, after: null) {
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                    pageInfo {
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                        hasNextPage
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                        endCursor
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                    }
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                    nodes {
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                        id
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                        state
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                    }
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            }
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            }
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        }
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;@</span>
+</span></span><span style="display:flex;"><span>} | <span style="color:#8be9fd;font-style:italic">ConvertTo-Json</span> 
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$collection</span> = @()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">while</span> (<span style="color:#8be9fd;font-style:italic">$true</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">$response</span> = <span style="color:#8be9fd;font-style:italic">Invoke-RestMethod</span> -Uri <span style="color:#f1fa8c">&#34;https://gitlab.com/api/graphql&#34;</span> -Headers @{Authorization = <span style="color:#f1fa8c">&#34;Bearer </span>$(<span style="color:#8be9fd;font-style:italic">$PrivateToken</span>)<span style="color:#f1fa8c">&#34;</span> } -Method Post -Body <span style="color:#8be9fd;font-style:italic">$query</span> -ContentType <span style="color:#f1fa8c">&#39;application/json&#39;</span> -Verbose
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">$query</span> = @{
+</span></span><span style="display:flex;"><span>        query = <span style="color:#f1fa8c">@&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        query {
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            project(fullPath: &#34;group/project&#34;) {
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                id
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                name
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            mergeRequests(first: 5, after: &#34;</span>$(<span style="color:#8be9fd;font-style:italic">$response</span>.data.project.mergeRequests.pageInfo.endCursor)<span style="color:#f1fa8c">&#34;) {
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                    pageInfo {
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                        hasNextPage
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                        endCursor
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                    }
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                    nodes {
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                        id
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                        state
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                    }
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            }
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            }
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        }
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;@</span>
+</span></span><span style="display:flex;"><span>    } | <span style="color:#8be9fd;font-style:italic">ConvertTo-Json</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">$collection</span> += <span style="color:#8be9fd;font-style:italic">$response</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> (<span style="color:#8be9fd;font-style:italic">$response</span>.data.project.mergeRequests.pageInfo.hasNextPage <span style="color:#ff79c6">-eq</span> <span style="color:#8be9fd;font-style:italic">$false</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">break</span> 
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$collection</span>
+</span></span></code></pre></div><h1 id="comparing-two-projects">Comparing two projects</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-GraphQL" data-lang="GraphQL"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  leftProject: <span style="color:#50fa7b">project</span>(fullPath: <span style="color:#f1fa8c">&#34;group/project&#34;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">starCount</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  rightProject: <span style="color:#50fa7b">project</span>(fullPath: <span style="color:#f1fa8c">&#34;group/project&#34;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">starCount</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Hey, you know what? I have to compare more fields, and is there any shorthand? Yes, try using a fragment.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-GraphQL" data-lang="GraphQL"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">fragment</span> <span style="color:#50fa7b">compareFields</span> <span style="color:#8be9fd;font-style:italic">on</span> Project {
+</span></span><span style="display:flex;"><span>  starCount
+</span></span><span style="display:flex;"><span>  forksCount
+</span></span><span style="display:flex;"><span>  wikiEnabled
+</span></span><span style="display:flex;"><span>  statistics {
+</span></span><span style="display:flex;"><span>    commitCount
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  archived
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  leftProject: <span style="color:#50fa7b">project</span>(fullPath: <span style="color:#f1fa8c">&#34;group/project&#34;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">...</span><span style="color:#50fa7b">compareFields</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  rightProject: <span style="color:#50fa7b">project</span>(fullPath: <span style="color:#f1fa8c">&#34;group/project&#34;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">...</span><span style="color:#50fa7b">compareFields</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>leftproject</code> and <code>rightproject</code> are aliases.</li>
+</ul>
+<p>Now that you know the query operation, work on the scenario, and if you need assistance with an advanced query, feel free to reach me.</p>
+<h1 id="mutations">Mutations</h1>
+<p><code>Mutation</code> is to do change the state of the object. Yes, something to create or update. Can we keep it short? Why, not? here is the example</p>
+<blockquote>
+<p>Create an issue</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-GraphQL" data-lang="GraphQL"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">mutation</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#50fa7b">createIssue</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">input</span>: {<span style="color:#50fa7b">title</span>: <span style="color:#f1fa8c">&#34;test -1&#34;</span>, <span style="color:#50fa7b">projectPath</span>: <span style="color:#f1fa8c">&#34;group/project&#34;</span>, <span style="color:#50fa7b">description</span>: <span style="color:#f1fa8c">&#34;test 1 description&#34;</span>}
+</span></span><span style="display:flex;"><span>  ) {
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">issue</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#50fa7b">id</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#8be9fd;font-style:italic">type</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#50fa7b">title</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><blockquote>
+<p>Close the issue (Update Demo)</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-GraphQL" data-lang="GraphQL"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">mutation</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#50fa7b">updateIssue</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">input</span>: {<span style="color:#50fa7b">iid</span>: <span style="color:#f1fa8c">&#34;2&#34;</span>, <span style="color:#50fa7b">projectPath</span>: <span style="color:#f1fa8c">&#34;group/project&#34;</span>, <span style="color:#50fa7b">stateEvent</span>: <span style="color:#50fa7b">CLOSE</span>}
+</span></span><span style="display:flex;"><span>  ) {
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">issue</span> {
+</span></span><span style="display:flex;"><span>      id
+</span></span><span style="display:flex;"><span>      title
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h1 id="recommendations">Recommendations</h1>
+<ul>
+<li>Use variables to make your queries more reusable and dynamic.</li>
+<li>Use fragments to encapsulate related sets of fields.</li>
+<li>Use nested fields to fetch data from related entities.</li>
+<li>Use filters and sorting to narrow down your results.</li>
+<li>Use the GraphiQL explorer to test your queries.</li>
+<li>Read the GitLab GraphQL documentation.</li>
+</ul>
+<h1 id="graphql-over-restapi-gitlab">GraphQL over RESTAPI (GitLab)</h1>
+<ul>
+<li>More flexible and expressive than REST.</li>
+<li>More performant than REST for complex queries.</li>
+<li>Easier to maintain than REST.</li>
+<li>More secure and scalable than REST.</li>
+<li>Self-documenting, which means that the schema provides all of the information that you need to understand and use the API.</li>
+<li>Supports powerful features such as filtering, sorting, and pagination.</li>
+<li>Language-agnostic, which means that you can use it with any programming language.</li>
+</ul>
+<h1 id="references">References</h1>
+<ul>
+<li><a href="https://graphql.org/" target="_blank" rel="noopener">GraphQL</a>
+</li>
+<li><a href="https://docs.gitlab.com/ee/api/graphql/" target="_blank" rel="noopener">GitLab GraphQL</a>
+</li>
+<li><a href="https://docs.gitlab.com/ee/api/graphql/" target="_blank" rel="noopener">PowerShell</a>
+</li>
+</ul>
+<h1 id="summary">Summary</h1>
+<p>GitLab GraphQL API is a powerful tool that allows you to fetch data from GitLab flexibly and efficiently. Using GraphQL, you can write queries to retrieve only the data you need and conveniently format the results.</p>
+<p>In my next blog post, I will demonstrate building a user experience to view the data that helps to visualize the GitLab information.</p>
+
+
+</article><div class="bg-blue-100 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2">Social Networking</div>
+      <p class="opacity-60">Let us stay connected to learn, share and grow!</p>
+    </div>
+
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
+      
+
+      
+      <li>
+        <a
+          href="https://twitter.com/chendrayanv"
+          target="_blank"
+          rel="noopener"
+          aria-label="Twitter"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"
+            />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <li>
+        <a
+          href="https://linkedin.com/in/chendrayanv"
+          target="_blank"
+          rel="noopener"
+          aria-label="LinkedIn"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <rect x="4" y="4" width="16" height="16" rx="2" />
+            <line x1="8" y1="11" x2="8" y2="16" />
+            <line x1="8" y1="8" x2="8" y2="8.01" />
+            <line x1="12" y1="16" x2="12" y2="11" />
+            <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <li>
+        <a
+          href=""
+          target="_blank"
+          rel="noopener"
+          aria-label="GitHub"
+          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+            />
+          </svg>
+        </a>
+      </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+    </ul>
+  </div>
+</div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    Copyright © 2021 - Howdy, Kloudy! · All rights reserved
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+<div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden">
+  <div class="container max-w-3xl mx-auto p-12">
+    <div class="relative">
+      <div class="my-4 text-center text-2xl font-bold">Search</div>
+
+      <span class="p-2 absolute right-0 top-0 cursor-pointer close-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </span>
+    </div>
+
+    <input type="search" class="py-2 px-3 w-full dark:text-black border dark:border-transparent"
+      placeholder="Enter search query" />
+
+    <div class="search-results text-lg font-medium my-4 hidden">Results</div>
+    <ul class="search-list my-2">
+
+    </ul>
+
+    <div class="no-results text-center my-8 hidden">
+      <div class="text-xl font-semibold mb-2">No results found</div>
+      <p class="font-light text-sm">Try adjusting your search query</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="/js/scripts.min.js"></script>
+
+
+
+
+
+
+<script>
+  
+  const darkmode = document.querySelector('.toggle-dark-mode');
+  function toggleDarkMode() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkmode', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkmode', 'dark')
+    }
+  }
+  if (darkmode) {
+    darkmode.addEventListener('click', toggleDarkMode);
+  }
+
+  const darkStorage = localStorage.getItem('darkmode');
+  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!darkStorage && isBrowserDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  if (darkStorage && darkStorage === 'dark') {
+    toggleDarkMode();
+  }
+</script>
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
+</body>
+</html>

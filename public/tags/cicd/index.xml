@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CICD on Howdy,Kloudy!</title>
+    <link>/tags/cicd/</link>
+    <description>Recent content in CICD on Howdy,Kloudy!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 14 Sep 2023 07:56:42 +0100</lastBuildDate><atom:link href="/tags/cicd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GitLab Custom SAST Analyzer for PowerShell Project</title>
+      <link>/blog/gitlab-custom-sast-analyzer-for-powershell-project/</link>
+      <pubDate>Thu, 14 Sep 2023 07:56:42 +0100</pubDate>
+      
+      <guid>/blog/gitlab-custom-sast-analyzer-for-powershell-project/</guid>
+      <description>Introduction In the ever-evolving landscape of infrastructure as code, software development and cybersecurity, ensuring the robust security of your codebase has become paramount. My journey into enhancing the security posture of my PowerShell projects led me to explore the world of GitLab Custom SAST Analyzers.
+As a GitLab Security Specialist, I was well-versed in the importance of securing code repositories and the pivotal role that Static Application Security Testing (SAST) plays in this endeavour.</description>
+    </item>
+    
+  </channel>
+</rss>
