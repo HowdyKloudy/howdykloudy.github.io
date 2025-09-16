@@ -38,4 +38,4 @@ This solution adheres to Azure best practices, utilising VNET integration with p
 
 ## Basic Architecture Diagram
 
-![Pattern](/2025/07/pattern.png)
+![image](/2025/07/Pattern.png)
