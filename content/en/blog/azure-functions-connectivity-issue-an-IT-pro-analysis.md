@@ -11,6 +11,7 @@ thumbnail: /2025/07/blog-header.jpg
 
 An application stakeholder reported an issue with an Azure Function, indicating an error message stating "The host is unreachable." Upon inquiry, the stakeholder suggested that the Function App pattern design was flawed and that no functions were operational. Yes, this prompted a detailed investigation into the deployment and configuration and pushed me to write this blog. 
 A professional analysis of an Azure Functions connectivity issue caused by improper network configuration and its resolution using VNET integration.
+
 The initial step involved assessing the deployment process of the Function App. The stakeholder confirmed that the functions were not running and could not connect to the host, attributing the issue to an incorrect pattern. To clarify, the distinction between the components was reviewed:
 
 - Function App: The hosting environment for the functions.
