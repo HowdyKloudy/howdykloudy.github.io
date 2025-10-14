@@ -2,10 +2,17 @@
 author: "Chendrayan Venkatesan"
 title: "Diving into Azure's SRE Agent (Preview): My Hands-On Journey"
 date: 2025-10-14
+draft: true
 description: "just another connectivity fix in Azure Function App!"
 tags: ["Azure","AI", "SRE"]
 thumbnail: /2025/10/header.jpg
 ---
+
+> References
+
+- [About Azure SRE Agent](https://learn.microsoft.com/en-us/azure/sre-agent/overview?tabs=explore)
+- [Usage](https://learn.microsoft.com/en-us/azure/sre-agent/usage)
+- 
 
 # Introdcution 
 
