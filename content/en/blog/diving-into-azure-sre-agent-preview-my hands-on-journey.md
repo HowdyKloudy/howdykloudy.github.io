@@ -4,7 +4,7 @@ title: "Diving into Azure's SRE Agent (Preview): My Hands-On Journey"
 date: 2025-10-14
 description: "just another connectivity fix in Azure Function App!"
 tags: ["Azure","AI", "SRE"]
-thumbnail: /2025/07/blog-header.jpg
+thumbnail: /2025/10/header.jpg
 ---
 
 # Introdcution 
